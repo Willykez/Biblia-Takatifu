@@ -1,0 +1,33 @@
+# Build outputs
+*.iml
+.gradle/
+build/
+/captures
+.externalNativeBuild/
+.cxx/
+local.properties
+
+# Android Studio / IntelliJ
+.idea/
+*.hprof
+.navigation/
+captures/
+
+# Keystores & signing material - never commit real release-signing secrets.
+# CI generates a throwaway keystore per run when no secrets are configured (see
+# .github/workflows/android-release.yml); a real upload keystore should only ever live in
+# GitHub Secrets (RELEASE_KEYSTORE_BASE64 etc.), never in the repo.
+*.jks
+*.keystore
+keystore.properties
+
+# Env / secrets
+.env
+*.env.local
+
+# macOS
+.DS_Store
+
+# Gradle wrapper distribution cache (not the wrapper jar/scripts themselves - those *should*
+# be committed so `./gradlew` works on a clean checkout)
+gradle/wrapper/dists/

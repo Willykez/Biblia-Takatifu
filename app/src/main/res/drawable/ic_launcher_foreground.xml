@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Three overlapping rounded "screens" stacked diagonally: a simple mark for a reusable
+     UI-framework app. Kept within the adaptive-icon safe zone (inner ~66dp circle). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.45"
+        android:pathData="M31,41 h24 a9,9 0 0 1 9,9 v24 a9,9 0 0 1 -9,9 h-24 a9,9 0 0 1 -9,-9 v-24 a9,9 0 0 1 9,-9 z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.72"
+        android:pathData="M42,33 h24 a9,9 0 0 1 9,9 v24 a9,9 0 0 1 -9,9 h-24 a9,9 0 0 1 -9,-9 v-24 a9,9 0 0 1 9,-9 z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M53,25 h24 a9,9 0 0 1 9,9 v24 a9,9 0 0 1 -9,9 h-24 a9,9 0 0 1 -9,-9 v-24 a9,9 0 0 1 9,-9 z" />
+</vector>

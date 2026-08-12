@@ -1,0 +1,6 @@
+{
+  "name": "App Design",
+  "description": "A reusable Jetpack Compose app framework: bottom-nav shell (Files, Share, History, Settings) with a full Material 3 design system, theming, and a fully functional Settings screen. Files/Share/History are placeholder screens meant to be built on for a future app.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

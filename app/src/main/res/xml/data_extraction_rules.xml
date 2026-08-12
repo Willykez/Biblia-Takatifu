@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   App Design's transfer-history table is excluded from Android's default full-app cloud
+   backup, since it's local device history rather than something meant to sync. Theme and
+   onboarding preferences are left in, since restoring those on a new device is a normal,
+   wanted convenience with no privacy downside.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="database" path="pulse_database" />
+        <exclude domain="database" path="pulse_database-wal" />
+        <exclude domain="database" path="pulse_database-shm" />
+        <exclude domain="database" path="pulse_database-journal" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="database" path="pulse_database" />
+        <exclude domain="database" path="pulse_database-wal" />
+        <exclude domain="database" path="pulse_database-shm" />
+        <exclude domain="database" path="pulse_database-journal" />
+    </device-transfer>
+</data-extraction-rules>

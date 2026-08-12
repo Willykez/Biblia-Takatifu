@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Legacy Auto Backup rules - applies on API 23-30 (data_extraction_rules.xml above covers
+   API 31+; both are needed to actually exclude the DB on every supported version, since
+   this app's minSdk is 24). Same rationale as data_extraction_rules.xml: the transfer
+   history database never leaves the device.
+-->
+<full-backup-content>
+    <exclude domain="database" path="pulse_database" />
+    <exclude domain="database" path="pulse_database-wal" />
+    <exclude domain="database" path="pulse_database-shm" />
+    <exclude domain="database" path="pulse_database-journal" />
+</full-backup-content>
