@@ -21,21 +21,12 @@ android {
 
   signingConfigs {
     create("release") {
-      // Supplied via env vars, never committed. Locally, assembleRelease is a no-op until
-      // these are set. In CI: android-ci.yml only ever builds the debug variant (never
-      // touches these); android-release.yml sets them - using a real keystore from repo
-      // secrets if configured, otherwise an auto-generated throwaway one so the workflow
-      // always produces a validly-signed build. See README > Releasing.
       val keystorePath = System.getenv("KEYSTORE_PATH")
       if (keystorePath != null) storeFile = file(keystorePath)
       storePassword = System.getenv("STORE_PASSWORD")
       keyAlias = System.getenv("KEY_ALIAS") ?: "upload"
       keyPassword = System.getenv("KEY_PASSWORD")
     }
-    // Debug builds intentionally do NOT declare a custom signingConfig here: no debug
-    // keystore is (or should be) committed to the repo, so debug quietly falls back to
-    // AGP's own auto-generated ~/.android/debug.keystore (androiddebugkey/android) -
-    // this is what keeps `assembleDebug` reproducible on a clean checkout and in CI.
   }
 
   buildTypes {
@@ -47,7 +38,6 @@ android {
       signingConfig = signingConfigs.getByName("release")
     }
     debug {
-      // No signingConfig override - see the comment on signingConfigs above.
       applicationIdSuffix = ".debug"
       versionNameSuffix = "-debug"
     }
@@ -62,8 +52,6 @@ android {
   }
   testOptions { unitTests { isIncludeAndroidResources = true } }
 
-  // The bundled Bible database (assets/bible_swahili.sqlite, ~18MB) ships uncompressed so
-  // SQLiteDatabase.openDatabase() can read it directly without an extra extraction step.
   androidResources {
     noCompress += "sqlite"
   }
