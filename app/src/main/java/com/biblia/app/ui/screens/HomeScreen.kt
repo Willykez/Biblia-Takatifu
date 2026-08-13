@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Search
@@ -57,6 +58,7 @@ fun HomeScreen(
     viewModel: BibleViewModel,
     onNavigate: (String) -> Unit,
     onOpenBook: (BibleBook) -> Unit,
+    onOpenCalendar: () -> Unit,
 ) {
     val oldTestament by viewModel.oldTestament.collectAsState()
     val newTestament by viewModel.newTestament.collectAsState()
@@ -84,14 +86,26 @@ fun HomeScreen(
                             color = SleekOnSurfaceVariant,
                         )
                     }
-                    Box(
-                        modifier = Modifier
-                            .size(40.dp)
-                            .background(SleekPrimaryContainer, CircleShape)
-                            .bouncyClickable { onNavigate("search") },
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Icon(Icons.Default.Search, contentDescription = "Search", tint = SleekPrimary, modifier = Modifier.size(20.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Box(
+                            modifier = Modifier
+                                .size(40.dp)
+                                .background(SleekPrimaryContainer, CircleShape)
+                                .bouncyClickable { onOpenCalendar() },
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Icon(Icons.Default.CalendarMonth, contentDescription = "Kalenda ya Liturujia", tint = SleekPrimary, modifier = Modifier.size(20.dp))
+                        }
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Box(
+                            modifier = Modifier
+                                .size(40.dp)
+                                .background(SleekPrimaryContainer, CircleShape)
+                                .bouncyClickable { onNavigate("search") },
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Icon(Icons.Default.Search, contentDescription = "Search", tint = SleekPrimary, modifier = Modifier.size(20.dp))
+                        }
                     }
                 }
 

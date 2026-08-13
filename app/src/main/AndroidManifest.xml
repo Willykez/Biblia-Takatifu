@@ -2,10 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
-      Biblia is a fully offline reader: the bundled SQLite database (assets/bible_swahili.sqlite)
-      is all it needs. No network, storage, camera, or notification-listener permissions are
-      declared - the app never needs them.
+      Biblia's Bible reader itself is fully offline: the bundled SQLite database
+      (assets/bible_swahili.sqlite) needs no network. The one exception is the Liturgical
+      Calendar feature, which fetches real Mass readings/feast data from the public
+      LiturgicalCalendarAPI (litcal.johnromanodorazio.com) and caches it on disk for offline
+      use afterward - see LitCalRepository.kt. No other permission is declared.
     -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"

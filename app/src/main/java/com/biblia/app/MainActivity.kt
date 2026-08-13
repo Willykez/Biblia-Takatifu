@@ -38,11 +38,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.biblia.app.data.BibleBook
 import com.biblia.app.data.BibleVerse
 import com.biblia.app.ui.BibleViewModel
+import com.biblia.app.ui.LiturgicalViewModel
 import com.biblia.app.ui.common.SparkPredictiveBackHandler
+import com.biblia.app.ui.screens.CalendarScreen
 import com.biblia.app.ui.screens.ChaptersScreen
 import com.biblia.app.ui.screens.HomeScreen
 import com.biblia.app.ui.screens.OnboardingScreen
 import com.biblia.app.ui.screens.ReaderScreen
+import com.biblia.app.ui.screens.ReadingsScreen
 import com.biblia.app.ui.screens.SavedScreen
 import com.biblia.app.ui.screens.SearchScreen
 import com.biblia.app.ui.screens.SettingsScreen
@@ -50,6 +53,7 @@ import com.biblia.app.ui.screens.SplashScreen
 import com.biblia.app.ui.theme.LocalReducedMotion
 import com.biblia.app.ui.theme.MyApplicationTheme
 import com.biblia.app.ui.theme.reducedMotionAwareSpec
+import java.time.LocalDate
 
 /**
  * App shell for Biblia Takatifu.
@@ -89,11 +93,14 @@ class MainActivity : ComponentActivity() {
         }
         val currentScreen = backStack.last()
         val viewModel: BibleViewModel = viewModel()
+        val liturgicalViewModel: LiturgicalViewModel = viewModel()
 
         // Which book/chapter "chapters" and "reader" are currently showing - plain
         // Activity-level state since the string-based backStack has no slot for arguments.
         var selectedBook by remember { mutableStateOf<BibleBook?>(null) }
         var selectedChapterNum by remember { mutableIntStateOf(1) }
+        // Which date "readings" is currently showing, same pattern as selectedBook above.
+        var selectedReadingsDate by remember { mutableStateOf(LocalDate.now()) }
         // Set by openVerse() when jumping in from Search/Saved and the target book isn't
         // already loaded; the LaunchedEffect below resolves it and completes the navigation.
         var pendingVerseBookId by remember { mutableStateOf<Int?>(null) }
@@ -141,6 +148,11 @@ class MainActivity : ComponentActivity() {
             pendingVerseBookId = verse.bookId
           }
           navigate("reader")
+        }
+
+        fun openDate(date: LocalDate) {
+          selectedReadingsDate = date
+          navigate("readings")
         }
 
         // System/gesture back: pop our own stack instead of the default (which would
@@ -219,6 +231,17 @@ class MainActivity : ComponentActivity() {
                 viewModel = viewModel,
                 onNavigate = ::navigate,
                 onOpenBook = ::openBook,
+                onOpenCalendar = { navigate("calendar") },
+              )
+              "calendar" -> CalendarScreen(
+                viewModel = liturgicalViewModel,
+                onNavigate = ::navigate,
+                onOpenDate = ::openDate,
+              )
+              "readings" -> ReadingsScreen(
+                viewModel = liturgicalViewModel,
+                date = selectedReadingsDate,
+                onBack = ::goBack,
               )
               "chapters" -> selectedBook?.let { book ->
                 ChaptersScreen(
