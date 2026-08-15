@@ -1,5 +1,6 @@
 package com.biblia.app.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,19 +24,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.background
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.biblia.app.ui.theme.ReadingFont
 import kotlinx.coroutines.launch
 
-private data class OnboardPage(val title: String, val body: String)
+private data class OnboardPage(
+    val title: String,
+    val body: String,
+)
 
 private val pages = listOf(
     OnboardPage(
         "Biblia yako, nje ya mtandao",
-        "Vitabu vyote 66, kwa Kiswahili na Kiingereza pamoja \u2014 hakuna mtandao unaohitajika.",
+        "Vitabu vyote 66, kwa Kiswahili na Kiingereza pamoja — hakuna mtandao unaohitajika.",
     ),
     OnboardPage(
         "Weka alama, angazia, andika dokezo",
@@ -48,27 +51,44 @@ private val pages = listOf(
 )
 
 @Composable
-fun OnboardingScreen(onGetStarted: () -> Unit) {
-    val pagerState = rememberPagerState(pageCount = { pages.size })
+fun OnboardingScreen(
+    onGetStarted: () -> Unit,
+) {
+    val pagerState = rememberPagerState(
+        pageCount = { pages.size },
+    )
+
     val scope = rememberCoroutineScope()
 
-    Column(modifier = Modifier.fillMaxSize().padding(24.dp)) {
-        HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+    ) {
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier.weight(1f),
+        ) { page ->
             val p = pages[page]
+
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    p.title,
+                    text = p.title,
                     fontFamily = ReadingFont,
                     fontSize = 26.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground,
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+
+                Spacer(
+                    modifier = Modifier.height(16.dp),
+                )
+
                 Text(
-                    p.body,
+                    text = p.body,
                     fontSize = 16.sp,
                     lineHeight = 24.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -77,17 +97,28 @@ fun OnboardingScreen(onGetStarted: () -> Unit) {
         }
 
         Row(
-            modifier = Modifier.fillMaxWidth().padding(vertical = 20.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 20.dp),
         ) {
             repeat(pages.size) { index ->
                 Box(
                     modifier = Modifier
                         .padding(end = 6.dp)
-                        .size(if (index == pagerState.currentPage) 8.dp else 6.dp)
+                        .size(
+                            if (index == pagerState.currentPage) {
+                                8.dp
+                            } else {
+                                6.dp
+                            },
+                        )
                         .background(
-                            if (index == pagerState.currentPage) MaterialTheme.colorScheme.primary
-                            else MaterialTheme.colorScheme.outline,
-                            CircleShape,
+                            color = if (index == pagerState.currentPage) {
+                                MaterialTheme.colorScheme.primary
+                            } else {
+                                MaterialTheme.colorScheme.outline
+                            },
+                            shape = CircleShape,
                         ),
                 )
             }
@@ -98,15 +129,42 @@ fun OnboardingScreen(onGetStarted: () -> Unit) {
                 onClick = onGetStarted,
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.small,
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                ),
             ) {
-                Text("Anza", fontSize = 16.sp)
+                Text(
+                    text = "Anza",
+                    fontSize = 16.sp,
+                )
             }
         } else {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                TextButton(onClick = onGetStarted) { Text("Ruka", color = MaterialTheme.colorScheme.onSurfaceVariant) }
-                TextButton(onClick = { scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) } }) {
-                    Text("Endelea", color = MaterialTheme.colorScheme.primary)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                TextButton(
+                    onClick = onGetStarted,
+                ) {
+                    Text(
+                        text = "Ruka",
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+
+                TextButton(
+                    onClick = {
+                        scope.launch {
+                            pagerState.animateScrollToPage(
+                                pagerState.currentPage + 1,
+                            )
+                        }
+                    },
+                ) {
+                    Text(
+                        text = "Endelea",
+                        color = MaterialTheme.colorScheme.primary,
+                    )
                 }
             }
         }

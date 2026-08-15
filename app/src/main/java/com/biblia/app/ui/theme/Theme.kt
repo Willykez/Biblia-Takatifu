@@ -9,9 +9,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 
-enum class ThemeMode { SYSTEM, LIGHT, DARK }
+enum class ThemeMode {
+    SYSTEM,
+    LIGHT,
+    DARK
+}
 
-/** Read-only access to which mode is actually in effect, for anything that needs to branch. */
+/**
+ * Read-only access to which mode is actually in effect.
+ */
 val LocalIsDarkTheme = staticCompositionLocalOf { false }
 
 private val LightScheme = lightColorScheme(
@@ -54,11 +60,14 @@ fun BibliaTheme(
         ThemeMode.LIGHT -> false
         ThemeMode.DARK -> true
     }
-    CompositionLocalProvider(LocalIsDarkTheme provides isDark) {
+
+    CompositionLocalProvider(
+        LocalIsDarkTheme provides isDark
+    ) {
         MaterialTheme(
             colorScheme = if (isDark) DarkScheme else LightScheme,
             typography = AppTypography,
-            shapes = Shapes(), // Material3 defaults - modest rounding, no custom pill/blob shapes
+            shapes = Shapes(),
             content = content,
         )
     }
