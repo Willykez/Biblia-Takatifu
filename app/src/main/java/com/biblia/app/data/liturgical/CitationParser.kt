@@ -17,19 +17,22 @@ data class ParsedCitation(
 
 /**
  * Parses citations in the shape the Lectionary tables actually use, e.g.:
- *   "Isa 42:1-4, 6-7"            same-chapter, comma-separated ranges/singles
- *   "1 Kgs 19:9a, 11-13a"        multi-word book name, trailing sub-verse letters (a/b/c)
- *   "Ps 67:2-3, 5, 6+8"          "+" is another gap-separated group, same as ","
- *   "Matt 9:36\u201410:8"         em dash = continuous range crossing a chapter boundary
- *   "Matt 22:1-14 or 22:1-10"    alternate/shorter form after " or " - we take the first
+ *   "Isaya 42:1-4, 6-7"                same-chapter, comma-separated ranges/singles
+ *   "1 Wafalme 19:9a, 11-13a"          multi-word book name, trailing sub-verse letters (a/b/c)
+ *   "Zaburi 67:2-3, 5, 6+8"            "+" is another gap-separated group, same as ","
+ *   "Isaya 63:16b-17, 19b; 64:2b-7"    ";" starts a new chapter group entirely
+ *   "Mathayo 9:35\u201410:1"            em dash = continuous range crossing a chapter boundary
+ *   "Mathayo 9:35-10:1, 5a, 6-8"       plain-hyphen cross-chapter also happens; the chapter
+ *                                       it crosses into carries forward to later bare tokens
+ *   "Isaya 2:1-5 (au Mwaka A: Isaya 4:2-6)"   alternate reading in parens - we take the first
  * Sub-verse letters (9a, 13a) are stripped for lookup purposes - this DB has no sub-verse
  * granularity, so "13a" resolves to verse 13 in full.
  */
 object CitationParser {
 
     fun parse(citation: String): ParsedCitation {
-        val primary = citation.substringBefore(" or ").trim()
-            .removePrefix("Cf. ").removePrefix("cf. ").removePrefix("Cf.").trim()
+        val primary = citation.substringBefore('(').trim()
+            .removePrefix("Cf. ").removePrefix("cf. ").removePrefix("kama katika ").trim()
         val (abbrev, rest) = splitBook(primary)
         val bookId = abbrev?.let { BookAbbreviations.abbreviationToBookId[it] }
         val spans = if (rest == null) emptyList() else parseSpans(rest)
@@ -61,33 +64,38 @@ object CitationParser {
 
         val colonIndex = rest.indexOf(':')
         if (colonIndex < 0) return emptyList()
-        val chapter = rest.substring(0, colonIndex).trim().toIntOrNull() ?: return emptyList()
+        val firstChapter = rest.substring(0, colonIndex).trim().toIntOrNull() ?: return emptyList()
         val verseSpecs = rest.substring(colonIndex + 1)
 
-        return verseSpecs.split(',', '+').mapNotNull { token ->
-            val t = token.trim()
-            if (t.isEmpty()) return@mapNotNull null
+        // Stateful: a token that crosses into a new chapter (e.g. "35-10:1") updates the
+        // chapter every *subsequent* bare-verse token uses too, e.g. in
+        // "9:35-10:1, 5a, 6-8" the "5a, 6-8" belong to chapter 10, not the outer chapter 9.
+        var currentChapter = firstChapter
+        val spans = mutableListOf<VerseSpan>()
+        for (rawToken in verseSpecs.split(',', '+')) {
+            val t = rawToken.trim()
+            if (t.isEmpty()) continue
             if (t.contains(':')) {
-                // A token can itself carry a new chapter (plain-hyphen cross-chapter span,
-                // e.g. "36-10:8" meaning verse 36 of the outer chapter through 10:8).
                 val dashIdx = t.indexOf('-')
-                if (dashIdx < 0) return@mapNotNull null
-                val startVerse = stripLetterSuffix(t.substring(0, dashIdx)) ?: return@mapNotNull null
+                if (dashIdx < 0) continue
+                val startVerse = stripLetterSuffix(t.substring(0, dashIdx)) ?: continue
                 val rightParts = t.substring(dashIdx + 1).split(':', limit = 2)
-                if (rightParts.size < 2) return@mapNotNull null
-                val endChapter = rightParts[0].trim().toIntOrNull() ?: chapter
-                val endVerse = stripLetterSuffix(rightParts[1]) ?: return@mapNotNull null
-                VerseSpan(chapter, startVerse, endChapter, endVerse)
+                if (rightParts.size < 2) continue
+                val endChapter = rightParts[0].trim().toIntOrNull() ?: currentChapter
+                val endVerse = stripLetterSuffix(rightParts[1]) ?: continue
+                spans += VerseSpan(currentChapter, startVerse, endChapter, endVerse)
+                currentChapter = endChapter
             } else if (t.contains('-')) {
                 val parts = t.split('-', limit = 2)
-                val start = stripLetterSuffix(parts[0]) ?: return@mapNotNull null
-                val end = stripLetterSuffix(parts[1]) ?: return@mapNotNull null
-                VerseSpan(chapter, start, chapter, end)
+                val start = stripLetterSuffix(parts[0]) ?: continue
+                val end = stripLetterSuffix(parts[1]) ?: continue
+                spans += VerseSpan(currentChapter, start, currentChapter, end)
             } else {
-                val v = stripLetterSuffix(t) ?: return@mapNotNull null
-                VerseSpan(chapter, v, chapter, v)
+                val v = stripLetterSuffix(t) ?: continue
+                spans += VerseSpan(currentChapter, v, currentChapter, v)
             }
         }
+        return spans
     }
 
     private fun parseChapterVerse(text: String): Pair<Int, Int>? {

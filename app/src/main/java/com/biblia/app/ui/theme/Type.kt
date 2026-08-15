@@ -7,76 +7,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 /**
- * The type scale this app's screens actually use in practice, formalized here as a shared
- * reference. Most Text() calls across the app still set fontSize/fontWeight directly rather
- * than reading from MaterialTheme.typography (that predates this pass, and a blanket refactor
- * of every call site wasn't done without a real build to verify against - see below) but the
- * values below match what's already on screen, so use these names as the source of truth
- * when adding anything new instead of picking another one-off size.
- *
- *  - labelSmall   11sp bold, 1sp tracking  -> section eyebrows ("QUICK ACCESS", "ABOUT")
- *  - bodySmall    12sp regular             -> captions, row subtitles, meta text
- *  - bodyMedium   13sp regular/medium      -> secondary body copy, list descriptions
- *  - titleSmall   14sp bold                -> row titles (Settings rows, list items)
- *  - titleMedium  16sp bold                -> card/dialog titles
- *  - titleLarge   20sp bold                -> page/section headings ("All transfers")
- *  - headlineSmall 28sp extra-bold         -> hero text (onboarding)
+ * Two families only: serif for anything the person is actually reading (verses, readings),
+ * plain system sans for everything else (labels, nav, buttons). No custom weights beyond
+ * Normal/Medium/Bold - editorial typography leans on size and spacing, not a type ramp.
  */
-val Typography = Typography(
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
-        fontSize = 11.sp,
-        lineHeight = 14.sp,
-        letterSpacing = 1.sp,
-    ),
-    bodySmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.4.sp,
-    ),
-    bodyMedium = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 13.sp,
-        lineHeight = 18.sp,
-        letterSpacing = 0.25.sp,
-    ),
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp,
-    ),
-    titleSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
-        fontSize = 14.sp,
-        lineHeight = 20.sp,
-        letterSpacing = 0.1.sp,
-    ),
-    titleMedium = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
-        fontSize = 16.sp,
-        lineHeight = 22.sp,
-        letterSpacing = 0.sp,
-    ),
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
-        lineHeight = 26.sp,
-        letterSpacing = 0.sp,
-    ),
-    headlineSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.ExtraBold,
-        fontSize = 28.sp,
-        lineHeight = 34.sp,
-        letterSpacing = 0.sp,
-    ),
+val ReadingFont = FontFamily.Serif
+val UiFont = FontFamily.Default
+
+val AppTypography = Typography(
+    titleLarge = TextStyle(fontFamily = UiFont, fontWeight = FontWeight.Bold, fontSize = 24.sp, lineHeight = 30.sp),
+    titleMedium = TextStyle(fontFamily = UiFont, fontWeight = FontWeight.Bold, fontSize = 18.sp, lineHeight = 24.sp),
+    titleSmall = TextStyle(fontFamily = UiFont, fontWeight = FontWeight.Medium, fontSize = 15.sp, lineHeight = 20.sp),
+    bodyLarge = TextStyle(fontFamily = ReadingFont, fontWeight = FontWeight.Normal, fontSize = 17.sp, lineHeight = 27.sp),
+    bodyMedium = TextStyle(fontFamily = UiFont, fontWeight = FontWeight.Normal, fontSize = 14.sp, lineHeight = 21.sp),
+    bodySmall = TextStyle(fontFamily = UiFont, fontWeight = FontWeight.Normal, fontSize = 12.sp, lineHeight = 17.sp),
+    labelLarge = TextStyle(fontFamily = UiFont, fontWeight = FontWeight.Medium, fontSize = 14.sp, lineHeight = 20.sp),
+    labelMedium = TextStyle(fontFamily = UiFont, fontWeight = FontWeight.Bold, fontSize = 11.sp, lineHeight = 14.sp, letterSpacing = 1.sp),
+    labelSmall = TextStyle(fontFamily = UiFont, fontWeight = FontWeight.Normal, fontSize = 11.sp, lineHeight = 14.sp),
 )

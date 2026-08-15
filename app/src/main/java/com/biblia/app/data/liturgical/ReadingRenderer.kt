@@ -3,7 +3,7 @@ package com.biblia.app.data.liturgical
 import com.biblia.app.data.BibleRepository
 import com.biblia.app.data.BibleVerse
 
-/** Resolves citations from a live LitCalEvent into actual verse text from the Bible database. */
+/** Resolves Swahili lectionary citations into actual verse text from the Bible database. */
 class ReadingRenderer(private val repository: BibleRepository) {
 
     suspend fun render(label: ReadingLabel, citation: String): RenderedReading {
@@ -44,7 +44,15 @@ class ReadingRenderer(private val repository: BibleRepository) {
         }
     }
 
-    /** Renders every non-blank citation on a live LitCal event, in liturgical order. */
-    suspend fun renderEvent(event: LitCalEvent): List<RenderedReading> =
-        event.readings?.asLabeledList()?.map { (label, citation) -> render(label, citation) } ?: emptyList()
+    /** Renders every non-blank citation in a resolved day's reading set, in Mass order. */
+    suspend fun renderReadingSet(readings: ReadingSet?): List<RenderedReading> {
+        if (readings == null) return emptyList()
+        val labeled = listOfNotNull(
+            readings.somoLaKwanza?.takeIf { it.isNotBlank() }?.let { ReadingLabel.FIRST_READING to it },
+            readings.wimboLaKatikati?.takeIf { it.isNotBlank() }?.let { ReadingLabel.PSALM to it },
+            readings.somoLaPili?.takeIf { it.isNotBlank() }?.let { ReadingLabel.SECOND_READING to it },
+            readings.injili?.takeIf { it.isNotBlank() }?.let { ReadingLabel.GOSPEL to it },
+        )
+        return labeled.map { (label, citation) -> render(label, citation) }
+    }
 }

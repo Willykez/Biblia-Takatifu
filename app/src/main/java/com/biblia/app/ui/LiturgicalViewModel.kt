@@ -4,13 +4,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.biblia.app.data.BibleRepository
-import com.biblia.app.data.liturgical.LitCalEvent
-import com.biblia.app.data.liturgical.LitCalRepository
-import com.biblia.app.data.liturgical.LiturgicalCalendar
-import com.biblia.app.data.liturgical.LiturgicalDay
+import com.biblia.app.data.liturgical.LectionaryRepository
+import com.biblia.app.data.liturgical.LiturgicalResolver
 import com.biblia.app.data.liturgical.ReadingRenderer
 import com.biblia.app.data.liturgical.RenderedDay
-import com.biblia.app.data.liturgical.RenderedReading
+import com.biblia.app.data.liturgical.ResolvedDay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,65 +16,42 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.YearMonth
 
-sealed class CalendarLoadState {
-    data object Loading : CalendarLoadState()
-    data class Loaded(val fromCache: Boolean) : CalendarLoadState()
-    data class Offline(val hasCachedData: Boolean, val message: String) : CalendarLoadState()
-}
-
 /**
- * Backs the Calendar and Today's Readings screens. Source of truth is the live
- * LiturgicalCalendarAPI (LitCalRepository, cached on disk per year); LiturgicalCalendar's
- * offline date math is the fallback used for season colour/day naming on dates the API
- * hasn't been fetched for yet, so the calendar grid never looks empty.
+ * Backs the Calendar and Today's Readings screens. Fully local now - readings, saints, and
+ * the A/B/C + I/II cycle table all come from your bundled lectionary_swahili.sqlite via
+ * LiturgicalResolver, not a network API. No loading/offline states needed for that reason;
+ * [monthCache] just avoids re-resolving the same 30-odd days every time the calendar redraws.
  */
 class LiturgicalViewModel(application: Application) : AndroidViewModel(application) {
     private val bibleRepository = BibleRepository(application)
-    private val litCalRepository = LitCalRepository(application)
+    private val lectionaryRepository = LectionaryRepository(application)
+    private val resolver = LiturgicalResolver(lectionaryRepository)
     private val renderer = ReadingRenderer(bibleRepository)
 
-    private val _loadState = MutableStateFlow<CalendarLoadState>(CalendarLoadState.Loading)
-    val loadState: StateFlow<CalendarLoadState> = _loadState.asStateFlow()
+    private val _keepThursdaySolemnities = MutableStateFlow(false)
+    val keepThursdaySolemnities: StateFlow<Boolean> = _keepThursdaySolemnities.asStateFlow()
 
-    private val eventsByYear = mutableMapOf<Int, List<LitCalEvent>>()
-
-    fun offlineDayFor(date: LocalDate): LiturgicalDay = LiturgicalCalendar.dayFor(date)
-
-    fun ensureYearLoaded(year: Int, forceRefresh: Boolean = false) {
-        viewModelScope.launch {
-            _loadState.value = CalendarLoadState.Loading
-            when (val result = litCalRepository.getYear(year, forceRefresh = forceRefresh)) {
-                is LitCalRepository.YearResult.Success -> {
-                    eventsByYear[year] = result.events
-                    _loadState.value = CalendarLoadState.Loaded(fromCache = result.fromCache)
-                }
-                is LitCalRepository.YearResult.Failure -> {
-                    result.staleCache?.let { eventsByYear[year] = it }
-                    _loadState.value = CalendarLoadState.Offline(
-                        hasCachedData = result.staleCache != null,
-                        message = result.message,
-                    )
-                }
-            }
-        }
+    fun setKeepThursdaySolemnities(value: Boolean) {
+        _keepThursdaySolemnities.value = value
     }
 
-    fun eventsForDate(date: LocalDate): List<LitCalEvent> =
-        (eventsByYear[date.year] ?: emptyList()).filter { it.date == date && !it.isVigilMass }
+    private val monthCache = mutableMapOf<YearMonth, Map<LocalDate, ResolvedDay>>()
 
-    fun eventsInMonth(month: YearMonth): Map<LocalDate, List<LitCalEvent>> =
-        (eventsByYear[month.year] ?: emptyList())
-            .filter { !it.isVigilMass && it.date.month == month.month && it.date.year == month.year }
-            .groupBy { it.date }
+    suspend fun resolveDay(date: LocalDate): ResolvedDay = resolver.resolve(date)
+
+    suspend fun resolveMonth(month: YearMonth): Map<LocalDate, ResolvedDay> {
+        monthCache[month]?.let { return it }
+        val result = (1..month.lengthOfMonth()).associate { day ->
+            val date = month.atDay(day)
+            date to resolver.resolve(date)
+        }
+        monthCache[month] = result
+        return result
+    }
 
     suspend fun renderDay(date: LocalDate): RenderedDay {
-        val events = eventsForDate(date)
-        val readingsByEvent = mutableMapOf<String, List<RenderedReading>>()
-        for (event in events) {
-            readingsByEvent[event.eventKey] = renderer.renderEvent(event)
-        }
-        return RenderedDay(date, events, readingsByEvent)
+        val resolved = resolver.resolve(date)
+        val readings = renderer.renderReadingSet(resolved.readings)
+        return RenderedDay(resolved, readings)
     }
-
-    fun lastSyncedLabel(year: Int): String? = litCalRepository.lastSyncedLabel(year)
 }

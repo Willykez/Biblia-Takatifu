@@ -1,19 +1,17 @@
 package com.biblia.app.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -21,10 +19,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material.icons.filled.ChevronRight
-import androidx.compose.material.icons.filled.CloudOff
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Today
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -32,136 +27,92 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.biblia.app.data.liturgical.LitCalEvent
-import com.biblia.app.ui.AuroraBackground
-import com.biblia.app.ui.CalendarLoadState
+import com.biblia.app.data.liturgical.ResolvedDay
 import com.biblia.app.ui.LiturgicalViewModel
-import com.biblia.app.ui.SleekBottomNav
-import com.biblia.app.ui.bouncyClickable
-import com.biblia.app.ui.liturgical.LiturgicalColors
-import com.biblia.app.ui.theme.SleekOnSurface
-import com.biblia.app.ui.theme.SleekOnSurfaceVariant
-import com.biblia.app.ui.theme.SleekPrimary
-import com.biblia.app.ui.theme.SleekPrimaryContainer
-import com.biblia.app.ui.theme.SleekSurfaceContainer
+import com.biblia.app.ui.components.AppTopBar
+import com.biblia.app.ui.theme.AppColors
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.TextStyle
 import java.util.Locale
+
+private fun colorForRangi(rangi: String?): androidx.compose.ui.graphics.Color = when {
+    rangi == null -> AppColors.LiturgicalGreen
+    rangi.contains("zambarau") || rangi.contains("purple") -> AppColors.LiturgicalViolet
+    rangi.contains("nyeupe") || rangi.contains("dhahabu") || rangi.contains("white") -> AppColors.LiturgicalWhite
+    rangi.contains("nyekundu") || rangi.contains("red") -> AppColors.LiturgicalRed
+    rangi.contains("waridi") || rangi.contains("rose") -> AppColors.LiturgicalRose
+    else -> AppColors.LiturgicalGreen
+}
+
+private fun colorForSeason(season: String): androidx.compose.ui.graphics.Color = when (season) {
+    "majilio", "kwaresima" -> AppColors.LiturgicalViolet
+    "noeli", "pasaka" -> AppColors.LiturgicalWhite
+    "sikukuu_maalum" -> AppColors.LiturgicalRed
+    else -> AppColors.LiturgicalGreen
+}
 
 @Composable
 fun CalendarScreen(
     viewModel: LiturgicalViewModel,
     onNavigate: (String) -> Unit,
     onOpenDate: (LocalDate) -> Unit,
+    onBack: () -> Unit,
 ) {
     val today = remember { LocalDate.now() }
     var month by remember { mutableStateOf(YearMonth.from(today)) }
-    val loadState by viewModel.loadState.collectAsState()
-    var eventsByDate by remember(month) { mutableStateOf<Map<LocalDate, List<LitCalEvent>>>(emptyMap()) }
+    var daysInMonth by remember(month) { mutableStateOf<Map<LocalDate, ResolvedDay>>(emptyMap()) }
 
-    LaunchedEffect(month) { viewModel.ensureYearLoaded(month.year) }
-    LaunchedEffect(month, loadState) {
-        eventsByDate = viewModel.eventsInMonth(month)
-    }
+    LaunchedEffect(month) { daysInMonth = viewModel.resolveMonth(month) }
 
-    Scaffold(
-        bottomBar = { SleekBottomNav(currentRoute = "calendar", onNavigate = onNavigate) },
-        containerColor = Color.Transparent,
-    ) { innerPadding ->
-        AuroraBackground(modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize().padding(top = innerPadding.calculateTopPadding())) {
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 10.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                ) {
-                    Text(
-                        "${month.month.getDisplayName(TextStyle.FULL, Locale.ENGLISH)} ${month.year}",
-                        fontSize = 19.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = SleekOnSurface,
-                    )
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        IconButton(onClick = { month = month.minusMonths(1) }) {
-                            Icon(Icons.Default.ChevronLeft, contentDescription = "Mwezi uliopita", tint = SleekOnSurface)
-                        }
-                        IconButton(onClick = { month = YearMonth.from(today) }) {
-                            Icon(Icons.Default.Today, contentDescription = "Leo", tint = SleekOnSurface)
-                        }
-                        IconButton(onClick = { month = month.plusMonths(1) }) {
-                            Icon(Icons.Default.ChevronRight, contentDescription = "Mwezi ujao", tint = SleekOnSurface)
-                        }
-                        IconButton(onClick = { viewModel.ensureYearLoaded(month.year, forceRefresh = true) }) {
-                            Icon(Icons.Default.Refresh, contentDescription = "Sasisha", tint = SleekOnSurface)
-                        }
-                    }
+    Scaffold(containerColor = MaterialTheme.colorScheme.background) { innerPadding ->
+        Column(modifier = Modifier.fillMaxSize().padding(top = innerPadding.calculateTopPadding())) {
+            AppTopBar(
+                title = "Kalenda ya Liturujia",
+                subtitle = "${month.month.getDisplayName(TextStyle.FULL, Locale.ENGLISH)} ${month.year}",
+                showBack = true,
+                onBack = onBack,
+            )
+
+            Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp), horizontalArrangement = Arrangement.Center) {
+                IconButton(onClick = { month = month.minusMonths(1) }) {
+                    Icon(Icons.Default.ChevronLeft, contentDescription = "Mwezi uliopita")
                 }
-
-                when (val state = loadState) {
-                    is CalendarLoadState.Loading -> Box(
-                        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                        contentAlignment = Alignment.Center,
-                    ) { CircularProgressIndicator(color = SleekPrimary, modifier = Modifier.size(20.dp)) }
-
-                    is CalendarLoadState.Offline -> Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp, vertical = 4.dp)
-                            .background(SleekSurfaceContainer, MaterialTheme.shapes.medium)
-                            .padding(10.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Icon(Icons.Default.CloudOff, contentDescription = null, tint = SleekOnSurfaceVariant, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            if (state.hasCachedData) "Nje ya mtandao \u2014 data iliyohifadhiwa" else "Nje ya mtandao",
-                            fontSize = 11.sp,
-                            color = SleekOnSurfaceVariant,
-                        )
-                    }
-
-                    is CalendarLoadState.Loaded -> {}
+                IconButton(onClick = { month = YearMonth.from(today) }) {
+                    Icon(Icons.Default.Today, contentDescription = "Leo")
                 }
+                IconButton(onClick = { month = month.plusMonths(1) }) {
+                    Icon(Icons.Default.ChevronRight, contentDescription = "Mwezi ujao")
+                }
+            }
 
-                WeekdayHeaderRow()
+            WeekdayHeaderRow()
 
-                val firstOfMonth = month.atDay(1)
-                val leadingBlanks = firstOfMonth.dayOfWeek.value % 7 // Sunday-first grid
-                val totalCells = leadingBlanks + month.lengthOfMonth()
+            val firstOfMonth = month.atDay(1)
+            val leadingBlanks = firstOfMonth.dayOfWeek.value % 7
+            val totalCells = leadingBlanks + month.lengthOfMonth()
 
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(7),
-                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(bottom = innerPadding.calculateBottomPadding()),
-                ) {
-                    items(totalCells) { index ->
-                        if (index < leadingBlanks) {
-                            Box(modifier = Modifier.aspectRatio(1f))
-                        } else {
-                            val date = month.atDay(index - leadingBlanks + 1)
-                            DayCell(
-                                date = date,
-                                isToday = date == today,
-                                events = eventsByDate[date].orEmpty(),
-                                offlineDay = if (eventsByDate[date].isNullOrEmpty()) viewModel.offlineDayFor(date) else null,
-                                onClick = { onOpenDate(date) },
-                            )
-                        }
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(7),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
+                modifier = Modifier.fillMaxSize().padding(bottom = innerPadding.calculateBottomPadding()),
+            ) {
+                items(totalCells) { index ->
+                    if (index < leadingBlanks) {
+                        Box(modifier = Modifier.aspectRatio(1f))
+                    } else {
+                        val date = month.atDay(index - leadingBlanks + 1)
+                        val resolved = daysInMonth[date]
+                        DayCell(date = date, isToday = date == today, resolved = resolved, onClick = { onOpenDate(date) })
                     }
                 }
             }
@@ -171,15 +122,14 @@ fun CalendarScreen(
 
 @Composable
 private fun WeekdayHeaderRow() {
-    val labels = listOf("J2", "J3", "J4", "J5", "Alh", "Ij", "J1") // Sun-Sat, Swahili short forms
-    Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp)) {
+    val labels = listOf("J2", "J3", "J4", "J5", "Alh", "Ij", "J1")
+    Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 6.dp)) {
         labels.forEach { label ->
             Text(
                 label,
-                fontSize = 11.sp,
-                fontWeight = FontWeight.Bold,
-                color = SleekOnSurfaceVariant,
-                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
                 modifier = Modifier.weight(1f),
             )
         }
@@ -187,43 +137,26 @@ private fun WeekdayHeaderRow() {
 }
 
 @Composable
-private fun DayCell(
-    date: LocalDate,
-    isToday: Boolean,
-    events: List<LitCalEvent>,
-    offlineDay: com.biblia.app.data.liturgical.LiturgicalDay?,
-    onClick: () -> Unit,
-) {
-    val primaryEvent = events.maxByOrNull { it.grade }
-    val color = when {
-        primaryEvent != null -> primaryEvent.colorLcl.firstOrNull()?.let { LiturgicalColors.fromApiName(it) }
-        offlineDay != null -> LiturgicalColors.fromOffline(offlineDay.color)
-        else -> null
-    } ?: LiturgicalColors.Green
+private fun DayCell(date: LocalDate, isToday: Boolean, resolved: ResolvedDay?, onClick: () -> Unit) {
+    val dotColor = when {
+        resolved == null -> null
+        resolved.usedFixedSolemnity || resolved.saintOfTheDay != null -> colorForRangi(resolved.rangi ?: resolved.saintOfTheDay?.rangi)
+        else -> colorForSeason(resolved.season)
+    }
+    val showDot = resolved?.usedFixedSolemnity == true || (resolved?.saintOfTheDay != null && resolved.day != null)
 
-    Box(
-        modifier = Modifier
-            .aspectRatio(1f)
-            .padding(3.dp)
-            .clip(MaterialTheme.shapes.medium)
-            .background(if (isToday) SleekPrimaryContainer else color.copy(alpha = 0.12f))
-            .bouncyClickable { onClick() },
-        contentAlignment = Alignment.Center,
-    ) {
+    Box(modifier = Modifier.aspectRatio(1f).clickable { onClick() }, contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 date.dayOfMonth.toString(),
-                fontSize = 14.sp,
-                fontWeight = if (isToday) FontWeight.ExtraBold else FontWeight.Medium,
-                color = if (isToday) SleekPrimary else SleekOnSurface,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = if (isToday) FontWeight.Bold else FontWeight.Normal,
+                color = if (isToday) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onBackground,
             )
-            if (primaryEvent != null && primaryEvent.grade >= 3) {
-                Box(
-                    modifier = Modifier
-                        .padding(top = 2.dp)
-                        .size(5.dp)
-                        .background(color, CircleShape),
-                )
+            if (showDot && dotColor != null) {
+                Box(modifier = Modifier.padding(top = 3.dp).size(4.dp).background(dotColor, CircleShape))
+            } else {
+                androidx.compose.foundation.layout.Spacer(modifier = Modifier.padding(top = 3.dp).size(4.dp))
             }
         }
     }

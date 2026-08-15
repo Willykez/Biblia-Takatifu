@@ -1,12 +1,13 @@
 package com.biblia.app.ui.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Icon
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
@@ -20,23 +21,14 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.biblia.app.data.BibleVerse
-import com.biblia.app.ui.AuroraBackground
 import com.biblia.app.ui.BibleViewModel
-import com.biblia.app.ui.GroupedListColumn
-import com.biblia.app.ui.GroupedListItem
-import com.biblia.app.ui.SleekBottomNav
-import com.biblia.app.ui.bouncyClickable
-import com.biblia.app.ui.groupPositionFor
-import com.biblia.app.ui.theme.SleekOnSurface
-import com.biblia.app.ui.theme.SleekOnSurfaceVariant
-import com.biblia.app.ui.theme.SleekPrimary
+import com.biblia.app.ui.components.AppBottomNav
+import com.biblia.app.ui.components.DividedRow
+import com.biblia.app.ui.theme.ReadingFont
 
 private enum class SavedTab { BOOKMARKS, HIGHLIGHTS, NOTES }
 
@@ -63,51 +55,45 @@ fun SavedScreen(
     }
 
     Scaffold(
-        bottomBar = { SleekBottomNav(currentRoute = "saved", onNavigate = onNavigate) },
-        containerColor = Color.Transparent,
+        bottomBar = { AppBottomNav(currentRoute = "saved", onNavigate = onNavigate) },
+        containerColor = MaterialTheme.colorScheme.background,
     ) { innerPadding ->
-        AuroraBackground(modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize().padding(top = innerPadding.calculateTopPadding())) {
-                Text(
-                    "Ilivyohifadhiwa",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = SleekOnSurface,
-                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 14.dp),
-                )
-                TabRow(selectedTabIndex = tab, containerColor = Color.Transparent) {
-                    Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("Alama") })
-                    Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text("Iliyoangaziwa") })
-                    Tab(selected = tab == 2, onClick = { tab = 2 }, text = { Text("Dokezo") })
-                }
+        Column(modifier = Modifier.fillMaxSize().padding(top = innerPadding.calculateTopPadding())) {
+            Text(
+                "Yaliyohifadhiwa",
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp),
+            )
+            TabRow(
+                selectedTabIndex = tab,
+                containerColor = MaterialTheme.colorScheme.background,
+                contentColor = MaterialTheme.colorScheme.primary,
+            ) {
+                Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("Alama") })
+                Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text("Iliyoangaziwa") })
+                Tab(selected = tab == 2, onClick = { tab = 2 }, text = { Text("Dokezo") })
+            }
 
-                if (items.isEmpty()) {
-                    Text(
-                        "Bado hakuna kitu hapa",
-                        color = SleekOnSurfaceVariant,
-                        fontSize = 14.sp,
-                        modifier = Modifier.fillMaxWidth().padding(top = 40.dp),
-                        textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                    )
-                } else {
-                    LazyColumn(
-                        contentPadding = PaddingValues(horizontal = 20.dp, vertical = 8.dp),
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(bottom = innerPadding.calculateBottomPadding()),
-                    ) {
-                        item {
-                            GroupedListColumn {
-                                items.forEachIndexed { index, verse ->
-                                    GroupedListItem(position = groupPositionFor(index, items.size)) {
-                                        SavedRow(
-                                            verse = verse,
-                                            bookTitle = bookTitleById[verse.bookId] ?: "",
-                                            onClick = { onOpenVerse(verse) },
-                                        )
-                                    }
-                                }
-                            }
+            if (items.isEmpty()) {
+                Text(
+                    "Bado hakuna kitu hapa",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.fillMaxWidth().padding(top = 40.dp),
+                    textAlign = TextAlign.Center,
+                )
+            } else {
+                LazyColumn(
+                    contentPadding = PaddingValues(bottom = innerPadding.calculateBottomPadding()),
+                    modifier = Modifier.fillMaxSize(),
+                ) {
+                    items(items, key = { it.id }) { verse ->
+                        DividedRow {
+                            SavedRow(
+                                verse = verse,
+                                bookTitle = bookTitleById[verse.bookId] ?: "",
+                                onClick = { onOpenVerse(verse) },
+                            )
                         }
                     }
                 }
@@ -121,29 +107,29 @@ private fun SavedRow(verse: BibleVerse, bookTitle: String, onClick: () -> Unit) 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .bouncyClickable { onClick() }
-            .padding(16.dp),
+            .clickable { onClick() }
+            .padding(horizontal = 20.dp, vertical = 14.dp),
     ) {
         if (bookTitle.isNotEmpty()) {
             Text(
                 "$bookTitle ${verse.chapterNum}:${verse.position}",
-                fontSize = 11.sp,
-                fontWeight = FontWeight.Bold,
-                color = SleekPrimary,
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.primary,
             )
         }
         Text(
             verse.primaryText,
-            fontSize = 14.sp,
-            color = SleekOnSurface,
+            fontFamily = ReadingFont,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground,
             maxLines = 3,
-            modifier = Modifier.padding(top = 2.dp),
+            modifier = Modifier.padding(top = 3.dp),
         )
         if (!verse.note.isNullOrBlank()) {
             Text(
                 "\u201C${verse.note}\u201D",
-                fontSize = 12.sp,
-                color = SleekOnSurfaceVariant,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 2,
                 modifier = Modifier.padding(top = 4.dp),
             )

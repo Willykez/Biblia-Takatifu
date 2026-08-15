@@ -1,26 +1,20 @@
 package com.biblia.app.ui.screens
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.ChevronRight
-import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
@@ -35,23 +29,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.biblia.app.data.BibleBook
-import com.biblia.app.ui.AuroraBackground
 import com.biblia.app.ui.BibleViewModel
-import com.biblia.app.ui.GroupPosition
-import com.biblia.app.ui.GroupedListColumn
-import com.biblia.app.ui.GroupedListItem
-import com.biblia.app.ui.SleekBottomNav
-import com.biblia.app.ui.bouncyClickable
-import com.biblia.app.ui.groupPositionFor
-import com.biblia.app.ui.theme.SleekOnSurface
-import com.biblia.app.ui.theme.SleekOnSurfaceVariant
-import com.biblia.app.ui.theme.SleekPrimary
-import com.biblia.app.ui.theme.SleekPrimaryContainer
+import com.biblia.app.ui.components.AppBottomNav
+import com.biblia.app.ui.components.DividedRow
+import com.biblia.app.ui.theme.ReadingFont
 
 @Composable
 fun HomeScreen(
@@ -66,70 +49,47 @@ fun HomeScreen(
     var tab by remember { mutableIntStateOf(0) }
 
     Scaffold(
-        bottomBar = { SleekBottomNav(currentRoute = "home", onNavigate = onNavigate) },
-        containerColor = Color.Transparent,
+        bottomBar = { AppBottomNav(currentRoute = "home", onNavigate = onNavigate) },
+        containerColor = MaterialTheme.colorScheme.background,
     ) { innerPadding ->
-        AuroraBackground(modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize().padding(top = innerPadding.calculateTopPadding())) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp, vertical = 14.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Column {
-                        Text("Biblia Takatifu", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = SleekOnSurface)
-                        Text(
-                            "Ukiendelea: ${readingState.lastBookTitle} ${readingState.lastChapterNum}",
-                            fontSize = 12.sp,
-                            color = SleekOnSurfaceVariant,
-                        )
+        Column(modifier = Modifier.fillMaxSize().padding(top = innerPadding.calculateTopPadding())) {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column {
+                    Text("Biblia Takatifu", fontFamily = ReadingFont, style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.onBackground)
+                    Text(
+                        "Ukiendelea: ${readingState.lastBookTitle} ${readingState.lastChapterNum}",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+                Row {
+                    IconButton(onClick = onOpenCalendar) {
+                        Icon(Icons.Default.CalendarMonth, contentDescription = "Kalenda ya Liturujia", tint = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Box(
-                            modifier = Modifier
-                                .size(40.dp)
-                                .background(SleekPrimaryContainer, CircleShape)
-                                .bouncyClickable { onOpenCalendar() },
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            Icon(Icons.Default.CalendarMonth, contentDescription = "Kalenda ya Liturujia", tint = SleekPrimary, modifier = Modifier.size(20.dp))
-                        }
-                        Spacer(modifier = Modifier.width(10.dp))
-                        Box(
-                            modifier = Modifier
-                                .size(40.dp)
-                                .background(SleekPrimaryContainer, CircleShape)
-                                .bouncyClickable { onNavigate("search") },
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            Icon(Icons.Default.Search, contentDescription = "Search", tint = SleekPrimary, modifier = Modifier.size(20.dp))
-                        }
+                    IconButton(onClick = { onNavigate("search") }) {
+                        Icon(Icons.Default.Search, contentDescription = "Tafuta", tint = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
+            }
 
-                TabRow(selectedTabIndex = tab, containerColor = Color.Transparent) {
-                    Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("Agano la Kale") })
-                    Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text("Agano Jipya") })
-                }
+            TabRow(
+                selectedTabIndex = tab,
+                containerColor = MaterialTheme.colorScheme.background,
+                contentColor = MaterialTheme.colorScheme.primary,
+            ) {
+                Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("Agano la Kale") })
+                Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text("Agano Jipya") })
+            }
 
-                val books = if (tab == 0) oldTestament else newTestament
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(bottom = innerPadding.calculateBottomPadding())
-                        .padding(horizontal = 20.dp, vertical = 16.dp),
-                ) {
-                    item {
-                        GroupedListColumn {
-                            books.forEachIndexed { index, book ->
-                                GroupedListItem(position = groupPositionFor(index, books.size)) {
-                                    BookRow(book = book, onClick = { onOpenBook(book) })
-                                }
-                            }
-                        }
-                        Spacer(modifier = Modifier.height(24.dp))
+            val books = if (tab == 0) oldTestament else newTestament
+            LazyColumn(modifier = Modifier.fillMaxSize().padding(bottom = innerPadding.calculateBottomPadding())) {
+                items(books, key = { it.id }) { book ->
+                    DividedRow {
+                        BookRow(book = book, onClick = { onOpenBook(book) })
                     }
                 }
             }
@@ -142,26 +102,15 @@ private fun BookRow(book: BibleBook, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .bouncyClickable { onClick() }
-            .padding(16.dp),
+            .clickable { onClick() }
+            .padding(horizontal = 20.dp, vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
-            Box(
-                modifier = Modifier
-                    .size(36.dp)
-                    .background(SleekPrimary.copy(alpha = 0.14f), MaterialTheme.shapes.small),
-                contentAlignment = Alignment.Center,
-            ) {
-                Icon(Icons.Default.MenuBook, contentDescription = null, tint = SleekPrimary, modifier = Modifier.size(18.dp))
-            }
-            Spacer(modifier = Modifier.width(14.dp))
-            Column {
-                Text(book.title, fontSize = 15.sp, fontWeight = FontWeight.Bold, color = SleekOnSurface)
-                Text("Sura ${book.numChapters}", fontSize = 12.sp, color = SleekOnSurfaceVariant)
-            }
+        Column {
+            Text(book.title, fontFamily = ReadingFont, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onBackground)
+            Text("Sura ${book.numChapters}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        Icon(Icons.Default.ChevronRight, contentDescription = null, tint = SleekOnSurfaceVariant.copy(alpha = 0.5f))
+        Icon(Icons.Default.ChevronRight, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(start = 8.dp))
     }
 }

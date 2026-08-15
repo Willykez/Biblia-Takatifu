@@ -3,12 +3,14 @@ package com.biblia.app.ui
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.biblia.app.data.AppearancePrefs
 import com.biblia.app.data.BibleBook
 import com.biblia.app.data.BibleDataCounts
 import com.biblia.app.data.BibleRepository
 import com.biblia.app.data.BibleVerse
 import com.biblia.app.data.ReadingPrefs
 import com.biblia.app.data.ReadingState
+import com.biblia.app.ui.theme.ThemeMode
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -17,7 +19,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 /**
- * Backs Home, Reader, Search, Saved and the "your data" part of Settings.
+ * Backs Home, Reader, Search, Saved and Settings.
  *
  * Replaces the framework's file-transfer PulseViewModel: same shape (AndroidViewModel,
  * exposed as StateFlows for Compose to collect), different domain.
@@ -25,9 +27,15 @@ import kotlinx.coroutines.launch
 class BibleViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = BibleRepository(application)
     private val readingPrefs = ReadingPrefs(application)
+    private val appearancePrefs = AppearancePrefs(application)
 
     val readingState: StateFlow<ReadingState> = readingPrefs.state
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ReadingState())
+
+    val themeMode: StateFlow<ThemeMode> = appearancePrefs.themeMode
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ThemeMode.SYSTEM)
+
+    fun setThemeMode(mode: ThemeMode) = viewModelScope.launch { appearancePrefs.setThemeMode(mode) }
 
     private val _oldTestament = MutableStateFlow<List<BibleBook>>(emptyList())
     val oldTestament: StateFlow<List<BibleBook>> = _oldTestament.asStateFlow()
