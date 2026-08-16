@@ -1,8 +1,10 @@
 package com.biblia.app
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
@@ -15,7 +17,10 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -23,12 +28,14 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.biblia.app.data.BibleBook
 import com.biblia.app.data.BibleVerse
@@ -40,31 +47,41 @@ import com.biblia.app.ui.screens.HomeScreen
 import com.biblia.app.ui.screens.OnboardingScreen
 import com.biblia.app.ui.screens.ReaderScreen
 import com.biblia.app.ui.screens.ReadingsScreen
-import com.biblia.app.ui.screens.SavedScreen
 import com.biblia.app.ui.screens.SearchScreen
-import com.biblia.app.ui.screens.SettingsScreen
+import com.biblia.app.ui.screens.SettingsSheetContent
 import com.biblia.app.ui.screens.SplashScreen
 import com.biblia.app.ui.theme.BibliaTheme
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 /**
  * App shell for Biblia Takatifu.
  *
- * A bottom-nav with four root tabs (Home, Search, Saved, Settings), a real push/pop
- * back-stack for everything else. "chapters", "reader" and "readings" are non-root, pushed
- * routes: since routes are plain strings with no argument-passing of their own, what they're
- * showing is tracked as separate Activity-level state ([selectedBook]/[selectedChapterNum]/
- * [selectedReadingsDate]) that each navigate-to call updates just before pushing the route.
+ * Bottom-nav has two root tabs (Home, Calendar) - Search and Settings are reached via icon
+ * buttons instead: Search pushes a normal back-stack screen, Settings opens as a
+ * ModalBottomSheet ([showSettingsSheet]) rather than navigating anywhere. "chapters",
+ * "reader", "readings" and "search" are non-root, pushed routes: since routes are plain
+ * strings with no argument-passing of their own, what they're showing is tracked as separate
+ * Activity-level state ([selectedBook]/[selectedChapterNum]/[selectedReadingsDate]) that each
+ * navigate-to call updates just before pushing the route.
+ *
+ * Hardware/gesture back is intentionally NOT a plain stack-pop (that's what the in-app top-bar
+ * back arrows do, via [goBack]): from anywhere else it jumps straight to Home, and from Home
+ * itself it's double-press-to-exit (a Toast on the first press, [EXIT_PRESS_WINDOW_MS] to
+ * press again before it resets) rather than exiting immediately.
  *
  * Transitions are a plain crossfade everywhere - no slide/spring/scale motion, matching the
  * flat, content-first design used throughout (see ui/theme and ui/components).
  */
-private val ROOT_ROUTES = setOf("home", "search", "saved", "settings")
+private val ROOT_ROUTES = setOf("home", "calendar")
+private const val EXIT_PRESS_WINDOW_MS = 2000L
 
 private const val PREFS_NAME = "biblia_prefs"
 private const val KEY_ONBOARDED = "has_onboarded"
 
 class MainActivity : ComponentActivity() {
+  @OptIn(ExperimentalMaterial3Api::class)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
@@ -75,10 +92,10 @@ class MainActivity : ComponentActivity() {
       val themeMode by viewModel.themeMode.collectAsState()
 
       BibliaTheme(themeMode = themeMode) {
-        // Real back-stack: every navigate() call pushes, hardware/gesture back pops.
-        // rememberSaveable (not plain remember) so that if Android reclaims this process
-        // while backgrounded, the restored Activity lands back on the same screen instead
-        // of cold-starting at the splash screen again.
+        // Real back-stack: navigate() pushes/roots; goBack() pops one level (used by in-app
+        // top-bar back arrows). rememberSaveable (not plain remember) so that if Android
+        // reclaims this process while backgrounded, the restored Activity lands back on the
+        // same screen instead of cold-starting at the splash screen again.
         val backStack = rememberSaveable(
           saver = listSaver<SnapshotStateList<String>, String>(
             save = { it.toList() },
@@ -93,8 +110,9 @@ class MainActivity : ComponentActivity() {
         var selectedBook by remember { mutableStateOf<BibleBook?>(null) }
         var selectedChapterNum by remember { mutableIntStateOf(1) }
         var selectedReadingsDate by remember { mutableStateOf(LocalDate.now()) }
-        // Set by openVerse() when jumping in from Search/Saved and the target book isn't
-        // already loaded; the LaunchedEffect below resolves it and completes the navigation.
+        var showSettingsSheet by remember { mutableStateOf(false) }
+        // Set by openVerse() when jumping in from Search and the target book isn't already
+        // loaded; the LaunchedEffect below resolves it and completes the navigation.
         var pendingVerseBookId by remember { mutableStateOf<Int?>(null) }
 
         LaunchedEffect(pendingVerseBookId) {
@@ -142,7 +160,27 @@ class MainActivity : ComponentActivity() {
           navigate("readings")
         }
 
-        BackHandler(enabled = backStack.size > 1) { goBack() }
+        // Hardware/gesture back: anywhere but Home jumps straight to Home; on Home it's
+        // double-press-to-exit instead of exiting on the first press.
+        val context = LocalContext.current
+        val scope = rememberCoroutineScope()
+        var awaitingExitConfirm by remember { mutableStateOf(false) }
+
+        BackHandler(enabled = true) {
+          if (currentScreen != "home") {
+            backStack.clear()
+            backStack.add("home")
+          } else if (awaitingExitConfirm) {
+            (context as? Activity)?.finish()
+          } else {
+            awaitingExitConfirm = true
+            Toast.makeText(context, "Bonyeza tena kutoka", Toast.LENGTH_SHORT).show()
+            scope.launch {
+              delay(EXIT_PRESS_WINDOW_MS)
+              awaitingExitConfirm = false
+            }
+          }
+        }
 
         Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
           AnimatedContent(
@@ -169,13 +207,13 @@ class MainActivity : ComponentActivity() {
                 viewModel = viewModel,
                 onNavigate = ::navigate,
                 onOpenBook = ::openBook,
-                onOpenCalendar = { navigate("calendar") },
+                onOpenSearch = { navigate("search") },
+                onOpenSettings = { showSettingsSheet = true },
               )
               "calendar" -> CalendarScreen(
                 viewModel = liturgicalViewModel,
                 onNavigate = ::navigate,
                 onOpenDate = ::openDate,
-                onBack = { navigate("home") },
               )
               "readings" -> ReadingsScreen(
                 viewModel = liturgicalViewModel,
@@ -199,21 +237,23 @@ class MainActivity : ComponentActivity() {
                   onChapterChange = { selectedChapterNum = it },
                   onBack = ::goBack,
                   onSearch = { navigate("search") },
-                  onSettings = { navigate("settings") },
+                  onSettings = { showSettingsSheet = true },
                 )
               }
               "search" -> SearchScreen(
                 viewModel = viewModel,
-                onNavigate = ::navigate,
-                onBack = { navigate("home") },
+                onBack = ::goBack,
                 onOpenVerse = ::openVerse,
               )
-              "saved" -> SavedScreen(
-                viewModel = viewModel,
-                onNavigate = ::navigate,
-                onOpenVerse = ::openVerse,
-              )
-              "settings" -> SettingsScreen(viewModel = viewModel, onNavigate = ::navigate)
+            }
+          }
+
+          if (showSettingsSheet) {
+            ModalBottomSheet(
+              onDismissRequest = { showSettingsSheet = false },
+              sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+            ) {
+              SettingsSheetContent(viewModel = viewModel)
             }
           }
         }

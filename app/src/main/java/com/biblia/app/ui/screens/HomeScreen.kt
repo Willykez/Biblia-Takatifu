@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -41,7 +41,8 @@ fun HomeScreen(
     viewModel: BibleViewModel,
     onNavigate: (String) -> Unit,
     onOpenBook: (BibleBook) -> Unit,
-    onOpenCalendar: () -> Unit,
+    onOpenSearch: () -> Unit,
+    onOpenSettings: () -> Unit,
 ) {
     val oldTestament by viewModel.oldTestament.collectAsState()
     val newTestament by viewModel.newTestament.collectAsState()
@@ -67,11 +68,11 @@ fun HomeScreen(
                     )
                 }
                 Row {
-                    IconButton(onClick = onOpenCalendar) {
-                        Icon(Icons.Default.CalendarMonth, contentDescription = "Kalenda ya Liturujia", tint = MaterialTheme.colorScheme.onSurfaceVariant)
-                    }
-                    IconButton(onClick = { onNavigate("search") }) {
+                    IconButton(onClick = onOpenSearch) {
                         Icon(Icons.Default.Search, contentDescription = "Tafuta", tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                    IconButton(onClick = onOpenSettings) {
+                        Icon(Icons.Default.Settings, contentDescription = "Mipangilio", tint = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             }

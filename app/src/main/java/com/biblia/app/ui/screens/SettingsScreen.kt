@@ -10,15 +10,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Switch
@@ -34,17 +33,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.biblia.app.ui.BibleViewModel
-import com.biblia.app.ui.components.AppBottomNav
-import com.biblia.app.ui.components.AppTopBar
 import com.biblia.app.ui.components.DividedRow
 import com.biblia.app.ui.components.SectionLabel
 import com.biblia.app.ui.theme.ThemeMode
 
+/**
+ * Settings as bottom-sheet content, not a full screen/route - it's presented via
+ * ModalBottomSheet from the gear icon on Home's and Reader's top bars (see MainActivity).
+ * No Scaffold, no top bar, no bottom nav here - just the content column. The sheet itself
+ * supplies the drag handle and dismiss gesture.
+ */
 @Composable
-fun SettingsScreen(
-    viewModel: BibleViewModel,
-    onNavigate: (String) -> Unit,
-) {
+fun SettingsSheetContent(viewModel: BibleViewModel) {
     val readingState by viewModel.readingState.collectAsState()
     val dataCounts by viewModel.dataCounts.collectAsState()
     val themeMode by viewModel.themeMode.collectAsState()
@@ -52,111 +52,111 @@ fun SettingsScreen(
     var clearHighlightsExpanded by remember { mutableStateOf(false) }
     var clearNotesExpanded by remember { mutableStateOf(false) }
 
-    Scaffold(
-        bottomBar = { AppBottomNav(currentRoute = "settings", onNavigate = onNavigate) },
-        containerColor = MaterialTheme.colorScheme.background,
-    ) { innerPadding ->
-        Column(modifier = Modifier.fillMaxSize().padding(top = innerPadding.calculateTopPadding())) {
-            AppTopBar(title = "Mipangilio", showBack = true, onBack = { onNavigate("home") })
-            LazyColumn(modifier = Modifier.fillMaxSize().padding(bottom = innerPadding.calculateBottomPadding())) {
-                item {
-                    SectionLabel("USOMAJI")
-                    DividedRow {
-                        SettingsRow(title = "Maandishi mawili", subtitle = "Onyesha Kiswahili na Kiingereza pamoja") {
-                            Switch(
-                                checked = readingState.bilingual,
-                                onCheckedChange = { viewModel.setBilingual(it) },
-                                colors = SwitchDefaults.colors(checkedTrackColor = MaterialTheme.colorScheme.primary),
-                            )
-                        }
-                    }
-                    DividedRow {
-                        SettingsRow(title = "Namba za mstari", subtitle = "Onyesha namba ya kila mstari") {
-                            Switch(
-                                checked = readingState.showVerseNumbers,
-                                onCheckedChange = { viewModel.setShowVerseNumbers(it) },
-                                colors = SwitchDefaults.colors(checkedTrackColor = MaterialTheme.colorScheme.primary),
-                            )
-                        }
-                    }
-                    DividedRow {
-                        Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp)) {
-                            Text("Ukubwa wa maandishi (${readingState.fontSizeSp}sp)", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onBackground)
-                            Slider(
-                                value = readingState.fontSizeSp.toFloat(),
-                                onValueChange = { viewModel.setFontSize(it.toInt()) },
-                                valueRange = 12f..28f,
-                                steps = 15,
-                                colors = SliderDefaults.colors(thumbColor = MaterialTheme.colorScheme.primary, activeTrackColor = MaterialTheme.colorScheme.primary),
-                            )
-                        }
-                    }
-                }
-
-                item {
-                    Spacer(modifier = Modifier.height(12.dp))
-                    SectionLabel("MWONEKANO")
-                    DividedRow {
-                        Row(
-                            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 14.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                        ) {
-                            listOf(ThemeMode.SYSTEM to "Mfumo", ThemeMode.LIGHT to "Mwanga", ThemeMode.DARK to "Giza").forEach { (mode, label) ->
-                                val selected = mode == themeMode
-                                Text(
-                                    label,
-                                    style = MaterialTheme.typography.labelLarge,
-                                    color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
-                                    modifier = Modifier.clickable { viewModel.setThemeMode(mode) },
-                                )
-                            }
-                        }
-                    }
-                }
-
-                item {
-                    Spacer(modifier = Modifier.height(12.dp))
-                    SectionLabel("DATA YAKO")
-                    ClearableDataRow(
-                        title = "Alama",
-                        subtitle = "${dataCounts.bookmarks} mstari umewekwa alama",
-                        expanded = clearBookmarksExpanded,
-                        onToggleExpanded = { clearBookmarksExpanded = !clearBookmarksExpanded },
-                        onConfirmClear = { viewModel.clearAllBookmarks(); clearBookmarksExpanded = false },
+    LazyColumn(modifier = Modifier.navigationBarsPadding()) {
+        item {
+            Text(
+                "Mipangilio",
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp),
+            )
+        }
+        item {
+            SectionLabel("USOMAJI")
+            DividedRow {
+                SettingsRow(title = "Maandishi mawili", subtitle = "Onyesha Kiswahili na Kiingereza pamoja") {
+                    Switch(
+                        checked = readingState.bilingual,
+                        onCheckedChange = { viewModel.setBilingual(it) },
+                        colors = SwitchDefaults.colors(checkedTrackColor = MaterialTheme.colorScheme.primary),
                     )
-                    ClearableDataRow(
-                        title = "Iliyoangaziwa",
-                        subtitle = "${dataCounts.highlights} mstari umeangaziwa",
-                        expanded = clearHighlightsExpanded,
-                        onToggleExpanded = { clearHighlightsExpanded = !clearHighlightsExpanded },
-                        onConfirmClear = { viewModel.clearAllHighlights(); clearHighlightsExpanded = false },
-                    )
-                    ClearableDataRow(
-                        title = "Dokezo",
-                        subtitle = "${dataCounts.notes} dokezo limehifadhiwa",
-                        expanded = clearNotesExpanded,
-                        onToggleExpanded = { clearNotesExpanded = !clearNotesExpanded },
-                        onConfirmClear = { viewModel.clearAllNotes(); clearNotesExpanded = false },
-                    )
-                }
-
-                item {
-                    Spacer(modifier = Modifier.height(12.dp))
-                    SectionLabel("KUHUSU")
-                    DividedRow(showDivider = false) {
-                        Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp)) {
-                            Text("Biblia Takatifu", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onBackground)
-                            Text(
-                                "Tafsiri ya Kiswahili na Kiingereza \u2014 vitabu 66, chapisho la nje ya mtandao",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.padding(top = 2.dp),
-                            )
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(24.dp))
                 }
             }
+            DividedRow {
+                SettingsRow(title = "Namba za mstari", subtitle = "Onyesha namba ya kila mstari") {
+                    Switch(
+                        checked = readingState.showVerseNumbers,
+                        onCheckedChange = { viewModel.setShowVerseNumbers(it) },
+                        colors = SwitchDefaults.colors(checkedTrackColor = MaterialTheme.colorScheme.primary),
+                    )
+                }
+            }
+            DividedRow {
+                Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp)) {
+                    Text("Ukubwa wa maandishi (${readingState.fontSizeSp}sp)", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onBackground)
+                    Slider(
+                        value = readingState.fontSizeSp.toFloat(),
+                        onValueChange = { viewModel.setFontSize(it.toInt()) },
+                        valueRange = 12f..28f,
+                        steps = 15,
+                        colors = SliderDefaults.colors(thumbColor = MaterialTheme.colorScheme.primary, activeTrackColor = MaterialTheme.colorScheme.primary),
+                    )
+                }
+            }
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(12.dp))
+            SectionLabel("MWONEKANO")
+            DividedRow {
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 14.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    listOf(ThemeMode.SYSTEM to "Mfumo", ThemeMode.LIGHT to "Mwanga", ThemeMode.DARK to "Giza").forEach { (mode, label) ->
+                        val selected = mode == themeMode
+                        Text(
+                            label,
+                            style = MaterialTheme.typography.labelLarge,
+                            color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.clickable { viewModel.setThemeMode(mode) },
+                        )
+                    }
+                }
+            }
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(12.dp))
+            SectionLabel("DATA YAKO")
+            ClearableDataRow(
+                title = "Alama",
+                subtitle = "${dataCounts.bookmarks} mstari umewekwa alama",
+                expanded = clearBookmarksExpanded,
+                onToggleExpanded = { clearBookmarksExpanded = !clearBookmarksExpanded },
+                onConfirmClear = { viewModel.clearAllBookmarks(); clearBookmarksExpanded = false },
+            )
+            ClearableDataRow(
+                title = "Iliyoangaziwa",
+                subtitle = "${dataCounts.highlights} mstari umeangaziwa",
+                expanded = clearHighlightsExpanded,
+                onToggleExpanded = { clearHighlightsExpanded = !clearHighlightsExpanded },
+                onConfirmClear = { viewModel.clearAllHighlights(); clearHighlightsExpanded = false },
+            )
+            ClearableDataRow(
+                title = "Dokezo",
+                subtitle = "${dataCounts.notes} dokezo limehifadhiwa",
+                expanded = clearNotesExpanded,
+                onToggleExpanded = { clearNotesExpanded = !clearNotesExpanded },
+                onConfirmClear = { viewModel.clearAllNotes(); clearNotesExpanded = false },
+            )
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(12.dp))
+            SectionLabel("KUHUSU")
+            DividedRow(showDivider = false) {
+                Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp)) {
+                    Text("Biblia Takatifu", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onBackground)
+                    Text(
+                        "Tafsiri ya Kiswahili na Kiingereza \u2014 vitabu 66, chapisho la nje ya mtandao",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(top = 2.dp),
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }

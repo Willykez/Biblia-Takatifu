@@ -8,18 +8,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.Bookmark
+import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material.icons.outlined.MenuBook
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -81,14 +80,17 @@ private data class NavItem(val route: String, val label: String, val outlined: I
 private val navItems = listOf(
     NavItem("home", "Biblia", Icons.Outlined.MenuBook, Icons.Filled.MenuBook),
     NavItem("search", "Tafuta", Icons.Outlined.Search, Icons.Filled.Search),
-    NavItem("saved", "Yaliyohifadhiwa", Icons.Outlined.Bookmark, Icons.Filled.Bookmark),
-    NavItem("settings", "Mipangilio", Icons.Outlined.Settings, Icons.Filled.Settings),
+    NavItem("calendar", "Kalenda", Icons.Outlined.CalendarMonth, Icons.Filled.CalendarMonth),
 )
 
-/** Plain text-and-icon tabs with a top hairline rule - no pill, no elevation, no motion. */
+/**
+ * Plain text-and-icon tabs with a top hairline rule - no pill, no elevation, no motion.
+ * navigationBarsPadding() keeps the tab labels clear of the phone's gesture bar / nav
+ * buttons instead of sitting flush behind them.
+ */
 @Composable
 fun AppBottomNav(currentRoute: String, onNavigate: (String) -> Unit) {
-    Column {
+    Column(modifier = Modifier.navigationBarsPadding()) {
         HorizontalDivider(color = MaterialTheme.colorScheme.outline, thickness = 1.dp)
         Row(
             modifier = Modifier

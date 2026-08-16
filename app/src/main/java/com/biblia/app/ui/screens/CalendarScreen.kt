@@ -38,6 +38,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.biblia.app.data.liturgical.ResolvedDay
 import com.biblia.app.ui.LiturgicalViewModel
+import com.biblia.app.ui.components.AppBottomNav
 import com.biblia.app.ui.components.AppTopBar
 import com.biblia.app.ui.theme.AppColors
 import java.time.LocalDate
@@ -66,7 +67,6 @@ fun CalendarScreen(
     viewModel: LiturgicalViewModel,
     onNavigate: (String) -> Unit,
     onOpenDate: (LocalDate) -> Unit,
-    onBack: () -> Unit,
 ) {
     val today = remember { LocalDate.now() }
     var month by remember { mutableStateOf(YearMonth.from(today)) }
@@ -74,13 +74,14 @@ fun CalendarScreen(
 
     LaunchedEffect(month) { daysInMonth = viewModel.resolveMonth(month) }
 
-    Scaffold(containerColor = MaterialTheme.colorScheme.background) { innerPadding ->
+    Scaffold(
+        bottomBar = { AppBottomNav(currentRoute = "calendar", onNavigate = onNavigate) },
+        containerColor = MaterialTheme.colorScheme.background,
+    ) { innerPadding ->
         Column(modifier = Modifier.fillMaxSize().padding(top = innerPadding.calculateTopPadding())) {
             AppTopBar(
                 title = "Kalenda ya Liturujia",
                 subtitle = "${month.month.getDisplayName(TextStyle.FULL, Locale.ENGLISH)} ${month.year}",
-                showBack = true,
-                onBack = onBack,
             )
 
             Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp), horizontalArrangement = Arrangement.Center) {

@@ -31,7 +31,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.biblia.app.data.BibleVerse
 import com.biblia.app.ui.BibleViewModel
-import com.biblia.app.ui.components.AppBottomNav
 import com.biblia.app.ui.components.AppTopBar
 import com.biblia.app.ui.components.DividedRow
 import com.biblia.app.ui.theme.ReadingFont
@@ -41,7 +40,6 @@ import kotlinx.coroutines.delay
 @Composable
 fun SearchScreen(
     viewModel: BibleViewModel,
-    onNavigate: (String) -> Unit,
     onBack: () -> Unit,
     onOpenVerse: (BibleVerse) -> Unit,
 ) {
@@ -65,10 +63,7 @@ fun SearchScreen(
         searching = false
     }
 
-    Scaffold(
-        bottomBar = { AppBottomNav(currentRoute = "search", onNavigate = onNavigate) },
-        containerColor = MaterialTheme.colorScheme.background,
-    ) { innerPadding ->
+    Scaffold(containerColor = MaterialTheme.colorScheme.background) { innerPadding ->
         Column(modifier = Modifier.fillMaxSize().padding(top = innerPadding.calculateTopPadding())) {
             AppTopBar(title = "Tafuta", showBack = true, onBack = onBack)
             OutlinedTextField(
