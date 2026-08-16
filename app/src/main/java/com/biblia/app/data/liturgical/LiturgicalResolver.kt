@@ -248,7 +248,7 @@ class LiturgicalResolver(
             return ResolvedDay(date, "pasaka", "oktava", null, day, cycle, null, "Oktava ya Pasaka", null, null, false, readings)
         }
 
-        val week = (weeksBetween(a.easterSunday, sundayOnOrBefore(date)) + 1).coerceIn(2, 7)
+        val week = (weeksBetween(a.easterSunday, sundayOnOrBefore(date)) + 1).toInt().coerceIn(2, 7)
         val periodKey = when (week) {
             2 -> "wiki_02_huruma_ya_mungu"
             4 -> "wiki_04_mchungaji_mwema"
