@@ -42,6 +42,14 @@ data class ResolvedDay(
 
 enum class ReadingLabel { FIRST_READING, PSALM, SECOND_READING, GOSPEL }
 
+/**
+ * One verse paired with the number label it should display as - normally just the verse
+ * number, but "6a" or "10ab" when the citation marked it as a partial verse (see VerseSpan).
+ * The DB has no sub-verse text boundaries, so [verse].primaryText is always the full verse -
+ * only the displayed label reflects the partial-verse marker, not the text itself.
+ */
+data class DisplayVerse(val verse: BibleVerse, val label: String)
+
 /** A single passage, rendered from a citation against the actual Bible database. */
 sealed class RenderedReading {
     abstract val label: ReadingLabel
@@ -50,7 +58,7 @@ sealed class RenderedReading {
     data class Available(
         override val label: ReadingLabel,
         override val citation: String,
-        val verses: List<BibleVerse>,
+        val verses: List<DisplayVerse>,
     ) : RenderedReading()
 
     /** Book not in this Bible (deuterocanonical) or citation didn't resolve to any rows. */

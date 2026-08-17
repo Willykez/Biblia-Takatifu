@@ -207,6 +207,17 @@ class MainActivity : ComponentActivity() {
                 viewModel = viewModel,
                 onNavigate = ::navigate,
                 onOpenBook = ::openBook,
+                onContinueReading = {
+                  val state = viewModel.readingState.value
+                  scope.launch {
+                    val book = viewModel.getBook(state.lastBookId)
+                    if (book != null) {
+                      selectedBook = book
+                      selectedChapterNum = state.lastChapterNum
+                      navigate("reader")
+                    }
+                  }
+                },
                 onOpenSearch = { navigate("search") },
                 onOpenSettings = { showSettingsSheet = true },
               )
@@ -219,10 +230,14 @@ class MainActivity : ComponentActivity() {
                 viewModel = liturgicalViewModel,
                 date = selectedReadingsDate,
                 onBack = ::goBack,
+                onPreviousDate = { selectedReadingsDate = selectedReadingsDate.minusDays(1) },
+                onNextDate = { selectedReadingsDate = selectedReadingsDate.plusDays(1) },
+                onOpenCalendar = { navigate("calendar") },
               )
               "chapters" -> selectedBook?.let { book ->
                 ChaptersScreen(
                   book = book,
+                  currentChapter = if (book.id == viewModel.readingState.value.lastBookId) viewModel.readingState.value.lastChapterNum else null,
                   onBack = ::goBack,
                   onSelectChapter = ::openChapter,
                 )

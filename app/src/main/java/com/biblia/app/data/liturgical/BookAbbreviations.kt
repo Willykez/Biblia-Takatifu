@@ -43,4 +43,13 @@ object BookAbbreviations {
 
     /** Longest-name-first so e.g. "1 Wakorintho"/"Kumbukumbu la Torati" match before a shorter prefix would. */
     val sortedAbbreviations: List<String> = ids.keys.sortedByDescending { it.length }
+
+    /** Lowercased/trimmed/period-stripped lookup, so casing or a stray "." doesn't cause a miss. */
+    private val normalizedIds: Map<String, Int> = ids.entries.associate { (name, id) -> normalize(name) to id }
+
+    private fun normalize(raw: String): String =
+        raw.trim().lowercase().trimEnd('.').replace(Regex("\\s+"), " ")
+
+    /** Resolves a book name/short-form to its database id, or null if unresolvable (e.g. deuterocanon). */
+    fun resolveId(bookName: String): Int? = normalizedIds[normalize(bookName)]
 }

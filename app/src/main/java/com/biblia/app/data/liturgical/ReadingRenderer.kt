@@ -17,13 +17,13 @@ class ReadingRenderer(private val repository: BibleRepository) {
             return RenderedReading.Unavailable(label, citation, "Imeshindwa kusoma rejea hii.")
         }
 
-        val verses = mutableListOf<BibleVerse>()
+        val verses = mutableListOf<DisplayVerse>()
         for (span in parsed.spans) {
             if (span.startChapter == span.endChapter) {
                 val chapterVerses = repository.getVerses(bookId, span.startChapter)
-                verses += chapterVerses.filter {
-                    !it.isHeading && it.position in span.startVerse..span.endVerse
-                }
+                verses += chapterVerses
+                    .filter { !it.isHeading && it.position in span.startVerse..span.endVerse }
+                    .map { it.withPartialLabel(span, it.position) }
             } else {
                 for (chapterNum in span.startChapter..span.endChapter) {
                     val chapterVerses = repository.getVerses(bookId, chapterNum)
@@ -32,7 +32,7 @@ class ReadingRenderer(private val repository: BibleRepository) {
                         span.endChapter -> chapterVerses.filter { !it.isHeading && it.position <= span.endVerse }
                         else -> chapterVerses.filter { !it.isHeading }
                     }
-                    verses += filtered
+                    verses += filtered.map { it.withPartialLabel(span, it.position, chapterNum) }
                 }
             }
         }
@@ -42,6 +42,19 @@ class ReadingRenderer(private val repository: BibleRepository) {
         } else {
             RenderedReading.Available(label, citation, verses)
         }
+    }
+
+    /**
+     * "6a"/"10ab" style label for a verse at the edge of a partial-verse span, otherwise just
+     * the plain verse number. Interior verses of a range are never lettered - see VerseSpan.
+     */
+    private fun BibleVerse.withPartialLabel(span: VerseSpan, verse: Int, chapter: Int = span.startChapter): DisplayVerse {
+        val letter = when {
+            chapter == span.startChapter && verse == span.startVerse -> span.startLetter
+            chapter == span.endChapter && verse == span.endVerse -> span.endLetter
+            else -> null
+        }
+        return DisplayVerse(this, "$verse${letter ?: ""}")
     }
 
     /** Renders every non-blank citation in a resolved day's reading set, in Mass order. */
