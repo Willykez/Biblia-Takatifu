@@ -95,6 +95,7 @@ class MainActivity : ComponentActivity() {
     setContent {
       val viewModel: BibleViewModel = viewModel()
       val themeMode by viewModel.themeMode.collectAsState()
+      val readingState by viewModel.readingState.collectAsState()
 
       BibliaTheme(themeMode = themeMode) {
         // Real back-stack: navigate() pushes/roots; goBack() pops one level (used by in-app
@@ -112,6 +113,9 @@ class MainActivity : ComponentActivity() {
         val currentScreen = backStack.last()
         val liturgicalViewModel: LiturgicalViewModel = viewModel()
         val readingPlanViewModel: ReadingPlanViewModel = viewModel()
+
+        val plans by readingPlanViewModel.plans.collectAsState()
+        val pacingByPlan by readingPlanViewModel.pacingByPlan.collectAsState()
 
         var selectedBook by remember { mutableStateOf<BibleBook?>(null) }
         var selectedChapterNum by remember { mutableIntStateOf(1) }
@@ -227,7 +231,7 @@ class MainActivity : ComponentActivity() {
                 onNavigate = ::navigate,
                 onOpenBook = ::openBook,
                 onContinueReading = {
-                  val state = viewModel.readingState.value
+                  val state = readingState
                   scope.launch {
                     val book = viewModel.getBook(state.lastBookId)
                     if (book != null) {
@@ -246,10 +250,10 @@ class MainActivity : ComponentActivity() {
                 viewModel = readingPlanViewModel,
                 onBack = ::goBack,
                 onOpenPlan = { planId ->
-                  val plan = readingPlanViewModel.plans.value.firstOrNull { it.id == planId }
+                  val plan = plans.firstOrNull { it.id == planId }
                   if (plan != null) {
                     selectedPlan = plan
-                    selectedPacing = readingPlanViewModel.pacingByPlan.value[planId] ?: PlanPacing.ONE_YEAR
+                    selectedPacing = pacingByPlan[planId] ?: PlanPacing.ONE_YEAR
                     navigate("plan_day")
                   }
                 },
@@ -279,7 +283,7 @@ class MainActivity : ComponentActivity() {
               "chapters" -> selectedBook?.let { book ->
                 ChaptersScreen(
                   book = book,
-                  currentChapter = if (book.id == viewModel.readingState.value.lastBookId) viewModel.readingState.value.lastChapterNum else null,
+                  currentChapter = if (book.id == readingState.lastBookId) readingState.lastChapterNum else null,
                   onBack = ::goBack,
                   onSelectChapter = ::openChapter,
                 )
