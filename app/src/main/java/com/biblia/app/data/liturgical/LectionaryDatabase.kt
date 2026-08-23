@@ -12,7 +12,7 @@ import java.io.FileOutputStream
  */
 object LectionaryDatabase {
     private const val DB_NAME = "lectionary_swahili.sqlite"
-    private const val DB_VERSION = 1
+    private const val DB_VERSION = 2 // bumped: watakatifu.wasifu, prefasi_za_liturujia, daraja_precedence added
 
     @Volatile private var instance: SQLiteDatabase? = null
 

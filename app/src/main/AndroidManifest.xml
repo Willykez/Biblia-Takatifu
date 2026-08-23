@@ -6,7 +6,13 @@
       the liturgical calendar/lectionary (assets/lectionary_swahili.sqlite, your own dataset -
       see APP_LOGIC.md) are bundled locally. No network permission is declared - the app
       never needs one.
+
+      POST_NOTIFICATIONS/RECEIVE_BOOT_COMPLETED/WAKE_LOCK are for the optional daily reading
+      reminder (off by default, opt-in from Settings) - see ui/notifications/.
     -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -29,6 +35,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".notifications.DailyReminderReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name=".notifications.BootRescheduleReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

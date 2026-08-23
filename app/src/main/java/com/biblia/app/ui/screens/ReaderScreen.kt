@@ -24,6 +24,7 @@ import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -151,6 +152,7 @@ fun ReaderScreen(
         ) {
             VerseActionSheet(
                 verse = verse,
+                bookTitle = bookTitle,
                 onToggleBookmark = { viewModel.toggleBookmark(verse); selectedVerse = verse.copy(bookmark = !verse.bookmark) },
                 onSetHighlight = { color -> viewModel.setHighlight(verse, color.index); selectedVerse = verse.copy(highlight = color.index) },
                 onSetNote = { note -> viewModel.setNote(verse, note) },
@@ -227,11 +229,13 @@ private fun VerseRow(
 @Composable
 private fun VerseActionSheet(
     verse: BibleVerse,
+    bookTitle: String,
     onToggleBookmark: () -> Unit,
     onSetHighlight: (HighlightColor) -> Unit,
     onSetNote: (String?) -> Unit,
 ) {
     var noteText by remember(verse.id) { mutableStateOf(verse.note ?: "") }
+    val context = androidx.compose.ui.platform.LocalContext.current
 
     Column(modifier = Modifier.fillMaxWidth().padding(24.dp)) {
         Text("Mstari ${verse.position}", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onBackground)
@@ -241,15 +245,37 @@ private fun VerseActionSheet(
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable { onToggleBookmark() },
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            Icon(
-                if (verse.bookmark) Icons.Default.Bookmark else Icons.Default.BookmarkBorder,
-                contentDescription = "Weka alama",
-                tint = MaterialTheme.colorScheme.primary,
-            )
-            Spacer(modifier = Modifier.width(12.dp))
-            Text(if (verse.bookmark) "Ina alama" else "Weka alama", fontSize = 14.sp, color = MaterialTheme.colorScheme.onBackground)
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.clickable { onToggleBookmark() },
+            ) {
+                Icon(
+                    if (verse.bookmark) Icons.Default.Bookmark else Icons.Default.BookmarkBorder,
+                    contentDescription = "Weka alama",
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+                Text(if (verse.bookmark) "Ina alama" else "Weka alama", fontSize = 14.sp, color = MaterialTheme.colorScheme.onBackground)
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.clickable {
+                    val reference = "$bookTitle ${verse.chapterNum}:${verse.position}"
+                    val shareText = "\u201C${verse.primaryText}\u201D\n\u2014 $reference\n\nBiblia Takatifu"
+                    val sendIntent = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(android.content.Intent.EXTRA_TEXT, shareText)
+                    }
+                    context.startActivity(android.content.Intent.createChooser(sendIntent, null))
+                },
+            ) {
+                Icon(Icons.Default.Share, contentDescription = "Shiriki", tint = MaterialTheme.colorScheme.primary)
+                Spacer(modifier = Modifier.width(12.dp))
+                Text("Shiriki", fontSize = 14.sp, color = MaterialTheme.colorScheme.onBackground)
+            }
         }
 
         Spacer(modifier = Modifier.height(20.dp))

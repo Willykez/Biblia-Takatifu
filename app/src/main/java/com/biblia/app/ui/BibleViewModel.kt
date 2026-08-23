@@ -10,6 +10,7 @@ import com.biblia.app.data.BibleRepository
 import com.biblia.app.data.BibleVerse
 import com.biblia.app.data.ReadingPrefs
 import com.biblia.app.data.ReadingState
+import com.biblia.app.data.RecentSearchesPrefs
 import com.biblia.app.ui.theme.ThemeMode
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -28,6 +29,10 @@ class BibleViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = BibleRepository(application)
     private val readingPrefs = ReadingPrefs(application)
     private val appearancePrefs = AppearancePrefs(application)
+    private val recentSearchesPrefs = RecentSearchesPrefs(application)
+
+    val recentSearches: StateFlow<List<String>> = recentSearchesPrefs.recentSearches
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     val readingState: StateFlow<ReadingState> = readingPrefs.state
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ReadingState())
@@ -63,7 +68,11 @@ class BibleViewModel(application: Application) : AndroidViewModel(application) {
     suspend fun getVerses(bookId: Int, chapterNum: Int): List<BibleVerse> =
         repository.getVerses(bookId, chapterNum)
 
-    suspend fun searchVerses(query: String): List<BibleVerse> = repository.searchVerses(query)
+    suspend fun searchVerses(query: String, matchAnyWord: Boolean = false, bookIds: List<Int>? = null): List<BibleVerse> =
+        repository.searchVerses(query, matchAnyWord, bookIds)
+
+    fun addRecentSearch(query: String) = viewModelScope.launch { recentSearchesPrefs.addSearch(query) }
+    fun clearRecentSearches() = viewModelScope.launch { recentSearchesPrefs.clear() }
 
     suspend fun searchBooks(query: String): List<BibleBook> = repository.searchBooks(query)
 

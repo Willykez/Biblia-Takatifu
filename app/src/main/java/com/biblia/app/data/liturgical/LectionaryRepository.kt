@@ -41,10 +41,19 @@ class LectionaryRepository(context: Context) {
 
     suspend fun getSaintFor(tarehe: String): SaintEntry? = withContext(Dispatchers.IO) {
         db.rawQuery(
-            "SELECT tarehe, jina, daraja, rangi FROM watakatifu WHERE tarehe = ? LIMIT 1",
+            "SELECT tarehe, jina, daraja, rangi, wasifu FROM watakatifu WHERE tarehe = ? LIMIT 1",
             arrayOf(tarehe),
         ).use { c ->
-            if (c.moveToFirst()) SaintEntry(c.getString(0), c.getString(1), c.getString(2), c.getString(3)) else null
+            if (c.moveToFirst()) {
+                SaintEntry(c.getString(0), c.getString(1), c.getString(2), c.getString(3), if (c.isNull(4)) null else c.getString(4))
+            } else null
+        }
+    }
+
+    /** Data-driven precedence ranking (ngazi 1 = highest), replacing a hardcoded rule chain. */
+    suspend fun getPrecedenceTable(): List<PrecedenceEntry> = withContext(Dispatchers.IO) {
+        db.rawQuery("SELECT ngazi, daraja, maelezo FROM daraja_precedence ORDER BY ngazi ASC", null).use { c ->
+            buildList { while (c.moveToNext()) add(PrecedenceEntry(c.getInt(0), c.getString(1), c.getString(2))) }
         }
     }
 

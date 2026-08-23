@@ -1,5 +1,8 @@
 package com.biblia.app.ui.screens
 
+import android.Manifest
+import android.app.TimePickerDialog
+import android.os.Build
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -28,14 +31,23 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import com.biblia.app.data.ReminderPrefs
+import com.biblia.app.data.ReminderState
+import com.biblia.app.notifications.DailyReminderReceiver
+import com.biblia.app.notifications.ReminderScheduler
 import com.biblia.app.ui.BibleViewModel
 import com.biblia.app.ui.components.DividedRow
 import com.biblia.app.ui.components.SectionLabel
 import com.biblia.app.ui.theme.ThemeMode
+import kotlinx.coroutines.launch
 
 /**
  * Settings as bottom-sheet content, not a full screen/route - it's presented via
@@ -51,6 +63,52 @@ fun SettingsSheetContent(viewModel: BibleViewModel) {
     var clearBookmarksExpanded by remember { mutableStateOf(false) }
     var clearHighlightsExpanded by remember { mutableStateOf(false) }
     var clearNotesExpanded by remember { mutableStateOf(false) }
+
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val reminderPrefs = remember { ReminderPrefs(context) }
+    val reminderState by reminderPrefs.state.collectAsState(initial = ReminderState())
+    val notificationPermissionLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        if (granted) {
+            scope.launch {
+                reminderPrefs.setEnabled(true)
+                DailyReminderReceiver.ensureChannel(context)
+                ReminderScheduler.schedule(context, reminderState.hour, reminderState.minute)
+            }
+        }
+    }
+
+    fun enableReminder() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        } else {
+            scope.launch {
+                reminderPrefs.setEnabled(true)
+                DailyReminderReceiver.ensureChannel(context)
+                ReminderScheduler.schedule(context, reminderState.hour, reminderState.minute)
+            }
+        }
+    }
+
+    fun disableReminder() {
+        scope.launch { reminderPrefs.setEnabled(false) }
+        ReminderScheduler.cancel(context)
+    }
+
+    fun openTimePicker() {
+        TimePickerDialog(
+            context,
+            { _, hour, minute ->
+                scope.launch {
+                    reminderPrefs.setTime(hour, minute)
+                    if (reminderState.enabled) ReminderScheduler.schedule(context, hour, minute)
+                }
+            },
+            reminderState.hour,
+            reminderState.minute,
+            true,
+        ).show()
+    }
 
     LazyColumn(modifier = Modifier.navigationBarsPadding()) {
         item {
@@ -90,6 +148,29 @@ fun SettingsSheetContent(viewModel: BibleViewModel) {
                         valueRange = 12f..28f,
                         steps = 15,
                         colors = SliderDefaults.colors(thumbColor = MaterialTheme.colorScheme.primary, activeTrackColor = MaterialTheme.colorScheme.primary),
+                    )
+                }
+            }
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(12.dp))
+            SectionLabel("UKUMBUSHO")
+            DividedRow {
+                SettingsRow(title = "Ukumbusho wa kila siku", subtitle = "Mstari wa Injili ya leo, kwa wakati unaochagua") {
+                    Switch(
+                        checked = reminderState.enabled,
+                        onCheckedChange = { if (it) enableReminder() else disableReminder() },
+                        colors = SwitchDefaults.colors(checkedTrackColor = MaterialTheme.colorScheme.primary),
+                    )
+                }
+            }
+            if (reminderState.enabled) {
+                DividedRow(showDivider = false) {
+                    SettingsRow(
+                        title = "Wakati",
+                        subtitle = "%02d:%02d".format(reminderState.hour, reminderState.minute),
+                        onClick = { openTimePicker() },
                     )
                 }
             }

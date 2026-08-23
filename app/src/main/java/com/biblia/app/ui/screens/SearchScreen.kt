@@ -1,5 +1,8 @@
 package com.biblia.app.ui.screens
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,14 +13,16 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.MenuBook
 import androidx.compose.material3.CircularProgressIndicator
@@ -50,6 +55,9 @@ import com.biblia.app.ui.components.AppTopBar
 import com.biblia.app.ui.theme.ReadingFont
 import kotlinx.coroutines.delay
 
+private enum class SearchScope(val label: String) { ALL("Yote"), OT("Agano la Kale"), NT("Agano Jipya") }
+private enum class MatchMode(val label: String) { PHRASE("Kifungu kamili"), ANY_WORD("Neno lolote") }
+
 @Composable
 fun SearchScreen(
     viewModel: BibleViewModel,
@@ -59,14 +67,25 @@ fun SearchScreen(
     var query by remember { mutableStateOf("") }
     var results by remember { mutableStateOf<List<BibleVerse>>(emptyList()) }
     var searching by remember { mutableStateOf(false) }
+    var scope by remember { mutableStateOf(SearchScope.ALL) }
+    var matchMode by remember { mutableStateOf(MatchMode.PHRASE) }
     val oldTestament by viewModel.oldTestament.collectAsState()
     val newTestament by viewModel.newTestament.collectAsState()
+    val recentSearches by viewModel.recentSearches.collectAsState()
     val bookTitleById = remember(oldTestament, newTestament) {
         (oldTestament + newTestament).associate { it.id to it.title }
     }
     val focusRequester = remember { FocusRequester() }
 
-    LaunchedEffect(query) {
+    val scopedBookIds = remember(scope, oldTestament, newTestament) {
+        when (scope) {
+            SearchScope.ALL -> null
+            SearchScope.OT -> oldTestament.map { it.id }
+            SearchScope.NT -> newTestament.map { it.id }
+        }
+    }
+
+    LaunchedEffect(query, scope, matchMode) {
         if (query.trim().length < 2) {
             results = emptyList()
             searching = false
@@ -74,8 +93,9 @@ fun SearchScreen(
         }
         searching = true
         delay(300)
-        results = viewModel.searchVerses(query.trim())
+        results = viewModel.searchVerses(query.trim(), matchAnyWord = matchMode == MatchMode.ANY_WORD, bookIds = scopedBookIds)
         searching = false
+        if (results.isNotEmpty()) viewModel.addRecentSearch(query.trim())
     }
 
     LaunchedEffect(Unit) { focusRequester.requestFocus() }
@@ -108,6 +128,25 @@ fun SearchScreen(
                 }
             }
         }
+
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 4.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            SearchScope.entries.forEach { candidate ->
+                FilterChip(selected = scope == candidate, label = candidate.label, onClick = { scope = candidate })
+            }
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 4.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            MatchMode.entries.forEach { candidate ->
+                FilterChip(selected = matchMode == candidate, label = candidate.label, onClick = { matchMode = candidate })
+            }
+        }
+        Spacer(modifier = Modifier.height(8.dp))
         HorizontalDivider(color = MaterialTheme.colorScheme.outline, thickness = 1.dp)
 
         Box(modifier = Modifier.fillMaxSize()) {
@@ -118,20 +157,15 @@ fun SearchScreen(
                     strokeWidth = 2.dp,
                 )
 
-                query.trim().length in 1..1 -> EmptyState(
-                    icon = Icons.Outlined.MenuBook,
-                    message = "Andika angalau herufi mbili",
+                query.trim().length in 1..1 -> EmptyState(message = "Andika angalau herufi mbili")
+
+                query.isEmpty() -> RecentSearchesList(
+                    recent = recentSearches,
+                    onSelect = { query = it },
+                    onClear = { viewModel.clearRecentSearches() },
                 )
 
-                query.isEmpty() -> EmptyState(
-                    icon = Icons.Outlined.MenuBook,
-                    message = "Tafuta neno lolote katika Biblia yote",
-                )
-
-                results.isEmpty() -> EmptyState(
-                    icon = Icons.Outlined.MenuBook,
-                    message = "Hakuna matokeo kwa \u201c${query.trim()}\u201d",
-                )
+                results.isEmpty() -> EmptyState(message = "Hakuna matokeo kwa \u201c${query.trim()}\u201d")
 
                 else -> Column {
                     Text(
@@ -158,12 +192,69 @@ fun SearchScreen(
 }
 
 @Composable
-private fun EmptyState(icon: androidx.compose.ui.graphics.vector.ImageVector, message: String) {
+private fun FilterChip(selected: Boolean, label: String, onClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .clickable { onClick() }
+            .let {
+                if (selected) it.background(MaterialTheme.colorScheme.primary.copy(alpha = 0.12f), RoundedCornerShape(6.dp))
+                else it.border(BorderStroke(1.dp, MaterialTheme.colorScheme.outline), RoundedCornerShape(6.dp))
+            }
+            .padding(horizontal = 10.dp, vertical = 5.dp),
+    ) {
+        Text(
+            label,
+            style = MaterialTheme.typography.labelMedium,
+            color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
+}
+
+@Composable
+private fun RecentSearchesList(recent: List<String>, onSelect: (String) -> Unit, onClear: () -> Unit) {
+    if (recent.isEmpty()) {
+        EmptyState(message = "Tafuta neno lolote katika Biblia yote")
+        return
+    }
+    Column(modifier = Modifier.fillMaxSize()) {
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text("ULIYOTAFUTA HIVI KARIBUNI", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(
+                "Futa",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.clickable { onClear() },
+            )
+        }
+        LazyColumn {
+            items(recent) { q ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { onSelect(q) }
+                        .padding(horizontal = 20.dp, vertical = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(Icons.Default.History, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(18.dp))
+                    Spacer(modifier = Modifier.width(14.dp))
+                    Text(q, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onBackground)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun EmptyState(message: String) {
     Column(
         modifier = Modifier.fillMaxSize().padding(top = 60.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.outline, modifier = Modifier.size(36.dp))
+        Icon(Icons.Outlined.MenuBook, contentDescription = null, tint = MaterialTheme.colorScheme.outline, modifier = Modifier.size(36.dp))
         Spacer(modifier = Modifier.height(12.dp))
         Text(message, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center)
     }

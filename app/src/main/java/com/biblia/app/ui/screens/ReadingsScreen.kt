@@ -206,6 +206,14 @@ private fun LiturgicalMasthead(
             if (resolved.saintOfTheDay != null && !resolved.title.contains(resolved.saintOfTheDay.jina)) {
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(resolved.saintOfTheDay.jina, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+                resolved.saintOfTheDay.wasifu?.takeIf { it.isNotBlank() }?.let { bio ->
+                    Text(
+                        bio,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(top = 4.dp),
+                    )
+                }
             }
         }
 

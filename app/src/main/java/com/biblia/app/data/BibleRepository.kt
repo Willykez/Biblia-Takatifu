@@ -47,11 +47,34 @@ class BibleRepository(context: Context) {
         ).use { c -> buildList { while (c.moveToNext()) add(cursorToVerse(c)) } }
     }
 
-    suspend fun searchVerses(query: String, limit: Int = 300): List<BibleVerse> = withContext(Dispatchers.IO) {
-        if (query.isBlank()) return@withContext emptyList()
+    suspend fun searchVerses(
+        query: String,
+        matchAnyWord: Boolean = false,
+        bookIds: List<Int>? = null,
+        limit: Int = 300,
+    ): List<BibleVerse> = withContext(Dispatchers.IO) {
+        val trimmed = query.trim()
+        if (trimmed.isBlank()) return@withContext emptyList()
+
+        val whereClauses = mutableListOf("head = 0")
+        val args = mutableListOf<String>()
+
+        if (matchAnyWord) {
+            val words = trimmed.split(Regex("\\s+")).filter { it.isNotBlank() }
+            words.forEach { word -> whereClauses += "text LIKE ?"; args += "%$word%" }
+        } else {
+            whereClauses += "text LIKE ?"
+            args += "%$trimmed%"
+        }
+
+        if (!bookIds.isNullOrEmpty()) {
+            whereClauses += "chapter_id IN (${bookIds.joinToString(",") { "?" }})"
+            args += bookIds.map { it.toString() }
+        }
+
         db.rawQuery(
-            "SELECT $VERSE_COLS FROM texts WHERE text LIKE ? AND head = 0 LIMIT ?",
-            arrayOf("%$query%", limit.toString()),
+            "SELECT $VERSE_COLS FROM texts WHERE ${whereClauses.joinToString(" AND ")} LIMIT ?",
+            (args + limit.toString()).toTypedArray(),
         ).use { c -> buildList { while (c.moveToNext()) add(cursorToVerse(c)) } }
     }
 

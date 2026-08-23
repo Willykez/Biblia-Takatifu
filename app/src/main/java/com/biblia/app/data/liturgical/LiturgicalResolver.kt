@@ -316,8 +316,22 @@ class LiturgicalResolver(
 
     private suspend fun withSaintInfo(seasonal: ResolvedDay, date: LocalDate): ResolvedDay {
         val saint = repository.getSaintFor(date.toSwahiliTarehe()) ?: return seasonal
-        val isPlainWeekday = seasonal.day != null // any weekday slot, any season
-        return if (isPlainWeekday) {
+        val saintNgazi = ngaziFor(saint.daraja)
+        val isSunday = seasonal.day == null
+
+        // ngazi 9 (Kumbukumbu ya Hiari) never swaps readings/title per the data - always
+        // informational only, regardless of what slot it landed on.
+        val neverOverrides = saintNgazi == 9
+        // Ordinary-Time Sundays sit at ngazi 5; only a rank *below* that (numerically less,
+        // i.e. more senior - practically just ngazi 4, "Sikukuu Kuu") could outrank one. No
+        // ngazi-4 saint exists in the current data, so this is future-proofing, not dead code.
+        val eligibleToOverride = when {
+            neverOverrides -> false
+            !isSunday -> true // any plain weekday (ngazi 8 baseline) - ngazi 4/6/7 all beat it
+            else -> saintNgazi != null && saintNgazi < 5
+        }
+
+        return if (eligibleToOverride) {
             seasonal.copy(
                 title = "${seasonal.title} \u2014 ${saint.jina}",
                 rangi = saint.rangi,
@@ -327,6 +341,19 @@ class LiturgicalResolver(
             seasonal.copy(saintOfTheDay = saint) // informational only, doesn't touch title/readings
         }
     }
+
+    /**
+     * Looks up a saint's `daraja` label against the data-driven `daraja_precedence` table -
+     * matched by the precedence text's lead phrase (before its parenthetical), not a raw
+     * startsWith: "Sikukuu Kuu (...)" and "Sikukuu (...)" both start with "Sikukuu", so a plain
+     * substring/prefix check would misclassify a "Sikukuu" saint as ngazi 4 instead of ngazi 6.
+     */
+    private suspend fun ngaziFor(saintDaraja: String): Int? =
+        precedenceTable().firstOrNull { it.daraja.substringBefore('(').trim() == saintDaraja }?.ngazi
+
+    private var precedenceCache: List<PrecedenceEntry>? = null
+    private suspend fun precedenceTable(): List<PrecedenceEntry> =
+        precedenceCache ?: repository.getPrecedenceTable().also { precedenceCache = it }
 
     private fun solemnityTitle(periodKey: String): String = when (periodKey) {
         "kutolewa_hekaluni_bwana" -> "Kutolewa Hekaluni kwa Bwana"

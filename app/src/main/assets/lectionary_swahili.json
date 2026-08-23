@@ -1477,7 +1477,8 @@
         "INJILI_mwaka_A": "Mathayo 28:1-10",
         "INJILI_mwaka_B": "Marko 16:1-7",
         "INJILI_mwaka_C": "Luka 24:1-12",
-        "SHANGILIO": "[hakuna mstari wa ziada; Wimbo la Alleluia mara tatu hufuata Wimbo wa Katikati]"
+        "SHANGILIO": "[hakuna mstari wa ziada; Wimbo la Alleluia mara tatu hufuata Wimbo wa Katikati]",
+        "SOMO_LA_KWANZA": "(Angalia masomo_ya_agano_la_kale: masomo 7 ya Agano la Kale yanayosomwa kabla ya Waraka)"
       }
     },
     "oktava": [
@@ -1531,19 +1532,22 @@
         "SOMO_LA_KWANZA": "Isaya 42:1-4, 6-7",
         "WIMBO_WA_KATIKATI": "Zaburi 29:1-2, 3-4, 3b+9b-10",
         "SOMO_LA_PILI": "Matendo ya Mitume 10:34-38",
-        "INJILI": "Mathayo 3:13-17"
+        "INJILI": "Mathayo 3:13-17",
+        "SHANGILIO": "kama katika Marko 9:7"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Isaya 55:1-11",
         "WIMBO_WA_KATIKATI": "Isaya 12:2-3, 4bcd, 5-6",
         "SOMO_LA_PILI": "1 Yohana 5:1-9",
-        "INJILI": "Marko 1:7-11"
+        "INJILI": "Marko 1:7-11",
+        "SHANGILIO": "kama katika Yohana 1:29"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Isaya 40:1-5, 9-11",
         "WIMBO_WA_KATIKATI": "Zaburi 104:1b-2, 3-4, 24-25, 27-28, 29b-30",
         "SOMO_LA_PILI": "Tito 2:11-14; 3:4-7",
-        "INJILI": "Luka 3:15-16, 21-22"
+        "INJILI": "Luka 3:15-16, 21-22",
+        "SHANGILIO": "kama katika Luka 3:16"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -1639,19 +1643,22 @@
         "SOMO_LA_KWANZA": "Isaya 49:3, 5-6",
         "WIMBO_WA_KATIKATI": "Zaburi 40:2+4, 7-8a, 8b-9, 10",
         "SOMO_LA_PILI": "1 Wakorintho 1:1-3",
-        "INJILI": "Yohana 1:29-34"
+        "INJILI": "Yohana 1:29-34",
+        "SHANGILIO": "Yohana 1:14a+12a"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "1 Samweli 3:3b-10, 19",
         "WIMBO_WA_KATIKATI": "Zaburi 40:2+4, 7-8a, 8b-9, 10",
         "SOMO_LA_PILI": "1 Wakorintho 6:13c-15a, 17-20",
-        "INJILI": "Yohana 1:35-42"
+        "INJILI": "Yohana 1:35-42",
+        "SHANGILIO": "Yohana 1:41+17b"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Isaya 62:1-5",
         "WIMBO_WA_KATIKATI": "Zaburi 96:1-2a, 2b-3, 7-8, 9-10",
         "SOMO_LA_PILI": "1 Wakorintho 12:4-11",
-        "INJILI": "Yohana 2:1-11"
+        "INJILI": "Yohana 2:1-11",
+        "SHANGILIO": "kama katika 2 Wathesalonike 2:14"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -1747,19 +1754,22 @@
         "SOMO_LA_KWANZA": "Isaya 8:23b-9:3",
         "WIMBO_WA_KATIKATI": "Zaburi 27:1, 4, 13-14",
         "SOMO_LA_PILI": "1 Wakorintho 1:10-13, 17",
-        "INJILI": "Mathayo 4:12-23"
+        "INJILI": "Mathayo 4:12-23",
+        "SHANGILIO": "kama katika Mathayo 4:23"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Jon 3:1-5, 10",
         "WIMBO_WA_KATIKATI": "Zaburi 25:4-5, 6-7, 8-9",
         "SOMO_LA_PILI": "1 Wakorintho 7:29-31",
-        "INJILI": "Marko 1:14-20"
+        "INJILI": "Marko 1:14-20",
+        "SHANGILIO": "Marko 1:15"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Nehemia 8:2-4a, 5-6, 8-10",
         "WIMBO_WA_KATIKATI": "Zaburi 19:8, 9, 10, 15",
         "SOMO_LA_PILI": "1 Wakorintho 12:12-30",
-        "INJILI": "Luka 1:1-4; 4:14-21"
+        "INJILI": "Luka 1:1-4; 4:14-21",
+        "SHANGILIO": "Luka 4:18cd"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -1780,7 +1790,7 @@
           "siku": "Wed",
           "SOMO_LA_KWANZA": "Waebrania 10:11-18",
           "WIMBO_WA_KATIKATI": "Zaburi 110:1, 2, 3, 4",
-          "SHANGILIO": null,
+          "SHANGILIO": "[hakuna mstari maalum]",
           "INJILI": "Marko 4:1-20"
         },
         {
@@ -1824,7 +1834,7 @@
           "siku": "Wed",
           "SOMO_LA_KWANZA": "2 Samweli 7:4-17",
           "WIMBO_WA_KATIKATI": "Zaburi 89:4-5, 27-28, 29-30",
-          "SHANGILIO": null,
+          "SHANGILIO": "[hakuna mstari maalum]",
           "INJILI": "Marko 4:1-22"
         },
         {
@@ -1855,19 +1865,22 @@
         "SOMO_LA_KWANZA": "Sefania 2:3; 3:12-13",
         "WIMBO_WA_KATIKATI": "Zaburi 146:6c-7, 8-9a, 9b-10",
         "SOMO_LA_PILI": "1 Wakorintho 1:26-31",
-        "INJILI": "Mathayo 5:1-12a"
+        "INJILI": "Mathayo 5:1-12a",
+        "SHANGILIO": "Mathayo 5:12a"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Kumbukumbu la Torati 18:15-20",
         "WIMBO_WA_KATIKATI": "Zaburi 95:1-2, 6-7b, 7c-9",
         "SOMO_LA_PILI": "1 Wakorintho 7:32-35",
-        "INJILI": "Marko 1:21-28"
+        "INJILI": "Marko 1:21-28",
+        "SHANGILIO": "Mathayo 4:16"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Yeremia 1:4-5, 17-19",
         "WIMBO_WA_KATIKATI": "Zaburi 71:1-2, 3-4, 5-6, 15+17",
         "SOMO_LA_PILI": "1 Wakorintho 12:31-13:13",
-        "INJILI": "Luka 4:21-30"
+        "INJILI": "Luka 4:21-30",
+        "SHANGILIO": "Luka 4:18cd"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -1963,19 +1976,22 @@
         "SOMO_LA_KWANZA": "Isaya 58:7-10",
         "WIMBO_WA_KATIKATI": "Zaburi 112:4-5, 6-7, 8-9",
         "SOMO_LA_PILI": "1 Wakorintho 2:1-5",
-        "INJILI": "Mathayo 5:13-16"
+        "INJILI": "Mathayo 5:13-16",
+        "SHANGILIO": "Yohana 8:12"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Ayubu 7:1-4, 6-7",
         "WIMBO_WA_KATIKATI": "Zaburi 147:1-2, 3-4, 5-6",
         "SOMO_LA_PILI": "1 Wakorintho 9:16-19, 22-23",
-        "INJILI": "Marko 1:29-39"
+        "INJILI": "Marko 1:29-39",
+        "SHANGILIO": "Mathayo 8:17"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Isaya 6:1-2a, 3-8",
         "WIMBO_WA_KATIKATI": "Zaburi 138:1-2a, 2b-3, 4-5, 7-8",
         "SOMO_LA_PILI": "1 Wakorintho 15:1-11",
-        "INJILI": "Luka 5:1-11"
+        "INJILI": "Luka 5:1-11",
+        "SHANGILIO": "Mathayo 4:19"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -2071,19 +2087,22 @@
         "SOMO_LA_KWANZA": "Yoshua bin Sira (Sira) 15:16-21",
         "WIMBO_WA_KATIKATI": "Zaburi 119:1-2, 4-5, 17-18, 33-34",
         "SOMO_LA_PILI": "1 Wakorintho 2:6-10",
-        "INJILI": "Mathayo 5:17-37"
+        "INJILI": "Mathayo 5:17-37",
+        "SHANGILIO": "kama katika Mathayo 11:25"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Mambo ya Walawi 13:1-2, 44-46",
         "WIMBO_WA_KATIKATI": "Zaburi 32:1-2, 5, 11",
         "SOMO_LA_PILI": "1 Wakorintho 10:31-11:1",
-        "INJILI": "Marko 1:40-45"
+        "INJILI": "Marko 1:40-45",
+        "SHANGILIO": "Luka 7:16"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Yeremia 17:5-8",
         "WIMBO_WA_KATIKATI": "Zaburi 1:1-2, 3, 4+6",
         "SOMO_LA_PILI": "1 Wakorintho 15:12, 16-20",
-        "INJILI": "Luka 6:17, 20-26"
+        "INJILI": "Luka 6:17, 20-26",
+        "SHANGILIO": "Luka 6:23ab"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -2179,19 +2198,22 @@
         "SOMO_LA_KWANZA": "Mambo ya Walawi 19:1-2, 17-18",
         "WIMBO_WA_KATIKATI": "Zaburi 103:1-2, 3-4, 8+10, 12-13",
         "SOMO_LA_PILI": "1 Wakorintho 3:16-23",
-        "INJILI": "Mathayo 5:38-48"
+        "INJILI": "Mathayo 5:38-48",
+        "SHANGILIO": "1 Yohana 2:5"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Isaya 43:18-19, 21-22, 24b-25",
         "WIMBO_WA_KATIKATI": "Zaburi 41:2-3, 4-5, 13-14",
         "SOMO_LA_PILI": "2 Wakorintho 1:18-22",
-        "INJILI": "Marko 2:1-12"
+        "INJILI": "Marko 2:1-12",
+        "SHANGILIO": "kama katika Luka 4:18"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "1 Samweli 26:2, 7-9, 12-13, 22-23",
         "WIMBO_WA_KATIKATI": "Zaburi 103:1-2, 3-4, 8+10, 12-13",
         "SOMO_LA_PILI": "1 Wakorintho 15:45-49",
-        "INJILI": "Luka 6:27-38"
+        "INJILI": "Luka 6:27-38",
+        "SHANGILIO": "Yohana 13:34"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -2287,19 +2309,22 @@
         "SOMO_LA_KWANZA": "Isaya 49:14-15",
         "WIMBO_WA_KATIKATI": "Zaburi 62:2-3, 6-7, 8-9",
         "SOMO_LA_PILI": "1 Wakorintho 4:1-5",
-        "INJILI": "Mathayo 6:24-34"
+        "INJILI": "Mathayo 6:24-34",
+        "SHANGILIO": "Waebrania 4:12"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Hosea 2:16b, 17b, 21-22",
         "WIMBO_WA_KATIKATI": "Zaburi 103:1-2, 3-4, 8+10, 12-13",
         "SOMO_LA_PILI": "2 Wakorintho 3:1b-6",
-        "INJILI": "Marko 2:18-22"
+        "INJILI": "Marko 2:18-22",
+        "SHANGILIO": "Yakobo 1:18"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Yoshua bin Sira (Sira) 27:5-8",
         "WIMBO_WA_KATIKATI": "Zaburi 92:2-3, 13-14, 15-16",
         "SOMO_LA_PILI": "1 Wakorintho 15:54-58",
-        "INJILI": "Luka 6:39-45"
+        "INJILI": "Luka 6:39-45",
+        "SHANGILIO": "Wafilipi 2:15d+16a"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -2395,19 +2420,22 @@
         "SOMO_LA_KWANZA": "Kumbukumbu la Torati 11:18, 26-28, 32",
         "WIMBO_WA_KATIKATI": "Zaburi 31:2-3a, 3b-4, 17+25",
         "SOMO_LA_PILI": "Warumi 3:21-25, 28",
-        "INJILI": "Mathayo 7:21-27"
+        "INJILI": "Mathayo 7:21-27",
+        "SHANGILIO": "Yohana 15:5"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Kumbukumbu la Torati 5:12-15",
         "WIMBO_WA_KATIKATI": "Zaburi 81:3-4, 5-6, 7-8, 10-11",
         "SOMO_LA_PILI": "2 Wakorintho 4:6-11",
-        "INJILI": "Marko 2:23-3:6"
+        "INJILI": "Marko 2:23-3:6",
+        "SHANGILIO": "kama katika Yohana 17:17b+17a"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "1 Wafalme 8:41-43",
         "WIMBO_WA_KATIKATI": "Zaburi 117:1-2",
         "SOMO_LA_PILI": "Wagalatia 1:1-2, 6-10",
-        "INJILI": "Luka 7:1-10"
+        "INJILI": "Luka 7:1-10",
+        "SHANGILIO": "Yohana 3:16"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -2503,19 +2531,22 @@
         "SOMO_LA_KWANZA": "Hosea 6:3-6",
         "WIMBO_WA_KATIKATI": "Zaburi 50:1+8, 12-13, 14-15",
         "SOMO_LA_PILI": "Warumi 4:18-25",
-        "INJILI": "Mathayo 9:9-13"
+        "INJILI": "Mathayo 9:9-13",
+        "SHANGILIO": "kama katika Luka 4:18"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Mwanzo 3:9-15",
         "WIMBO_WA_KATIKATI": "Zaburi 130:1-2, 3-4, 5-6, 7-8",
         "SOMO_LA_PILI": "2 Wakorintho 4:13-5:1",
-        "INJILI": "Marko 3:20-35"
+        "INJILI": "Marko 3:20-35",
+        "SHANGILIO": "Yohana 12:31b-32"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "1 Wafalme 17:17-24",
         "WIMBO_WA_KATIKATI": "Zaburi 30:2+4, 5-6, 11-12a+13b",
         "SOMO_LA_PILI": "Wagalatia 1:11-19",
-        "INJILI": "Luka 7:11-17"
+        "INJILI": "Luka 7:11-17",
+        "SHANGILIO": "Luka 7:16"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -2611,19 +2642,22 @@
         "SOMO_LA_KWANZA": "Kutoka 19:2-6a",
         "WIMBO_WA_KATIKATI": "Zaburi 100:1-2, 3, 5",
         "SOMO_LA_PILI": "Warumi 5:6-11",
-        "INJILI": "Mathayo 9:36-10:8"
+        "INJILI": "Mathayo 9:36-10:8",
+        "SHANGILIO": "Marko 1:15"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Ezekieli 17:22-24",
         "WIMBO_WA_KATIKATI": "Zaburi 92:2-3, 13-14, 15-16",
         "SOMO_LA_PILI": "2 Wakorintho 5:6-10",
-        "INJILI": "Marko 4:26-34"
+        "INJILI": "Marko 4:26-34",
+        "SHANGILIO": "[hakuna mstari maalum]"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "2 Samweli 12:7-10, 13",
         "WIMBO_WA_KATIKATI": "Zaburi 32:1-2, 5, 7, 11",
         "SOMO_LA_PILI": "Wagalatia 2:16, 19-21",
-        "INJILI": "Luka 7:36-8:3"
+        "INJILI": "Luka 7:36-8:3",
+        "SHANGILIO": "1 Yohana 4:10b"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -2719,19 +2753,22 @@
         "SOMO_LA_KWANZA": "Yeremia 20:10-13",
         "WIMBO_WA_KATIKATI": "Zaburi 69:8-10, 14+17, 33-35",
         "SOMO_LA_PILI": "Warumi 5:12-15",
-        "INJILI": "Mathayo 10:26-33"
+        "INJILI": "Mathayo 10:26-33",
+        "SHANGILIO": "Yohana 15:26b-27a"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Ayubu 38:1, 8-11",
         "WIMBO_WA_KATIKATI": "Zaburi 107:23-24, 25-26, 28-29, 30-31",
         "SOMO_LA_PILI": "2 Wakorintho 5:14-17",
-        "INJILI": "Marko 4:35-41"
+        "INJILI": "Marko 4:35-41",
+        "SHANGILIO": "Luka 7:16"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Zekaria 12:10-11; 13:1",
         "WIMBO_WA_KATIKATI": "Zaburi 63:2, 3-4, 5-6, 8-9",
         "SOMO_LA_PILI": "Wagalatia 3:26-29",
-        "INJILI": "Luka 9:18-24"
+        "INJILI": "Luka 9:18-24",
+        "SHANGILIO": "Yohana 10:27"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -2827,19 +2864,22 @@
         "SOMO_LA_KWANZA": "2 Wafalme 4:8-11, 14-16a",
         "WIMBO_WA_KATIKATI": "Zaburi 89:2-3, 16-17, 18-19",
         "SOMO_LA_PILI": "Warumi 6:3-4, 8-11",
-        "INJILI": "Mathayo 10:37-42"
+        "INJILI": "Mathayo 10:37-42",
+        "SHANGILIO": "1 Petro 2:9"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Hekima 1:13-15; 2:23-24",
         "WIMBO_WA_KATIKATI": "Zaburi 30:2+4, 5-6, 11-12a+13b",
         "SOMO_LA_PILI": "2 Wakorintho 8:7, 9, 13-15",
-        "INJILI": "Marko 5:21-43"
+        "INJILI": "Marko 5:21-43",
+        "SHANGILIO": "kama katika 2 Timotheo 1:10"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "1 Wafalme 19:16b, 19-21",
         "WIMBO_WA_KATIKATI": "Zaburi 16:1-2a+5, 7-8, 9-10, 11",
         "SOMO_LA_PILI": "Wagalatia 5:1, 13-18",
-        "INJILI": "Luka 9:51-62"
+        "INJILI": "Luka 9:51-62",
+        "SHANGILIO": "1 Samweli 3:9; Yohana 6:68c"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -2935,19 +2975,22 @@
         "SOMO_LA_KWANZA": "Zekaria 9:9-10",
         "WIMBO_WA_KATIKATI": "Zaburi 145:1-2, 8-9, 10-11, 13-14",
         "SOMO_LA_PILI": "Warumi 8:9, 11-13",
-        "INJILI": "Mathayo 11:25-30"
+        "INJILI": "Mathayo 11:25-30",
+        "SHANGILIO": "kama katika Mathayo 11:25"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Ezekieli 2:2-5",
         "WIMBO_WA_KATIKATI": "Zaburi 123:1-2a, 2bc, 3-4",
         "SOMO_LA_PILI": "2 Wakorintho 12:7-10",
-        "INJILI": "Marko 6:1-6"
+        "INJILI": "Marko 6:1-6",
+        "SHANGILIO": "kama katika Luka 4:18"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Isaya 66:10-14c",
         "WIMBO_WA_KATIKATI": "Zaburi 66:1-3, 4-5, 6-7, 16+20",
         "SOMO_LA_PILI": "Wagalatia 6:14-18",
-        "INJILI": "Luka 10:1-12, 17-20"
+        "INJILI": "Luka 10:1-12, 17-20",
+        "SHANGILIO": "Wakolosai 3:15a+16a"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -3043,19 +3086,22 @@
         "SOMO_LA_KWANZA": "Isaya 55:10-11",
         "WIMBO_WA_KATIKATI": "Zaburi 65:10, 11, 12-13, 14",
         "SOMO_LA_PILI": "Warumi 8:18-23",
-        "INJILI": "Mathayo 13:1-23"
+        "INJILI": "Mathayo 13:1-23",
+        "SHANGILIO": "[hakuna mstari maalum]"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Amosi 7:12-15",
         "WIMBO_WA_KATIKATI": "Zaburi 85:9ab+10, 11-12, 13-14",
         "SOMO_LA_PILI": "Waefeso 1:3-14",
-        "INJILI": "Marko 6:7-13"
+        "INJILI": "Marko 6:7-13",
+        "SHANGILIO": "kama katika Waefeso 1:17-18"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Kumbukumbu la Torati 30:10-14",
         "WIMBO_WA_KATIKATI": "Zaburi 69:14+17, 30-31, 33-34, 36a+37",
         "SOMO_LA_PILI": "Wakolosai 1:15-20",
-        "INJILI": "Luka 10:25-37"
+        "INJILI": "Luka 10:25-37",
+        "SHANGILIO": "kama katika Yohana 6:63c+68c"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -3151,19 +3197,22 @@
         "SOMO_LA_KWANZA": "Hekima 12:13, 16-19",
         "WIMBO_WA_KATIKATI": "Zaburi 86:5-6, 9-10, 15-16",
         "SOMO_LA_PILI": "Warumi 8:26-27",
-        "INJILI": "Mathayo 13:24-43"
+        "INJILI": "Mathayo 13:24-43",
+        "SHANGILIO": "kama katika Mathayo 11:25"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Yeremia 23:1-6",
         "WIMBO_WA_KATIKATI": "Zaburi 23:1-3a, 3b-4, 5, 6",
         "SOMO_LA_PILI": "Waefeso 2:13-18",
-        "INJILI": "Marko 6:30-34"
+        "INJILI": "Marko 6:30-34",
+        "SHANGILIO": "Yohana 10:27"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Mwanzo 18:1-10a",
         "WIMBO_WA_KATIKATI": "Zaburi 15:2-3a, 3b-4, 5",
         "SOMO_LA_PILI": "Wakolosai 1:24-28",
-        "INJILI": "Luka 10:38-42"
+        "INJILI": "Luka 10:38-42",
+        "SHANGILIO": "kama katika Luka 8:15"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -3184,7 +3233,7 @@
           "siku": "Wed",
           "SOMO_LA_KWANZA": "Kutoka 16:1-5, 9-15",
           "WIMBO_WA_KATIKATI": "Zaburi 78:18-19, 23-24, 25-26, 27-28",
-          "SHANGILIO": null,
+          "SHANGILIO": "[hakuna mstari maalum]",
           "INJILI": "Mathayo 13:1-9"
         },
         {
@@ -3228,7 +3277,7 @@
           "siku": "Wed",
           "SOMO_LA_KWANZA": "Yeremia 1:1, 4-10",
           "WIMBO_WA_KATIKATI": "Zaburi 71:1-2, 3-4a, 5-6ab, 15+17",
-          "SHANGILIO": null,
+          "SHANGILIO": "[hakuna mstari maalum]",
           "INJILI": "Mathayo 13:1-9"
         },
         {
@@ -3259,19 +3308,22 @@
         "SOMO_LA_KWANZA": "1 Wafalme 3:5, 7-12",
         "WIMBO_WA_KATIKATI": "Zaburi 119:57+72, 76-77, 127-28, 129-30",
         "SOMO_LA_PILI": "Warumi 8:28-30",
-        "INJILI": "Mathayo 13:44-52"
+        "INJILI": "Mathayo 13:44-52",
+        "SHANGILIO": "kama katika Mathayo 11:25"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "2 Wafalme 4:42-44",
         "WIMBO_WA_KATIKATI": "Zaburi 145:10-11, 15-16, 17-18",
         "SOMO_LA_PILI": "Waefeso 4:1-6",
-        "INJILI": "Yohana 6:1-15"
+        "INJILI": "Yohana 6:1-15",
+        "SHANGILIO": "Luka 7:16"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Mwanzo 18:20-32",
         "WIMBO_WA_KATIKATI": "Zaburi 138:1-2a, 2b-3, 6-7a, 7b-8",
         "SOMO_LA_PILI": "Wakolosai 2:12-14",
-        "INJILI": "Luka 11:1-13"
+        "INJILI": "Luka 11:1-13",
+        "SHANGILIO": "Warumi 8:15bc"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -3285,7 +3337,7 @@
           "siku": "Tue",
           "SOMO_LA_KWANZA": "Kutoka 33:7-11; 34:5b-9, 28",
           "WIMBO_WA_KATIKATI": "Zaburi 103:6-7, 8-9, 10-11, 12-13",
-          "SHANGILIO": null,
+          "SHANGILIO": "[hakuna mstari maalum]",
           "INJILI": "Mathayo 13:36-43"
         },
         {
@@ -3329,7 +3381,7 @@
           "siku": "Tue",
           "SOMO_LA_KWANZA": "Yeremia 14:17-22",
           "WIMBO_WA_KATIKATI": "Zaburi 79:8, 9, 11+13",
-          "SHANGILIO": null,
+          "SHANGILIO": "[hakuna mstari maalum]",
           "INJILI": "Mathayo 13:36-43"
         },
         {
@@ -3367,19 +3419,22 @@
         "SOMO_LA_KWANZA": "Isaya 55:1-3",
         "WIMBO_WA_KATIKATI": "Zaburi 145:8-9, 15-16, 17-18",
         "SOMO_LA_PILI": "Warumi 8:35, 37-39",
-        "INJILI": "Mathayo 14:13-21"
+        "INJILI": "Mathayo 14:13-21",
+        "SHANGILIO": "Mathayo 4:4b"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Kutoka 16:2-4, 12-15",
         "WIMBO_WA_KATIKATI": "Zaburi 78:3-4, 23-24, 25+54",
         "SOMO_LA_PILI": "Waefeso 4:17, 20-24",
-        "INJILI": "Yohana 6:24-35"
+        "INJILI": "Yohana 6:24-35",
+        "SHANGILIO": "Mathayo 4:4b"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Mhubiri 1:2; 2:21-23",
         "WIMBO_WA_KATIKATI": "Zaburi 90:3-4, 5-6, 12-13, 14+17",
         "SOMO_LA_PILI": "Wakolosai 3:1-5, 9-11",
-        "INJILI": "Luka 12:13-21"
+        "INJILI": "Luka 12:13-21",
+        "SHANGILIO": "Mathayo 5:3"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -3475,19 +3530,22 @@
         "SOMO_LA_KWANZA": "1 Wafalme 19:9a, 11-13a",
         "WIMBO_WA_KATIKATI": "Zaburi 85:9ab+10, 11-12, 13-14",
         "SOMO_LA_PILI": "Warumi 9:1-5",
-        "INJILI": "Mathayo 14:22-33"
+        "INJILI": "Mathayo 14:22-33",
+        "SHANGILIO": "kama katika Zaburi 130:5"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "1 Wafalme 19:4-8",
         "WIMBO_WA_KATIKATI": "Zaburi 34:2-3, 4-5, 6-7, 8-9",
         "SOMO_LA_PILI": "Waefeso 4:30-5:2",
-        "INJILI": "Yohana 6:41-51"
+        "INJILI": "Yohana 6:41-51",
+        "SHANGILIO": "Yohana 6:51"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Hekima 18:6-9",
         "WIMBO_WA_KATIKATI": "Zaburi 33:1+12, 18-19, 20-22",
         "SOMO_LA_PILI": "Waebrania 11:1-2, 8-19",
-        "INJILI": "Luka 12:32-48"
+        "INJILI": "Luka 12:32-48",
+        "SHANGILIO": "Mathayo 24:42a+44"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -3583,19 +3641,22 @@
         "SOMO_LA_KWANZA": "Isaya 56:1, 6-7",
         "WIMBO_WA_KATIKATI": "Zaburi 67:2-3, 5, 6+8",
         "SOMO_LA_PILI": "Warumi 11:13-15, 29-32",
-        "INJILI": "Mathayo 15:21-28"
+        "INJILI": "Mathayo 15:21-28",
+        "SHANGILIO": "kama katika Mathayo 4:23"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Mithali 9:1-6",
         "WIMBO_WA_KATIKATI": "Zaburi 34:2-3, 4-5, 6-7",
         "SOMO_LA_PILI": "Waefeso 5:15-20",
-        "INJILI": "Yohana 6:51-58"
+        "INJILI": "Yohana 6:51-58",
+        "SHANGILIO": "Yohana 6:56"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Yeremia 38:4-6, 8-10",
         "WIMBO_WA_KATIKATI": "Zaburi 40:2, 3, 4, 18",
         "SOMO_LA_PILI": "Waebrania 12:1-4",
-        "INJILI": "Luka 12:49-53"
+        "INJILI": "Luka 12:49-53",
+        "SHANGILIO": "Yohana 10:27"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -3691,19 +3752,22 @@
         "SOMO_LA_KWANZA": "Isaya 22:19-23",
         "WIMBO_WA_KATIKATI": "Zaburi 138:1-2a, 2b-3, 6+8",
         "SOMO_LA_PILI": "Warumi 11:33-36",
-        "INJILI": "Mathayo 16:13-20"
+        "INJILI": "Mathayo 16:13-20",
+        "SHANGILIO": "Mathayo 16:18"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Yoshua 24:1-2a, 15-17, 18b",
         "WIMBO_WA_KATIKATI": "Zaburi 34:2-3, 16-17, 18-19, 20-21",
         "SOMO_LA_PILI": "Waefeso 5:21-32",
-        "INJILI": "Yohana 6:60-69"
+        "INJILI": "Yohana 6:60-69",
+        "SHANGILIO": "kama katika Yohana 6:63c+68c"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Isaya 66:18-21",
         "WIMBO_WA_KATIKATI": "Zaburi 117:1, 2",
         "SOMO_LA_PILI": "Waebrania 12:5-7, 11-13",
-        "INJILI": "Luka 13:22-30"
+        "INJILI": "Luka 13:22-30",
+        "SHANGILIO": "Yohana 14:6"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -3799,19 +3863,22 @@
         "SOMO_LA_KWANZA": "Yeremia 20:7-9",
         "WIMBO_WA_KATIKATI": "Zaburi 63:2, 3-4, 5-6, 8-9",
         "SOMO_LA_PILI": "Warumi 12:1-2",
-        "INJILI": "Mathayo 16:21-27"
+        "INJILI": "Mathayo 16:21-27",
+        "SHANGILIO": "kama katika Waefeso 1:17-18"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Kumbukumbu la Torati 4:1-2, 6-8",
         "WIMBO_WA_KATIKATI": "Zaburi 15:2-3a, 3b-4a, 4b-5",
         "SOMO_LA_PILI": "Yakobo 1:17-18, 21b-22, 27",
-        "INJILI": "Marko 7:1-8, 14-15, 21-23"
+        "INJILI": "Marko 7:1-8, 14-15, 21-23",
+        "SHANGILIO": "Yakobo 1:18"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Yoshua bin Sira (Sira) 3:17-18, 20, 28-29",
         "WIMBO_WA_KATIKATI": "Zaburi 68:4-5, 6-7, 10-11",
         "SOMO_LA_PILI": "Waebrania 12:18-19, 22-24a",
-        "INJILI": "Luka 14:1, 7-14"
+        "INJILI": "Luka 14:1, 7-14",
+        "SHANGILIO": "Mathayo 11:29ab"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -3907,19 +3974,22 @@
         "SOMO_LA_KWANZA": "Ezekieli 33:7-9",
         "WIMBO_WA_KATIKATI": "Zaburi 95:1-2, 6-7b, 7c-9",
         "SOMO_LA_PILI": "Warumi 13:8-10",
-        "INJILI": "Mathayo 18:15-20"
+        "INJILI": "Mathayo 18:15-20",
+        "SHANGILIO": "2 Wakorintho 5:19"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Isaya 35:4-7a",
         "WIMBO_WA_KATIKATI": "Zaburi 146:6c-7, 8-9a, 9b-10",
         "SOMO_LA_PILI": "Yakobo 2:1-5",
-        "INJILI": "Marko 7:31-37"
+        "INJILI": "Marko 7:31-37",
+        "SHANGILIO": "kama katika Mathayo 4:23"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Hekima 9:13-18b",
         "WIMBO_WA_KATIKATI": "Zaburi 90:3-4, 5-6, 12-13, 14+17",
         "SOMO_LA_PILI": "Filemoni 9-10, 12-17",
-        "INJILI": "Luka 14:25-33"
+        "INJILI": "Luka 14:25-33",
+        "SHANGILIO": "Zaburi 119:135"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -4015,19 +4085,22 @@
         "SOMO_LA_KWANZA": "Yoshua bin Sira (Sira) 27:30-28:7",
         "WIMBO_WA_KATIKATI": "Zaburi 103:1-2, 3-4, 9-10, 11-12",
         "SOMO_LA_PILI": "Warumi 14:7-9",
-        "INJILI": "Mathayo 18:21-35"
+        "INJILI": "Mathayo 18:21-35",
+        "SHANGILIO": "Yohana 13:34"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Isaya 50:4-9a",
         "WIMBO_WA_KATIKATI": "Zaburi 116:1-2, 3-4, 5-6, 8-9",
         "SOMO_LA_PILI": "Yakobo 2:14-18",
-        "INJILI": "Marko 8:27-35"
+        "INJILI": "Marko 8:27-35",
+        "SHANGILIO": "Wagalatia 6:14"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Kutoka 32:7-11, 13-14",
         "WIMBO_WA_KATIKATI": "Zaburi 51:3-4, 12-13, 17+19",
         "SOMO_LA_PILI": "1 Timotheo 1:12-17",
-        "INJILI": "Luka 15:1-32"
+        "INJILI": "Luka 15:1-32",
+        "SHANGILIO": "2 Wakorintho 5:19"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -4123,19 +4196,22 @@
         "SOMO_LA_KWANZA": "Isaya 55:6-9",
         "WIMBO_WA_KATIKATI": "Zaburi 145:2-3, 8-9, 17-18",
         "SOMO_LA_PILI": "Wafilipi 1:20c-24, 27a",
-        "INJILI": "Mathayo 20:1-16a"
+        "INJILI": "Mathayo 20:1-16a",
+        "SHANGILIO": "kama katika Matendo ya Mitume 16:14b"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Hekima 2:12, 17-20",
         "WIMBO_WA_KATIKATI": "Zaburi 54:3-4, 5, 6-8",
         "SOMO_LA_PILI": "Yakobo 3:16-4:3",
-        "INJILI": "Marko 9:30-37"
+        "INJILI": "Marko 9:30-37",
+        "SHANGILIO": "kama katika 2 Wathesalonike 2:14"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Amosi 8:4-7",
         "WIMBO_WA_KATIKATI": "Zaburi 113:1-2, 4-6, 7-8",
         "SOMO_LA_PILI": "1 Timotheo 2:1-8",
-        "INJILI": "Luka 16:1-13"
+        "INJILI": "Luka 16:1-13",
+        "SHANGILIO": "kama katika 2 Wakorintho 8:9"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -4231,19 +4307,22 @@
         "SOMO_LA_KWANZA": "Ezekieli 18:25-28",
         "WIMBO_WA_KATIKATI": "Zaburi 25:4-5, 6-7, 8-9",
         "SOMO_LA_PILI": "Wafilipi 2:1-11",
-        "INJILI": "Mathayo 21:28-32"
+        "INJILI": "Mathayo 21:28-32",
+        "SHANGILIO": "Yohana 10:27"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Hesabu 11:25-29",
         "WIMBO_WA_KATIKATI": "Zaburi 19:8, 10, 12-13, 14",
         "SOMO_LA_PILI": "Yakobo 5:1-6",
-        "INJILI": "Marko 9:38-43, 45, 47-48"
+        "INJILI": "Marko 9:38-43, 45, 47-48",
+        "SHANGILIO": "kama katika Yohana 17:17b+17a"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Amosi 6:1a, 4-7",
         "WIMBO_WA_KATIKATI": "Zaburi 146:6c-7, 8-9a, 9b-10",
         "SOMO_LA_PILI": "1 Timotheo 6:11-16",
-        "INJILI": "Luka 16:19-31"
+        "INJILI": "Luka 16:19-31",
+        "SHANGILIO": "kama katika 2 Wakorintho 8:9"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -4339,19 +4418,22 @@
         "SOMO_LA_KWANZA": "Isaya 5:1-7",
         "WIMBO_WA_KATIKATI": "Zaburi 80:9+12, 13-14, 15-16, 19-20",
         "SOMO_LA_PILI": "Wafilipi 4:6-9",
-        "INJILI": "Mathayo 21:33-43"
+        "INJILI": "Mathayo 21:33-43",
+        "SHANGILIO": "kama katika Yohana 15:16"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Mwanzo 2:18-24",
         "WIMBO_WA_KATIKATI": "Zaburi 128:1-2, 3, 4-5, 6",
         "SOMO_LA_PILI": "Waebrania 2:9-11",
-        "INJILI": "Marko 10:2-16"
+        "INJILI": "Marko 10:2-16",
+        "SHANGILIO": "1 Yohana 4:12"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Habakuki 1:2-3; 2:2-4",
         "WIMBO_WA_KATIKATI": "Zaburi 95:1-2, 6-7b, 7c-9",
         "SOMO_LA_PILI": "2 Timotheo 1:6-8, 13-14",
-        "INJILI": "Luka 17:5-10"
+        "INJILI": "Luka 17:5-10",
+        "SHANGILIO": "1 Petro 1:25"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -4447,19 +4529,22 @@
         "SOMO_LA_KWANZA": "Isaya 25:6-10a",
         "WIMBO_WA_KATIKATI": "Zaburi 23:1-3a, 3b-4, 5, 6",
         "SOMO_LA_PILI": "Wafilipi 4:12-14, 19-20",
-        "INJILI": "Mathayo 22:1-14"
+        "INJILI": "Mathayo 22:1-14",
+        "SHANGILIO": "kama katika Waefeso 1:17-18"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Hekima 7:7-11",
         "WIMBO_WA_KATIKATI": "Zaburi 90:12-13, 14-15, 16-17",
         "SOMO_LA_PILI": "Waebrania 4:12-13",
-        "INJILI": "Marko 10:17-30"
+        "INJILI": "Marko 10:17-30",
+        "SHANGILIO": "Mathayo 5:3"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "2 Wafalme 5:14-17",
         "WIMBO_WA_KATIKATI": "Zaburi 98:1, 2-3a, 3b-4",
         "SOMO_LA_PILI": "2 Timotheo 2:8-13",
-        "INJILI": "Luka 17:11-19"
+        "INJILI": "Luka 17:11-19",
+        "SHANGILIO": "1 Wathesalonike 5:18"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -4555,19 +4640,22 @@
         "SOMO_LA_KWANZA": "Isaya 45:1, 4-6",
         "WIMBO_WA_KATIKATI": "Zaburi 96:1+3, 4-5, 7-8, 9-10",
         "SOMO_LA_PILI": "1 Wathesalonike 1:1-5b",
-        "INJILI": "Mathayo 22:15-21"
+        "INJILI": "Mathayo 22:15-21",
+        "SHANGILIO": "Wafilipi 2:15d-16a"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Isaya 53:10-11",
         "WIMBO_WA_KATIKATI": "Zaburi 33:4-5, 18-19, 20+22",
         "SOMO_LA_PILI": "Waebrania 4:14-16",
-        "INJILI": "Marko 10:35-45"
+        "INJILI": "Marko 10:35-45",
+        "SHANGILIO": "Marko 10:45"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Kutoka 17:8-13",
         "WIMBO_WA_KATIKATI": "Zaburi 121:1-2, 3-4, 5-6, 7-8",
         "SOMO_LA_PILI": "2 Timotheo 3:14-4:2",
-        "INJILI": "Luka 18:1-8"
+        "INJILI": "Luka 18:1-8",
+        "SHANGILIO": "Waebrania 4:12"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -4663,19 +4751,22 @@
         "SOMO_LA_KWANZA": "Kutoka 22:20-26",
         "WIMBO_WA_KATIKATI": "Zaburi 18:2-3a, 3b-4, 47+51",
         "SOMO_LA_PILI": "1 Wathesalonike 1:5c-10",
-        "INJILI": "Mathayo 22:34-40"
+        "INJILI": "Mathayo 22:34-40",
+        "SHANGILIO": "Yohana 14:23"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Yeremia 31:7-9",
         "WIMBO_WA_KATIKATI": "Zaburi 126:1-2a, 2b-3, 4-5, 6",
         "SOMO_LA_PILI": "Waebrania 5:1-6",
-        "INJILI": "Marko 10:46-52"
+        "INJILI": "Marko 10:46-52",
+        "SHANGILIO": "kama katika 2 Timotheo 1:10"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Yoshua bin Sira (Sira) 35:12-14, 16-18",
         "WIMBO_WA_KATIKATI": "Zaburi 34:2-3, 17-18, 19+23",
         "SOMO_LA_PILI": "2 Timotheo 4:6-8, 16-18",
-        "INJILI": "Luka 18:9-14"
+        "INJILI": "Luka 18:9-14",
+        "SHANGILIO": "2 Wakorintho 5:19"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -4771,19 +4862,22 @@
         "SOMO_LA_KWANZA": "Malaki 1:14b-2:2b, 8-10",
         "WIMBO_WA_KATIKATI": "Zaburi 131:1, 2, 3",
         "SOMO_LA_PILI": "1 Wathesalonike 2:7b-9, 13",
-        "INJILI": "Mathayo 23:1-12"
+        "INJILI": "Mathayo 23:1-12",
+        "SHANGILIO": "Mathayo 23:9b+10b"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Kumbukumbu la Torati 6:2-6",
         "WIMBO_WA_KATIKATI": "Zaburi 18:2-3a, 3b-4, 47+51",
         "SOMO_LA_PILI": "Waebrania 7:23-28",
-        "INJILI": "Marko 12:28b-34"
+        "INJILI": "Marko 12:28b-34",
+        "SHANGILIO": "Yohana 14:23"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Hekima 11:22-12:2",
         "WIMBO_WA_KATIKATI": "Zaburi 145:1-2, 8-9, 10-11, 13b-14",
         "SOMO_LA_PILI": "2 Wathesalonike 1:11-2:2",
-        "INJILI": "Luka 19:1-10"
+        "INJILI": "Luka 19:1-10",
+        "SHANGILIO": "Yohana 3:16"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -4879,19 +4973,22 @@
         "SOMO_LA_KWANZA": "Hekima 6:12-16",
         "WIMBO_WA_KATIKATI": "Zaburi 63:2, 3-4, 5-6, 7-8",
         "SOMO_LA_PILI": "1 Wathesalonike 4:13-18",
-        "INJILI": "Mathayo 25:1-13"
+        "INJILI": "Mathayo 25:1-13",
+        "SHANGILIO": "Mathayo 24:42a+44"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "1 Wafalme 17:10-16",
         "WIMBO_WA_KATIKATI": "Zaburi 146:6c-7, 8-9a, 9b-10",
         "SOMO_LA_PILI": "Waebrania 9:24-28",
-        "INJILI": "Marko 12:38-44"
+        "INJILI": "Marko 12:38-44",
+        "SHANGILIO": "Mathayo 5:3"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "2 Wamakabayo 7:1-2, 9-14",
         "WIMBO_WA_KATIKATI": "Zaburi 17:1, 5-6, 8+15",
         "SOMO_LA_PILI": "2 Wathesalonike 2:16-3:5",
-        "INJILI": "Luka 20:27-38"
+        "INJILI": "Luka 20:27-38",
+        "SHANGILIO": "Ufunuo 1:5a+6b"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -4987,19 +5084,22 @@
         "SOMO_LA_KWANZA": "Mithali 31:10-13, 19-20, 30-31",
         "WIMBO_WA_KATIKATI": "Zaburi 128:1-2, 3, 4-5",
         "SOMO_LA_PILI": "1 Wathesalonike 5:1-6",
-        "INJILI": "Mathayo 25:14-30"
+        "INJILI": "Mathayo 25:14-30",
+        "SHANGILIO": "Yohana 15:4a+5b"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Danieli 12:1-3",
         "WIMBO_WA_KATIKATI": "Zaburi 16:5+8, 9-10, 11",
         "SOMO_LA_PILI": "Waebrania 10:11-14, 18",
-        "INJILI": "Marko 13:24-32"
+        "INJILI": "Marko 13:24-32",
+        "SHANGILIO": "Luka 21:36"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "Malaki 3:19-20a",
         "WIMBO_WA_KATIKATI": "Zaburi 98:5-6, 7-8, 9",
         "SOMO_LA_PILI": "2 Wathesalonike 3:7-12",
-        "INJILI": "Luka 21:5-19"
+        "INJILI": "Luka 21:5-19",
+        "SHANGILIO": "Luka 21:28"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -5095,19 +5195,22 @@
         "SOMO_LA_KWANZA": "Ezekieli 34:11-12, 15-17",
         "WIMBO_WA_KATIKATI": "Zaburi 23:1-2a, 2b-3, 5, 6",
         "SOMO_LA_PILI": "1 Wakorintho 15:20-26, 28",
-        "INJILI": "Mathayo 25:31-46"
+        "INJILI": "Mathayo 25:31-46",
+        "SHANGILIO": "Marko 11:9b+10a"
       },
       "dominika_mwaka_B": {
         "SOMO_LA_KWANZA": "Danieli 7:13-14",
         "WIMBO_WA_KATIKATI": "Zaburi 93:1a, 1b-2, 5",
         "SOMO_LA_PILI": "Ufunuo 1:5-8",
-        "INJILI": "Yohana 18:33b-37"
+        "INJILI": "Yohana 18:33b-37",
+        "SHANGILIO": "Marko 11:9b+10a"
       },
       "dominika_mwaka_C": {
         "SOMO_LA_KWANZA": "2 Samweli 5:1-3",
         "WIMBO_WA_KATIKATI": "Zaburi 122:1-2, 3-4a, 4b-5",
         "SOMO_LA_PILI": "Wakolosai 1:12-20",
-        "INJILI": "Luka 23:35-43"
+        "INJILI": "Luka 23:35-43",
+        "SHANGILIO": "Marko 11:9b+10a"
       },
       "siku_za_wiki_mwaka_I": [
         {
@@ -5354,511 +5457,754 @@
       "tarehe": "Januari 2",
       "jina": "Basili Mkuu na Gregori wa Nazianzo, maaskofu na walimu wa Kanisa",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Basili Mkuu (330-379) na Gregori wa Nazianzo (329-390) walikuwa maaskofu wa Kapadokia na marafiki wa karibu waliosoma pamoja Athene. Wote wawili walitetea imani sahihi dhidi ya uzushi wa Uarian na waliandika kazi kubwa za kithiolojia zilizounda msingi wa mafundisho ya Utatu Mtakatifu, ndiyo maana wanaitwa Walimu wa Kanisa."
     },
     {
       "tarehe": "Januari 17",
       "jina": "Antoni wa Misri, mtawa",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Antoni wa Misri (251-356) aliuza mali zake alizorithi na kwenda jangwani kuishi maisha ya sala na kujinyima, na kwa hiyo anajulikana kama baba wa utawa wa Kikristo. Wafuasi wengi walimfuata jangwani wakiiga maisha yake, na hivyo mienendo ya kwanza ya kimonaki ilianzia kwake."
     },
     {
       "tarehe": "Januari 21",
       "jina": "Agnesi, bikira na shahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Agnesi alikuwa msichana mdogo wa Kirumi, mwenye umri wa miaka kumi na tatu hivi, aliyeuawa mwaka 304 kwa sababu alikataa kuolewa na kuendelea kuahidi ubikira wake kwa Kristo wakati wa mateso ya Diokletiani. Ushujaa wake mdogo umemfanya awe mfano wa usafi na uaminifu tangu karne za kwanza za Kanisa."
     },
     {
       "tarehe": "Januari 24",
       "jina": "Fransisko wa Sales, askofu na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Fransisko wa Sales (1567-1622) alikuwa askofu wa Geneva aliyejulikana kwa upole na hekima katika kuwarudisha Wakatoliki waliokuwa wamevutwa na matengenezo ya Kiprotestanti. Aliandika kitabu maarufu 'Utangulizi wa Maisha ya Kiroho' kikiwaelekeza walei jinsi ya kuishi utakatifu katika maisha ya kawaida, ndiyo maana ni mlinzi wa waandishi."
     },
     {
       "tarehe": "Januari 25",
       "jina": "Kuongoka kwa Paulo Mtume",
       "daraja": "Sikukuu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Sikukuu hii inakumbuka tukio la Paulo Mtume (aliyeitwa Sauli awali) kukutana na Kristo katika njia ya kwenda Damasko, tukio lililomgeuza kutoka kwa mtesaji wa Wakristo kuwa mmoja wa mitume wakuu wa Injili. Kuongoka kwake kunaadhimishwa kama ushuhuda wa neema ya Mungu ya kubadilisha maisha."
     },
     {
       "tarehe": "Januari 26",
       "jina": "Timotheo na Tito, maaskofu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Timotheo na Tito walikuwa wanafunzi na wasaidizi wa karibu wa Paulo Mtume, waliowekwa kuwa maaskofu wa kwanza wa Efeso na Krete. Nyaraka mbili za Paulo kwa Timotheo na moja kwa Tito, zilizo katika Agano Jipya, zinaonyesha uongozi wao katika Kanisa la mwanzo."
     },
     {
       "tarehe": "Januari 28",
       "jina": "Tomaso wa Akwino, padre na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Tomaso wa Akwino (1225-1274) alikuwa padre Mdominika na mwanateolojia mkubwa zaidi wa Zama za Kati, mwandishi wa 'Summa Theologiae' iliyounganisha imani ya Kikristo na falsafa ya Aristotle. Mafundisho yake bado ni msingi wa theolojia ya Kikatoliki hadi leo, ndiyo maana anaitwa Mwalimu wa Kanisa."
     },
     {
       "tarehe": "Januari 31",
       "jina": "Yohane Bosco, padre",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Yohane Bosco (1815-1888) alikuwa padre wa Kiitalia aliyejitolea maisha yake kwa vijana maskini na walioachwa mitaani mwa Turin, akianzisha shule na warsha za ufundi. Alianzisha shirika la Wasalezia ambalo bado linaendelea na kazi ya elimu na malezi ya vijana duniani kote."
     },
     {
       "tarehe": "Februari 3",
       "jina": "Blasi, askofu na shahidi",
       "daraja": "Kumbukumbu ya Hiari",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Blasi alikuwa askofu wa Sebaste (Armenia ya leo) aliyeuawa shahidi karibu mwaka 316, akijulikana kwa kuponya magonjwa ya koo kabla ya kifo chake. Kwa sababu hiyo, Wakatoliki wengi husali kwake wakiombea afya ya koo hasa siku ya kumbukumbu yake."
     },
     {
       "tarehe": "Februari 4",
       "jina": "Agata, bikira na shahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Agata alikuwa bikira Mkristo wa Sisilia aliyeteswa vikali na kuuawa karibu mwaka 251 kwa kukataa kuachana na imani yake na kumkubali mwombaji tajiri aliyemtaka aoe. Ni mmoja wa mashahidi wa mapema zaidi wanaoheshimiwa sana katika Kanisa la Roma."
     },
     {
       "tarehe": "Februari 6",
       "jina": "Paulo Miki na wenzake, mashahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Paulo Miki na wenzake ishirini na wasita walikuwa Wakristo wa Japani (wamisionari na waumini wa kienyeji) waliosulubiwa Nagasaki mwaka 1597 wakati wa mateso dhidi ya Ukristo nchini Japani. Ushuhuda wao ulikuwa mwanzo wa mateso makubwa yaliyofuata dhidi ya Wakristo wa Japani kwa karne nyingi."
     },
     {
       "tarehe": "Februari 10",
       "jina": "Skolastika, bikira",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Skolastika (480-543) alikuwa dada yake Benedikto wa Nursia na mwanzilishi wa maisha ya kimonaki kwa wanawake katika mfumo wa Kibenedikto. Hadithi maarufu inasimulia jinsi sala yake ilivyosababisha dhoruba iliyomlazimu kaka yake kukaa naye usiku mzima wa mazungumzo ya kiroho."
     },
     {
       "tarehe": "Februari 14",
       "jina": "Kirili, mtawa, na Methodio, askofu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Kirili na Methodio (karne ya 9) walikuwa ndugu wamisionari kutoka Uthesalonike walioleta Injili kwa watu wa Slavic, wakitengeneza alfabeti ya Kislavoni (msingi wa Kisirili) ili kutafsiri Biblia na liturujia. Wanaheshimiwa kama walinzi wa Ulaya pamoja na Benedikto."
     },
     {
       "tarehe": "Februari 22",
       "jina": "Kiti cha Petro Mtume",
       "daraja": "Sikukuu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Sikukuu hii haihusu mtu bali mamlaka ya kichungaji aliyopewa Petro Mtume na Kristo mwenyewe ('Wewe ni Petro, na juu ya mwamba huu nitalijenga Kanisa langu'). Inaadhimisha umoja wa Kanisa Katoliki chini ya huduma ya Papa kama mrithi wa Petro."
     },
     {
       "tarehe": "Februari 23",
       "jina": "Polikapo, askofu na shahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Polikapo (69-155) alikuwa askofu wa Smirna aliyefundishwa moja kwa moja na Yohane Mtume, na hivyo ni kiungo muhimu kati ya mitume na Kanisa la vizazi vilivyofuata. Aliuawa akiwa mzee sana, akikataa kumkana Kristo licha ya vitisho vya moto, akisema alikuwa amemtumikia Kristo miaka themanini na sita."
     },
     {
       "tarehe": "Machi 7",
       "jina": "Perpetua na Felisita, mashahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Perpetua na Felisita walikuwa akina mama wawili Wakristo wa Karthago (mmoja mtukufu, mwingine mtumwa) waliouawa katika uwanja wa michezo mwaka 203 kwa kukataa kuabudu miungu ya Kirumi. Shajara ya Perpetua mwenyewe, iliyoandikwa gerezani, ni mojawapo ya maandishi ya kwanza kabisa ya Kikristo yaliyoandikwa na mwanamke."
     },
     {
       "tarehe": "Aprili 7",
       "jina": "Yohane Batista de la Salle, padre",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Yohane Batista de la Salle (1651-1719) alikuwa padre Mfaransa aliyeacha mali na cheo chake ili kujitolea kikamilifu kwa elimu ya watoto maskini, akianzisha shirika la Ndugu wa Shule za Kikristo. Anaheshimiwa kama mlinzi wa walimu na waalimu wa dini kwa kuanzisha mbinu za kisasa za ualimu wa darasa."
     },
     {
       "tarehe": "Aprili 11",
       "jina": "Stanislaus, askofu na shahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Stanislaus (1030-1079) alikuwa askofu wa Krakow, Poland, aliyeuawa na Mfalme Boleslao wa Pili baada ya kumkemea mfalme hadharani kwa dhuluma zake. Kifo chake kilifanya awe mlinzi mkuu wa taifa la Poland na ishara ya ujasiri wa maaskofu dhidi ya dhuluma ya watawala."
     },
     {
       "tarehe": "Aprili 25",
       "jina": "Marko Mwinjilisti",
       "daraja": "Sikukuu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Marko Mwinjilisti aliandika Injili ya pili katika Agano Jipya, ikizingatiwa kuwa fupi zaidi na ya haraka zaidi kimwendo, ikitegemea mahubiri ya Petro Mtume aliyekuwa mfasiri wake. Anaonyeshwa kwa ishara ya simba na anaheshimiwa kama mlinzi wa Venice."
     },
     {
       "tarehe": "Aprili 29",
       "jina": "Katarina wa Siena, bikira na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Katarina wa Siena (1347-1380) alikuwa bikira wa kawaida, mshiriki wa tatu wa Kidominika, aliyekuwa na ushawishi mkubwa kisiasa na kiroho hadi akamshawishi Papa kurudisha kiti chake kutoka Avignon kwenda Roma. Maandishi yake ya kiroho yalimfanya awe mwanamke wa kwanza kutangazwa Mwalimu wa Kanisa pamoja na Teresa wa Avila."
     },
     {
       "tarehe": "Mei 1",
       "jina": "Yosefu Fundi (Yosefu Mfanyakazi)",
       "daraja": "Kumbukumbu ya Hiari",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Sikukuu hii ilianzishwa na Papa Pio wa Kumi na Mbili mwaka 1955 kumheshimu Yosefu, mume wa Bikira Maria, kama fundi seremala aliyefanya kazi kwa uaminifu ili kulisha familia yake takatifu. Inaadhimishwa pia siku ya Wafanyakazi Duniani, ikisisitiza heshima ya kazi ya mikono."
     },
     {
       "tarehe": "Mei 2",
       "jina": "Athanasi, askofu na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Athanasi (296-373) alikuwa askofu wa Aleksandria aliyepigania kwa nguvu imani sahihi ya Kiungu cha Yesu Kristo dhidi ya uzushi wa Uarian, hata ikimlazimu kuhamishwa uhamishoni mara tano. Uthabiti wake ulisaidia kuokoa mafundisho ya Mtaguso wa Nisea (mwaka 325)."
     },
     {
       "tarehe": "Mei 3",
       "jina": "Filipo na Yakobo, mitume",
       "daraja": "Sikukuu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Filipo na Yakobo (Yakobo mdogo) walikuwa miongoni mwa mitume kumi na wawili wa Yesu. Filipo alimwongoza Bartholomayo (Nathanaeli) kwa Kristo, na Yakobo mdogo anahusishwa na Waraka wa Yakobo katika Agano Jipya."
     },
     {
       "tarehe": "Mei 14",
       "jina": "Mathiya, mtume",
       "daraja": "Sikukuu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Mathiya alichaguliwa na mitume kwa kura kuchukua nafasi ya Yuda Iskariote baada ya usaliti na kifo chake, kama inavyosimuliwa katika Matendo ya Mitume sura ya kwanza. Ni mtume pekee aliyeteuliwa baada ya kupaa kwa Kristo mbinguni badala ya kuitwa moja kwa moja na Yesu."
     },
     {
       "tarehe": "Mei 26",
       "jina": "Filipo Neri, padre",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Filipo Neri (1515-1595) alikuwa padre wa Kirumi mchangamfu, aliyejulikana kama 'Mtani wa Roma' kwa ucheshi wake, aliyewaleta vijana wengi karibu na Kanisa kupitia sala rahisi na muziki. Alianzisha Oratorio ya Roma, jumuiya ya mapadre wanaoishi pamoja bila nadhiri rasmi."
     },
     {
       "tarehe": "Mei 31",
       "jina": "Kutembelewa kwa Bikira Maria",
       "daraja": "Sikukuu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Sikukuu hii inaadhimisha safari ya Bikira Maria kwenda kumtembelea binamu yake Elizabeti mara tu baada ya Tangazo la Malaika, tukio lililozalisha wimbo wa Magnificat na salamu ya Elizabeti 'Umebarikiwa kati ya wanawake'. Ni mfano wa huduma na furaha ya kumbeba Kristo kwa wengine."
     },
     {
       "tarehe": "Juni 1",
       "jina": "Yustini, shahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Yustini (100-165) alikuwa mwanafalsafa Mgiriki aliyeongoka Ukristo na kuwa mtetezi mkuu wa kwanza wa imani (mwandishi wa 'Apolojia') kwa watawala wa Kirumi. Aliuawa Roma pamoja na wanafunzi wake baada ya kukataa kuabudu miungu ya kipagani."
     },
     {
       "tarehe": "Juni 3",
       "jina": "Karoli Lwanga na wenzake, mashahidi wa Uganda",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Karoli Lwanga na wenzake ishirini na mmoja walikuwa vijana watumishi wa mfalme Mwanga wa Buganda (Uganda ya leo) walioteketezwa kwa moto mwaka 1886 kwa kukataa kuacha imani yao ya Kikristo na tabia mbaya za mfalme. Ni mashahidi wa kwanza wa Afrika mashariki na wanaheshimiwa sana katika Kanisa la Kiafrika."
     },
     {
       "tarehe": "Juni 5",
       "jina": "Bonifasi, askofu na shahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Bonifasi (675-754) alikuwa mtawa Mwingereza aliyeitwa 'Mtume wa Wajerumani' kwa kazi yake kubwa ya kuhubiri Injili miongoni mwa makabila ya Kijerumani ya kipagani. Aliuawa shahidi na kikundi cha wapagani alipokuwa akiwabatiza waongofu wapya nchini Ufrisia."
     },
     {
       "tarehe": "Juni 11",
       "jina": "Barnaba, mtume",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Barnaba alikuwa Mlawi wa Kiyahudi aliyemtambulisha Paulo kwa mitume baada ya kuongoka kwake, na baadaye alisafiri pamoja na Paulo katika safari za kwanza za kimisionari zilizotajwa katika Matendo ya Mitume. Ijapokuwa hakuwa mmoja wa mitume kumi na wawili, Kanisa la mwanzo lilimwita 'mtume' kwa kazi yake kubwa ya uinjilishaji."
     },
     {
       "tarehe": "Juni 13",
       "jina": "Antoni wa Padua, padre na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Antoni wa Padua (1195-1231) alikuwa padre Mfransisko Mreno aliyejulikana kwa mahubiri yenye nguvu na ujuzi mkubwa wa Maandiko, hivyo akatangazwa Mwalimu wa Kanisa. Anaombwa sana na waumini wanaotafuta vitu vilivyopotea, jadi iliyoanzia hadithi za maisha yake."
     },
     {
       "tarehe": "Juni 21",
       "jina": "Aloizi Gonzaga, mtawa",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Aloizi Gonzaga (1568-1591) alikuwa kijana mtukufu Mwitaliano aliyeacha urithi wake wa kifalme ili kujiunga na Wajesuiti, akijitolea kuwahudumia wagonjwa wa tauni mjini Roma ambako aliambukizwa na kufariki akiwa na miaka ishirini na tatu tu. Ni mlinzi wa vijana wanafunzi kwa sababu ya usafi na bidii yake ya ujana."
     },
     {
       "tarehe": "Juni 28",
       "jina": "Irene wa Lyon, askofu na shahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Irene wa Lyon (130-202) alikuwa askofu na mwanafunzi wa Polikapo, mwandishi wa kazi kubwa 'Adversus Haereses' iliyokataa uzushi wa Ugnostiki na kuelezea mfululizo wa mitume kama kigezo cha imani sahihi. Anachukuliwa kuwa mmoja wa waanzilishi wa theolojia ya kimfumo ya Kikristo."
     },
     {
       "tarehe": "Julai 3",
       "jina": "Tomaso, mtume",
       "daraja": "Sikukuu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Tomaso Mtume anajulikana zaidi kwa kutilia shaka Ufufuko wa Yesu mpaka alipoona na kugusa majeraha yake, tukio lililozaa maneno maarufu 'Bwana wangu na Mungu wangu'. Mapokeo yanasema baadaye alisafiri hadi India kueneza Injili, ndiyo maana Wakristo wa Mtakatifu Tomaso wa India wanadai asili yao kwake."
     },
     {
       "tarehe": "Julai 11",
       "jina": "Benedikto, mtawa",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Benedikto wa Nursia (480-547) ni baba wa utawa wa Magharibi, mwandishi wa 'Kanuni ya Benedikto' inayosisitiza sala na kazi ('ora et labora') kama msingi wa maisha ya kimonaki. Nyumba za watawa alizoanzisha, hasa Monte Cassino, zilihifadhi elimu na utamaduni wa Ulaya wakati wa Zama za Giza."
     },
     {
       "tarehe": "Julai 15",
       "jina": "Bonaventura, askofu na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Bonaventura (1221-1274) alikuwa padre Mfransisko na askofu, mwanateolojia mkuu aliyeongoza shirika la Wafransisko na kuandika tafsiri za kina za maisha ya kiroho yaliyounganisha fumbo na akili. Alitangazwa Mwalimu wa Kanisa kwa mchango wake mkubwa wa kithiolojia."
     },
     {
       "tarehe": "Julai 22",
       "jina": "Maria Magdalena",
       "daraja": "Sikukuu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Maria Magdalena alikuwa mfuasi wa karibu wa Yesu aliyeponywa na kutoka kwake pepo, na alikuwa shahidi wa kwanza wa Ufufuko, akimwambia mitume habari njema, ndiyo maana anaitwa 'Mtume kwa Mitume'. Sikukuu yake ilipandishwa hadhi kuwa Sikukuu na Papa Fransisko mwaka 2016."
     },
     {
       "tarehe": "Julai 25",
       "jina": "Yakobo, mtume",
       "daraja": "Sikukuu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Yakobo Mtume (Yakobo mkubwa), ndugu wa Yohane Mwinjilisti, alikuwa mmoja wa wanafunzi watatu wa karibu zaidi wa Yesu waliokuwepo wakati wa Kubadilika Sura. Ndiye mtume wa kwanza kuuawa shahidi (mwaka 44), na mapokeo yanamhusisha na madhabahu ya Santiago de Compostela nchini Hispania."
     },
     {
       "tarehe": "Julai 26",
       "jina": "Yohakimu na Anna, wazazi wa Bikira Maria",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Yohakimu na Anna ni majina yanayotokana na mapokeo ya Kanisa la mwanzo yakiwataja wazazi wa Bikira Maria, ijapokuwa hawatajwi kwa majina katika Injili. Wanaheshimiwa kama mfano wa familia takatifu iliyomlea Maria kwa imani na upendo kabla ya kuzaliwa kwa Yesu."
     },
     {
       "tarehe": "Julai 29",
       "jina": "Marta, Maria na Lazaro wa Bethania",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Marta, Maria na Lazaro walikuwa ndugu watatu wa Bethania waliokuwa marafiki wa karibu wa Yesu, ambao nyumbani mwao Yesu alikuwa akipumzika mara kwa mara. Lazaro alifufuliwa na Yesu kutoka kwa wafu, muujiza mkubwa uliotangulia mateso ya Yesu mwenyewe."
     },
     {
       "tarehe": "Julai 31",
       "jina": "Ignasi wa Loyola, padre",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Ignasi wa Loyola (1491-1556) alikuwa askari Mhispania aliyegeuka baada ya kujeruhiwa vitani, na baadaye akaanzisha Shirika la Yesu (Wajesuiti) lililojitolea kwa elimu na uinjilishaji duniani kote. Kitabu chake 'Mazoezi ya Kiroho' bado kinatumika sana katika mafungo ya sala hadi leo."
     },
     {
       "tarehe": "Agosti 1",
       "jina": "Alfonsi Maria Liguori, askofu na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Alfonsi Maria Liguori (1696-1787) alikuwa askofu na mwanasheria aliyeacha taaluma ya sheria kuwa padre, akianzisha shirika la Waredemptoristi kwa ajili ya uinjilishaji wa watu maskini vijijini. Aliandika sana kuhusu theolojia ya maadili yenye msimamo wa wastani, ndiyo maana ametangazwa Mwalimu wa Kanisa na ni mlinzi wa mapadre wa kukiri."
     },
     {
       "tarehe": "Agosti 4",
       "jina": "Yohane Maria Vianney, padre",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Yohane Maria Vianney (1786-1859) alikuwa padre mchungaji wa kijiji kidogo cha Ars, Ufaransa, aliyejulikana duniani kote kwa saa nyingi alizotumia katika kiti cha kukiri akiwahudumia maelfu ya mahujaji. Ni mlinzi wa mapadre wa parokia kwa sababu ya bidii yake ya kichungaji na maisha ya unyenyekevu."
     },
     {
       "tarehe": "Agosti 8",
       "jina": "Dominiko, padre",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Dominiko wa Guzman (1170-1221) alianzisha Shirika la Wahubiri (Wadominika) kwa lengo la kuhubiri na kufundisha imani sahihi dhidi ya uzushi wa Wakathari kusini mwa Ufaransa. Msisitizo wake juu ya masomo na kuhubiri uliifanya shirika lake kutoa wanateolojia wakubwa kama Tomaso wa Akwino."
     },
     {
       "tarehe": "Agosti 10",
       "jina": "Lawrenzi, shemasi na shahidi",
       "daraja": "Sikukuu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Lawrenzi alikuwa shemasi wa Kanisa la Roma aliyeuawa shahidi mwaka 258 wakati wa mateso ya Mfalme Valerian, akiwa amewajibika kwa hazina za Kanisa alizowagawia maskini badala ya kuzikabidhi kwa serikali. Mapokeo yanasema aliuawa kwa kuchomwa juu ya kimiani, akisema kwa ucheshi 'nimeiva upande huu, nigeuzeni'."
     },
     {
       "tarehe": "Agosti 11",
       "jina": "Klara wa Asizi, bikira",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Klara wa Asizi (1194-1253) alifuata nyayo za Fransisko wa Asizi akiacha utajiri wake ili kuanzisha shirika la watawa wa kike (Waklara Maskini) lililoishi kwa unyenyekevu na umaskini mkubwa. Anaheshimiwa kama mlinzi wa televisheni kwa sababu, katika uzee wake mgonjwa, aliweza 'kuona' na kusikia Misa iliyokuwa ikiendelea mbali naye."
     },
     {
       "tarehe": "Agosti 14",
       "jina": "Maksimiliano Maria Kolbe, padre na shahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Maksimiliano Kolbe (1894-1941) alikuwa padre Mfransisko Mpolandi aliyejitolea kufa badala ya baba wa familia mwenzake katika kambi ya mateso ya Auschwitz wakati wa Vita Kuu ya Pili ya Dunia. Kitendo hicho cha upendo wa kujitoa kimemfanya kuwa ishara kubwa ya thamani ya maisha ya binadamu katikati ya ukatili."
     },
     {
       "tarehe": "Agosti 20",
       "jina": "Bernardo wa Clairvaux, mtawa na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Bernardo wa Clairvaux (1090-1153) alikuwa mtawa Mfaransa aliyeongoza uamsho mkubwa wa maisha ya kimonaki ya Kisiterisia, akianzisha nyumba nyingi za watawa kote Ulaya. Mahubiri yake ya ushairi kuhusu upendo wa Kiungu na uchaji kwa Bikira Maria yaliathiri sana theolojia ya kiroho ya Zama za Kati."
     },
     {
       "tarehe": "Agosti 21",
       "jina": "Pio wa Kumi, papa",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Papa Pio wa Kumi (1835-1914) alijulikana kwa mageuzi yake katika liturujia na sheria za Kanisa, hasa kwa kuhimiza waumini wapokee Komunyo Takatifu mara kwa mara na hata watoto wadogo baada ya kufikia umri wa fahamu. Msimamo wake dhidi ya harakati za kisasa (Modernism) uliweka mwelekeo wa kithiolojia wa Kanisa mwanzoni mwa karne ya ishirini."
     },
     {
       "tarehe": "Agosti 24",
       "jina": "Bartholomayo, mtume",
       "daraja": "Sikukuu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Bartholomayo Mtume mara nyingi anahusishwa na Nathanaeli aliyetajwa katika Injili ya Yohane, ambaye Yesu alimsifu kama 'Mwisraeli asiye na hila'. Mapokeo yanasema alihubiri Injili hadi Armenia na India, na aliuawa shahidi kwa kuchunwa ngozi."
     },
     {
       "tarehe": "Agosti 27",
       "jina": "Monika",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Monika (322-387) alikuwa mama Mkristo wa Afrika Kaskazini aliyeomba kwa miaka mingi kwa machozi mwanawe Agostino aongoke, sala zilizojibiwa hatimaye kwa ubatizo wake mjini Milano. Ni mfano na mlinzi wa akina mama wanaoombea watoto wao waliopotea."
     },
     {
       "tarehe": "Agosti 28",
       "jina": "Agostino, askofu na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Agostino wa Hippo (354-430), mwana wa Monika, alikuwa mmoja wa waandishi wakubwa zaidi wa Kanisa, akiacha maisha ya dhambi kuongoka Ukristo na kuandika kazi kama 'Maungamo' na 'Mji wa Mungu'. Mafundisho yake juu ya neema na dhambi ya asili yameathiri theolojia ya Magharibi kwa karne nyingi."
     },
     {
       "tarehe": "Agosti 29",
       "jina": "Kukatwa kichwa kwa Yohane Mbatizaji",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Kumbukumbu hii inaadhimisha kifo cha Yohane Mbatizaji, aliyekatwa kichwa kwa amri ya Mfalme Herode Antipa baada ya kumkemea kwa kuoa mke wa kaka yake, kama inavyosimuliwa katika Injili. Ni mfano wa unabii uliolipiza gharama kwa ujasiri wa kusema ukweli."
     },
     {
       "tarehe": "Septemba 3",
       "jina": "Gregori Mkuu, papa na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Papa Gregori Mkuu (540-604) aliongoza Kanisa wakati wa machafuko makubwa Ulaya, akipanga huduma kwa maskini, akitunga sheria za liturujia, na kutuma wamisionari (akiwemo Augustino wa Canterbury) kuhubiri Uingereza. Wimbo wa Kigregoriano unabeba jina lake kwa kuunganishwa kwake kwa nyimbo za liturujia."
     },
     {
       "tarehe": "Septemba 8",
       "jina": "Kuzaliwa kwa Bikira Maria",
       "daraja": "Sikukuu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Sikukuu hii inaadhimisha kuzaliwa kwa Bikira Maria, tukio lisilotajwa katika Biblia lakini linalotokana na mapokeo ya kale ya Kanisa yaliyoandikwa katika Protoevanjelio ya Yakobo. Ni moja ya sikukuu chache za Kanisa zinazoadhimisha siku ya kuzaliwa badala ya siku ya kifo."
     },
     {
       "tarehe": "Septemba 13",
       "jina": "Yohane Krisostomu, askofu na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Yohane Krisostomu (349-407) alikuwa askofu wa Konstantinopoli aliyepewa jina 'Krisostomu' (mdomo wa dhahabu) kwa sababu ya ufasaha wake wa kipekee wa mahubiri. Ukali wake wa kukemea maisha ya anasa ya wakuu wa mji ulimfanya afukuzwe uhamishoni mara mbili, ambapo alifariki."
     },
     {
       "tarehe": "Septemba 15",
       "jina": "Bikira Maria Mwenye Huzuni",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Kumbukumbu hii inaadhimisha huzuni ya Bikira Maria aliyoipata kwa kushuhudia mateso na kifo cha mwanawe Yesu msalabani, kama Simeoni alivyotabiri 'upanga utapenya nafsi yako mwenyewe'. Inaadhimishwa siku moja baada ya Sikukuu ya Kuinuliwa kwa Msalaba, ikionyesha uhusiano wa karibu kati ya mateso ya Mama na ya Mwana."
     },
     {
       "tarehe": "Septemba 16",
       "jina": "Kornelio, papa, na Kipriano, askofu, mashahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Kornelio, papa (aliyeongoza 251-253), na Kipriano, askofu wa Karthago, walikuwa marafiki na washirikiana wa karibu waliopambana pamoja na mgawanyiko wa Kanisa uliosababishwa na mateso ya Decius. Wote wawili waliuawa shahidi, Kornelio uhamishoni na Kipriano kwa kukatwa kichwa."
     },
     {
       "tarehe": "Septemba 20",
       "jina": "Andrea Kim Taegon, Paulo Chong Hasang na wenzao, mashahidi wa Korea",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Andrea Kim Taegon, padre wa kwanza mzawa wa Korea, na Paulo Chong Hasang, pamoja na wenzao mia moja na tatu, waliuawa shahidi kati ya miaka 1839 na 1867 wakati wa mateso makali dhidi ya Wakristo nchini Korea. Wanaheshimika kama msingi wa Kanisa Katoliki la Korea lililokuwa limeanzishwa na walei wenyewe kabla ya wamisionari kufika."
     },
     {
       "tarehe": "Septemba 21",
       "jina": "Mathayo, mtume na mwinjilisti",
       "daraja": "Sikukuu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Mathayo alikuwa mtoza ushuru wa Kiyahudi aliyeitwa moja kwa moja na Yesu kutoka mezani mwa kazi yake ya kudharauliwa, kama inavyosimuliwa katika Injili yake mwenyewe. Injili aliyoiandika inasisitiza sana utimizo wa unabii wa Agano la Kale katika maisha ya Yesu."
     },
     {
       "tarehe": "Septemba 27",
       "jina": "Vinsenti wa Paulo, padre",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Vinsenti wa Paulo (1581-1660) alikuwa padre Mfaransa aliyejitolea maisha yake yote kwa maskini, wafungwa, na watumwa wa mashua, akianzisha mashirika mawili: Wamisionari (Wavinsenti) na Mabinti wa Upendo. Anaheshimiwa kama baba wa kazi za kijamii za kisasa za Kanisa Katoliki."
     },
     {
       "tarehe": "Septemba 29",
       "jina": "Malaika wakuu Mikaeli, Gabrieli na Raphaeli",
       "daraja": "Sikukuu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Malaika wakuu watatu wanaotajwa kwa majina katika Maandiko Matakatifu: Mikaeli (kiongozi wa majeshi ya mbinguni dhidi ya shetani), Gabrieli (aliyemtangazia Maria kuzaliwa kwa Yesu), na Raphaeli (aliyemwongoza Tobiya katika Kitabu cha Tobiti). Wanaadhimishwa pamoja kama wajumbe na walinzi wakuu wa Mungu."
     },
     {
       "tarehe": "Septemba 30",
       "jina": "Jeromu, padre na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Jeromu (347-420) alikuwa mwanachuoni mkubwa aliyetafsiri Biblia nzima kutoka Kiebrania na Kigiriki kwenda Kilatini, tafsiri iliyojulikana kama 'Vulgate' na kutumika kanisani kwa zaidi ya miaka elfu moja. Alisema maneno maarufu: 'Kutokujua Maandiko ni kutokumjua Kristo'."
     },
     {
       "tarehe": "Oktoba 1",
       "jina": "Teresa wa Mtoto Yesu, bikira na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Teresa wa Mtoto Yesu (Teresa wa Lisieux, 1873-1897) alikuwa mtawa Mfaransa aliyefariki akiwa na miaka ishirini na minne tu, lakini aliacha 'Njia Ndogo' ya utakatifu kwa vitendo vidogo vya upendo katika maisha ya kila siku. Ametangazwa Mwalimu wa Kanisa licha ya kutokuwa mwanateolojia wa kitaaluma, na ni mlinzi wa wamisionari."
     },
     {
       "tarehe": "Oktoba 2",
       "jina": "Malaika Walinzi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Kumbukumbu hii inaheshimu malaika walinzi ambao, kwa mujibu wa mafundisho ya Kanisa, Mungu amewapa kila mtu kama walinzi wa kiroho tangu kuzaliwa hadi kifo. Yesu mwenyewe alitaja malaika hawa akisema 'malaika wao daima wanaliona uso wa Baba yangu aliye mbinguni'."
     },
     {
       "tarehe": "Oktoba 4",
       "jina": "Fransisko wa Asizi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Fransisko wa Asizi (1181-1226) aliacha maisha ya utajiri wa kijana wa kibiashara ili kuishi umaskini kamili, akianzisha shirika la Wafransisko lililoenea haraka kote Ulaya. Anajulikana kwa upendo wake kwa maumbile na wanyama, na ni mlinzi wa mazingira na wanyama."
     },
     {
       "tarehe": "Oktoba 7",
       "jina": "Bikira Maria wa Rozari",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Sikukuu hii ilianzishwa kushukuru ushindi wa jeshi la Kikristo dhidi ya jeshi la Kiothmani katika vita ya Lepanto mwaka 1571, ushindi ulioaminika kupatikana kwa maombezi ya Bikira Maria kupitia Rozari. Rozari ni sala inayotafakari matukio makuu ya maisha ya Yesu na Maria kupitia kurudia Salamu Maria."
     },
     {
       "tarehe": "Oktoba 15",
       "jina": "Teresa wa Yesu (wa Avila), bikira na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Teresa wa Avila (1515-1582) alikuwa mtawa Mhispania aliyefanya mageuzi makubwa katika shirika la Wakarmeli, akirudisha msisitizo wa sala ya ndani na umaskini mkali. Maandishi yake ya fumbo kuhusu safari ya nafsi kumwelekea Mungu yalimfanya awe mwanamke wa kwanza kutangazwa Mwalimu wa Kanisa."
     },
     {
       "tarehe": "Oktoba 17",
       "jina": "Ignasi wa Antiokia, askofu na shahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Ignasi wa Antiokia (35-107) alikuwa askofu wa tatu wa Antiokia, mwanafunzi wa mitume, aliyeandika barua saba muhimu njiani kuelekea Roma alikokwenda kuuawa na simba katika uwanja wa michezo. Barua zake ni miongoni mwa nyaraka za kwanza kabisa za Kanisa zinazothibitisha imani ya Ekaristi na uongozi wa maaskofu."
     },
     {
       "tarehe": "Oktoba 18",
       "jina": "Luka Mwinjilisti",
       "daraja": "Sikukuu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Luka Mwinjilisti alikuwa daktari na msafiri mwenzake Paulo Mtume, mwandishi wa Injili ya tatu na Kitabu cha Matendo ya Mitume. Injili yake inasisitiza huruma ya Mungu kwa maskini, wanawake, na watu waliotengwa na jamii."
     },
     {
       "tarehe": "Oktoba 28",
       "jina": "Simoni na Yuda Tadeo, mitume",
       "daraja": "Sikukuu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Simoni Mzalendo na Yuda Tadeo walikuwa miongoni mwa mitume kumi na wawili; Yuda Tadeo anaheshimiwa sana kama mlinzi wa mambo yasiyowezekana kutokana na uaminifu wake katika hali ngumu. Mapokeo yanasema wote wawili walihubiri Injili pamoja hadi Uajemi ambako waliuawa shahidi."
     },
     {
       "tarehe": "Novemba 4",
       "jina": "Karoli Borromeo, askofu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Karoli Borromeo (1538-1584) alikuwa askofu mkuu wa Milano aliyeongoza mageuzi makubwa ya Kanisa baada ya Mtaguso wa Trento, akijenga seminari na kuboresha maisha ya kiroho ya mapadre wake. Alijulikana kwa ujasiri wake wa kubaki mjini kuwahudumia wagonjwa wakati wa tauni mbaya ya mwaka 1576."
     },
     {
       "tarehe": "Novemba 10",
       "jina": "Leo Mkuu, papa na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Papa Leo Mkuu (400-461) alilinda mafundisho sahihi kuhusu Kristo (Mungu kamili na binadamu kamili) katika Mtaguso wa Kalcedonia, na kwa ujasiri alikutana na Atila Mhuni akimshawishi asiishambulie Roma. Barua yake ya kithiolojia ('Tome ya Leo') ilikubaliwa na mtaguso kama fundisho rasmi."
     },
     {
       "tarehe": "Novemba 11",
       "jina": "Martini wa Tours, askofu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Martini wa Tours (316-397) alikuwa askari Mrumi aliyegawanya joho lake nusu kwa nusu kumpa maskini aliyekuwa akiganda na baridi, tukio lililomvuta zaidi imani ya Kikristo hadi akawa askofu. Ni mmoja wa watakatifu wa kwanza wasio mashahidi kuheshimiwa sana Ulaya nzima."
     },
     {
       "tarehe": "Novemba 12",
       "jina": "Yosafati, askofu na shahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Yosafati Kuntsevych (1580-1623) alikuwa askofu mkuu wa Ki-Byzantine (Ruthenian) wa Polotsk aliyejitahidi sana kuunganisha Kanisa la Mashariki na Roma huku akihifadhi taratibu za Kibyzantine. Aliuawa kwa shoka na umati uliopinga umoja huo, na anaheshimiwa kama shahidi wa umoja wa Kanisa."
     },
     {
       "tarehe": "Novemba 17",
       "jina": "Elizabeti wa Hungaria",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Elizabeti wa Hungaria (1207-1231) alikuwa binti mfalme aliyeolewa akiwa na miaka kumi na minne, na baada ya mumewe kufariki aliacha maisha ya kifahari ili kuwahudumia maskini na wagonjwa, akijenga hospitali kwa mali yake mwenyewe. Alifariki akiwa na miaka ishirini na minne tu, akiwa tayari amejulikana kwa upendo wake mkubwa kwa maskini."
     },
     {
       "tarehe": "Novemba 21",
       "jina": "Kutolewa kwa Bikira Maria Hekaluni",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Sikukuu hii inatokana na mapokeo yasiyo ya kibiblia yanayosema kuwa wazazi wa Bikira Maria walimtoa hekaluni akiwa mtoto mdogo kumweka wakfu kwa utumishi wa Mungu, kama ilivyokuwa desturi kwa baadhi ya familia za Kiyahudi. Ni ishara ya kujitoa kikamilifu kwa Maria kwa mapenzi ya Mungu tangu utoto."
     },
     {
       "tarehe": "Novemba 22",
       "jina": "Sesilia, bikira na shahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Sesilia alikuwa msichana Mkristo wa Kirumi aliyeuawa shahidi karne ya tatu kwa kukataa kuabudu miungu ya kipagani, na mapokeo yanasema aliimba nyimbo za sifa moyoni wakati wa harusi yake ya kulazimishwa. Kwa sababu hiyo ni mlinzi wa wanamuziki na waimbaji wa Kanisa."
     },
     {
       "tarehe": "Novemba 24",
       "jina": "Andrea Dung-Lac na wenzake, mashahidi wa Vietnam",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Andrea Dung-Lac na wenzake mia moja na kumi na saba walikuwa Wakristo wa Vietnam (wamisionari na waumini wa kienyeji) waliouawa kati ya karne ya 17 na 19 wakati wa mateso makali dhidi ya Ukristo huko Vietnam. Ni ishara ya mizizi imara ya Kanisa la Vietnam iliyojengwa kwa damu ya mashahidi wengi."
     },
     {
       "tarehe": "Novemba 30",
       "jina": "Andrea, mtume",
       "daraja": "Sikukuu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Andrea Mtume, kaka yake Simoni Petro, alikuwa mmoja wa wanafunzi wa kwanza wa Yohane Mbatizaji aliyemfuata Yesu na mara moja akamwita kaka yake pia. Mapokeo yanasema alihubiri Injili hadi Ugiriki na alisulubiwa kwenye msalaba wa umbo la 'X', unaojulikana leo kama 'Msalaba wa Mtakatifu Andrea'."
     },
     {
       "tarehe": "Desemba 3",
       "jina": "Fransisko Xavery, padre",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Fransisko Xavery (1506-1552) alikuwa mmoja wa waanzilishi wa Wajesuiti pamoja na Ignasi wa Loyola, na baadaye mmisionari mkubwa aliyesafiri India, Japani, na Asia ya Mashariki akibatiza maelfu. Anaheshimiwa kama mlinzi wa wamisionari kwa kazi yake kubwa ya uinjilishaji nje ya Ulaya."
     },
     {
       "tarehe": "Desemba 7",
       "jina": "Ambrosi, askofu na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Ambrosi (340-397) alikuwa gavana wa Kirumi aliyechaguliwa ghafla kuwa askofu wa Milano na umati wa watu ijapokuwa hakuwa hata amebatizwa bado. Alikuwa mfundishaji wa Agostino wa Hippo na mtunzi wa nyimbo nyingi za liturujia zinazotumika hadi leo."
     },
     {
       "tarehe": "Desemba 12",
       "jina": "Bikira Maria wa Guadalupe",
       "daraja": "Kumbukumbu ya Hiari",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Bikira Maria wa Guadalupe anaadhimishwa kukumbuka kutokea kwake kwa Juan Diego, mkulima Mhindi, karibu na Mexico City mwaka 1531, tukio lililosababisha uongofu mkubwa wa watu wa kienyeji kwa mamilioni. Ni mlinzi wa Amerika zote na sanamu yake ni mojawapo ya alama takatifu zinazoheshimiwa zaidi duniani."
     },
     {
       "tarehe": "Desemba 13",
       "jina": "Lusia, bikira na shahidi",
       "daraja": "Kumbukumbu",
-      "rangi": "nyekundu"
+      "rangi": "nyekundu",
+      "wasifu": "Lusia alikuwa bikira wa Sirakusa, Sisilia, aliyeuawa shahidi mwaka 304 wakati wa mateso ya Diokletiani baada ya kukataa kuolewa na kutoa mali yake kwa maskini. Jina lake linamaanisha 'nuru', ndiyo maana anaombwa sana na wale wenye matatizo ya macho."
     },
     {
       "tarehe": "Desemba 14",
       "jina": "Yohane wa Msalaba, padre na mwalimu",
       "daraja": "Kumbukumbu",
-      "rangi": "nyeupe"
+      "rangi": "nyeupe",
+      "wasifu": "Yohane wa Msalaba (1542-1591) alikuwa padre Mkarmeli na mshirika wa Teresa wa Avila katika mageuzi ya shirika lao, aliyeteswa na kufungwa na wenzake waliopinga mageuzi hayo. Katika gereza aliandika mashairi makubwa ya fumbo kama 'Usiku wa Giza wa Nafsi', yaliyomfanya kuwa Mwalimu wa Kanisa."
+    }
+  ],
+  "prefasi_za_liturujia": [
+    {
+      "kipindi": "majilio",
+      "kipande": "wiki_01-02",
+      "prefasi": "Prefasi ya Majilio I",
+      "tukio": "Kuja mara mbili kwa Kristo (kihistoria na kwa utukufu)"
+    },
+    {
+      "kipindi": "majilio",
+      "kipande": "wiki_03 (au Des 17-24)",
+      "prefasi": "Prefasi ya Majilio II",
+      "tukio": "Bikira Maria na Yohane Mbatizaji kama watangulizi wa Masiya"
+    },
+    {
+      "kipindi": "noeli",
+      "kipande": "yote",
+      "prefasi": "Prefasi za Noeli I-III",
+      "tukio": "Umwilisho wa Neno wa Mungu"
+    },
+    {
+      "kipindi": "noeli",
+      "kipande": "epifania",
+      "prefasi": "Prefasi ya Epifania",
+      "tukio": "Kudhihirishwa kwa Kristo kwa mataifa"
+    },
+    {
+      "kipindi": "kwaresima",
+      "kipande": "wiki_01",
+      "prefasi": "Prefasi ya Kwaresima I",
+      "tukio": "Majaribu ya Bwana jangwani"
+    },
+    {
+      "kipindi": "kwaresima",
+      "kipande": "wiki_02",
+      "prefasi": "Prefasi ya Kwaresima II",
+      "tukio": "Kubadilika sura kwa Bwana"
+    },
+    {
+      "kipindi": "kwaresima",
+      "kipande": "wiki_03-05",
+      "prefasi": "Prefasi za Kwaresima III-V",
+      "tukio": "Masimulizi ya Samaria/Kipofu/Lazaro (Mwaka A) au somo la Kwaresima kwa ujumla"
+    },
+    {
+      "kipindi": "kwaresima",
+      "kipande": "dominika_ya_matawi/wiki_takatifu",
+      "prefasi": "Prefasi ya Mateso ya Bwana I-II",
+      "tukio": "Mateso na Msalaba wa Kristo"
+    },
+    {
+      "kipindi": "pasaka",
+      "kipande": "juma_kuu_takatifu.vigilia_ya_pasaka - oktava",
+      "prefasi": "Prefasi ya Pasaka I (Fumbo la Pasaka)",
+      "tukio": "Ufufuko wa Kristo"
+    },
+    {
+      "kipindi": "pasaka",
+      "kipande": "wiki_02-06",
+      "prefasi": "Prefasi za Pasaka II-V",
+      "tukio": "Maisha mapya katika Kristo Mfufuka"
+    },
+    {
+      "kipindi": "pasaka",
+      "kipande": "kupaa_kwa_bwana",
+      "prefasi": "Prefasi ya Kupaa I-II",
+      "tukio": "Kupaa kwa Bwana mbinguni"
+    },
+    {
+      "kipindi": "pasaka",
+      "kipande": "pentekoste",
+      "prefasi": "Prefasi ya Pentekoste",
+      "tukio": "Kushuka kwa Roho Mtakatifu"
+    },
+    {
+      "kipindi": "pasaka",
+      "kipande": "utatu_mtakatifu",
+      "prefasi": "Prefasi ya Utatu Mtakatifu",
+      "tukio": "Umoja wa Baba, Mwana, na Roho Mtakatifu"
+    },
+    {
+      "kipindi": "pasaka",
+      "kipande": "fungu_takatifu_la_mwili_na_damu_ya_kristo",
+      "prefasi": "Prefasi ya Ekaristi Takatifu I-II",
+      "tukio": "Mwili na Damu ya Kristo"
+    },
+    {
+      "kipindi": "pasaka",
+      "kipande": "moyo_mtakatifu_wa_yesu",
+      "prefasi": "Prefasi ya Moyo Mtakatifu wa Yesu",
+      "tukio": "Upendo wa Kristo unaomiminika kwa waamini"
+    },
+    {
+      "kipindi": "muda_wa_kawaida",
+      "kipande": "wiki_01-34",
+      "prefasi": "Prefasi za Muda wa Kawaida I-VIII",
+      "tukio": "Sifa ya jumla kwa kazi ya wokovu (huchaguliwa kwa zamu)"
+    },
+    {
+      "kipindi": "sikukuu_maalum",
+      "kipande": "sikukuu za Bikira Maria",
+      "prefasi": "Prefasi za Bikira Maria I-II",
+      "tukio": "Nafasi ya Maria katika historia ya wokovu"
+    },
+    {
+      "kipindi": "sikukuu_maalum",
+      "kipande": "kristo_mfalme (wiki_34 muda_wa_kawaida)",
+      "prefasi": "Prefasi ya Kristo Mfalme wa Ulimwengu",
+      "tukio": "Ufalme wa milele wa Kristo"
+    }
+  ],
+  "_maelezo_prefasi": "Jedwali hili linaonyesha JINA na TUKIO la Prefasi inayotumika kwa kila kipindi/sikukuu, si maandishi kamili ya sala (ambayo ni hakimiliki ya Missale Romanum/Baraza la Maaskofu). Tumia jina kutafuta maandishi rasmi katika Kitabu cha Misa kilichoidhinishwa.",
+  "daraja_precedence": [
+    {
+      "ngazi": 1,
+      "daraja": "Triduum Takatifu / Noeli / Epifania / Kupaa / Pentekoste",
+      "maelezo": "Siku kuu za fumbo la wokovu -- hazibadilishwi kamwe"
+    },
+    {
+      "ngazi": 2,
+      "daraja": "Jumapili za Majilio, Kwaresima, na Pasaka; Sikukuu Kuu za Bwana",
+      "maelezo": "Hushinda Sikukuu/Kumbukumbu yoyote ya mtakatifu"
+    },
+    {
+      "ngazi": 3,
+      "daraja": "Wiki za Kwaresima Jumatatu-Jumamosi; Des 17-24",
+      "maelezo": "Huzuia kabisa Sikukuu/Kumbukumbu za watakatifu (isipokuwa Sikukuu Kuu)"
+    },
+    {
+      "ngazi": 4,
+      "daraja": "Sikukuu Kuu (Sikukuu Kuu) za watakatifu/kalenda kuu",
+      "maelezo": "K.m. Yohane Mbatizaji, Petro na Paulo"
+    },
+    {
+      "ngazi": 5,
+      "daraja": "Jumapili za Muda wa Kawaida; Sikukuu za Bwana katika Muda wa Kawaida",
+      "maelezo": "K.m. Kristo Mfalme, Utatu Mtakatifu"
+    },
+    {
+      "ngazi": 6,
+      "daraja": "Sikukuu (Feast) za watakatifu",
+      "maelezo": "K.m. Mitume, Wainjilisti"
+    },
+    {
+      "ngazi": 7,
+      "daraja": "Kumbukumbu (Memorial)",
+      "maelezo": "Huchukua nafasi ya somo la siku ya wiki ya kawaida"
+    },
+    {
+      "ngazi": 8,
+      "daraja": "Siku za wiki za Muda wa Kawaida (bila mtakatifu)",
+      "maelezo": "Kiwango cha msingi kabisa"
+    },
+    {
+      "ngazi": 9,
+      "daraja": "Kumbukumbu ya Hiari (Optional Memorial)",
+      "maelezo": "Haibadilishi masomo ya Misa -- ni chaguo tu, mtakatifu anatajwa katika sala/mahubiri"
     }
   ]
 }

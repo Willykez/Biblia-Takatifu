@@ -19,7 +19,11 @@ data class SaintEntry(
     val jina: String,
     val daraja: String, // "Sikukuu" | "Kumbukumbu" | "Kumbukumbu ya Hiari" | "Sikukuu Kuu"
     val rangi: String,
+    val wasifu: String?, // 2-3 sentence Swahili biography, added in a later data version
 )
+
+/** One row from `daraja_precedence`: ngazi 1 = highest priority, 9 = lowest. */
+data class PrecedenceEntry(val ngazi: Int, val daraja: String, val maelezo: String)
 
 /**
  * What LiturgicalResolver.resolve(date) produces: which readings key applies, plus enough
