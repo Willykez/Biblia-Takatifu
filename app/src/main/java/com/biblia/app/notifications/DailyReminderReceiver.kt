@@ -16,10 +16,6 @@ import com.biblia.app.MainActivity
 import com.biblia.app.data.BibleRepository
 import com.biblia.app.data.CuratedVerses
 import com.biblia.app.data.ReminderPrefs
-import com.biblia.app.data.liturgical.BookAbbreviations
-import com.biblia.app.data.liturgical.CitationParser
-import com.biblia.app.data.liturgical.LectionaryRepository
-import com.biblia.app.data.liturgical.LiturgicalResolver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -29,16 +25,14 @@ import java.time.LocalDate
 const val REMINDER_CHANNEL_ID = "biblia_daily_reminder"
 private const val NOTIFICATION_ID = 4202
 
-/** What actually goes in the notification: reference + text, from whichever source resolved. */
+/** What actually goes in the notification: reference + text. */
 private data class ReminderVerse(val bookTitle: String, val chapterNum: Int, val verseNum: Int, val text: String)
 
 /**
- * Runs outside any Activity/ViewModel scope, so it builds its own small repository/resolver
- * instances directly from the applicationContext rather than reusing BibleViewModel/
- * LiturgicalViewModel (which need a ViewModelStoreOwner this receiver doesn't have). Mirrors
- * ui/VerseOfDayLoader.kt's Gospel-first-then-curated logic - kept as its own small copy here
- * rather than a shared abstraction, since the two call sites have genuinely different
- * dependency shapes (ViewModels vs plain repositories).
+ * Runs outside any Activity/ViewModel scope, so it builds its own small BibleRepository
+ * instance directly from the applicationContext rather than reusing BibleViewModel (which
+ * needs a ViewModelStoreOwner this receiver doesn't have). Picks from CuratedVerses - the
+ * app is Bible-only now, no liturgical calendar to source a "Gospel of the day" from.
  */
 class DailyReminderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
@@ -57,7 +51,7 @@ class DailyReminderReceiver : BroadcastReceiver() {
 
     private suspend fun postNotification(context: Context) {
         val bibleRepository = BibleRepository(context)
-        val verse = todaysGospelVerse(context, bibleRepository) ?: curatedFallbackVerse(bibleRepository) ?: return
+        val verse = curatedVerse(bibleRepository) ?: return
 
         val contentIntent = PendingIntent.getActivity(
             context, 0, MainActivity.newIntent(context),
@@ -81,22 +75,9 @@ class DailyReminderReceiver : BroadcastReceiver() {
         }
     }
 
-    private suspend fun todaysGospelVerse(context: Context, bibleRepository: BibleRepository): ReminderVerse? = runCatching {
-        val resolver = LiturgicalResolver(LectionaryRepository(context))
-        val resolved = resolver.resolve(LocalDate.now())
-        val citation = resolved.readings?.injili?.takeIf { it.isNotBlank() } ?: return@runCatching null
-        val parsed = CitationParser.parse(citation)
-        val bookId = parsed.bookId ?: return@runCatching null
-        val span = parsed.spans.firstOrNull() ?: return@runCatching null
-        val book = bibleRepository.getBookById(bookId) ?: return@runCatching null
-        val verse = bibleRepository.getVerses(bookId, span.startChapter)
-            .firstOrNull { !it.isHeading && it.position == span.startVerse } ?: return@runCatching null
-        ReminderVerse(book.title, span.startChapter, verse.position, verse.primaryText)
-    }.getOrNull()
-
-    private suspend fun curatedFallbackVerse(bibleRepository: BibleRepository): ReminderVerse? = runCatching {
+    private suspend fun curatedVerse(bibleRepository: BibleRepository): ReminderVerse? = runCatching {
         val curated = CuratedVerses.forDayOfYear(LocalDate.now().dayOfYear)
-        val bookId = BookAbbreviations.resolveId(curated.bookTitle) ?: return@runCatching null
+        val bookId = bibleRepository.getBookByTitle(curated.bookTitle)?.id ?: return@runCatching null
         val verse = bibleRepository.getVerses(bookId, curated.chapter)
             .firstOrNull { !it.isHeading && it.position == curated.verse } ?: return@runCatching null
         ReminderVerse(curated.bookTitle, curated.chapter, verse.position, verse.primaryText)

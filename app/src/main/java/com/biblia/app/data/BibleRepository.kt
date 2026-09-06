@@ -30,6 +30,13 @@ class BibleRepository(context: Context) {
         ).use { c -> if (c.moveToFirst()) cursorToBook(c) else null }
     }
 
+    suspend fun getBookByTitle(title: String): BibleBook? = withContext(Dispatchers.IO) {
+        db.rawQuery(
+            "SELECT _id, title, num, mode, short_title FROM chapters WHERE title = ? LIMIT 1",
+            arrayOf(title),
+        ).use { c -> if (c.moveToFirst()) cursorToBook(c) else null }
+    }
+
     suspend fun searchBooks(query: String): List<BibleBook> = withContext(Dispatchers.IO) {
         val like = "%$query%"
         db.rawQuery(

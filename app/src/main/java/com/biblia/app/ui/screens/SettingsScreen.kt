@@ -39,6 +39,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import com.biblia.app.data.ReaderFontStyle
 import com.biblia.app.data.ReminderPrefs
 import com.biblia.app.data.ReminderState
 import com.biblia.app.notifications.DailyReminderReceiver
@@ -151,13 +152,43 @@ fun SettingsSheetContent(viewModel: BibleViewModel) {
                     )
                 }
             }
+            DividedRow {
+                Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 14.dp)) {
+                    Text("Aina ya maandishi", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onBackground)
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
+                        listOf(
+                            ReaderFontStyle.SERIF to "Klasiki",
+                            ReaderFontStyle.SANS to "Rahisi",
+                            ReaderFontStyle.MONO to "Namba",
+                        ).forEach { (style, label) ->
+                            val selected = style == readingState.fontStyle
+                            Text(
+                                label,
+                                style = MaterialTheme.typography.labelLarge,
+                                color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.clickable { viewModel.setFontStyle(style) },
+                            )
+                        }
+                    }
+                }
+            }
+            DividedRow(showDivider = false) {
+                SettingsRow(title = "Hali ya kusoma: Aya", subtitle = "Onyesha kama kitabu, si mstari kwa mstari") {
+                    Switch(
+                        checked = readingState.paragraphMode,
+                        onCheckedChange = { viewModel.setParagraphMode(it) },
+                        colors = SwitchDefaults.colors(checkedTrackColor = MaterialTheme.colorScheme.primary),
+                    )
+                }
+            }
         }
 
         item {
             Spacer(modifier = Modifier.height(12.dp))
             SectionLabel("UKUMBUSHO")
             DividedRow {
-                SettingsRow(title = "Ukumbusho wa kila siku", subtitle = "Mstari wa Injili ya leo, kwa wakati unaochagua") {
+                SettingsRow(title = "Ukumbusho wa kila siku", subtitle = "Mstari wa Biblia, kwa wakati unaochagua") {
                     Switch(
                         checked = reminderState.enabled,
                         onCheckedChange = { if (it) enableReminder() else disableReminder() },
@@ -184,7 +215,7 @@ fun SettingsSheetContent(viewModel: BibleViewModel) {
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 14.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
-                    listOf(ThemeMode.SYSTEM to "Mfumo", ThemeMode.LIGHT to "Mwanga", ThemeMode.DARK to "Giza").forEach { (mode, label) ->
+                    listOf(ThemeMode.SYSTEM to "Mfumo", ThemeMode.LIGHT to "Mwanga", ThemeMode.DARK to "Giza", ThemeMode.SEPIA to "Karatasi").forEach { (mode, label) ->
                         val selected = mode == themeMode
                         Text(
                             label,

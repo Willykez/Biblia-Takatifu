@@ -42,33 +42,31 @@ import com.biblia.app.data.BibleVerse
 import com.biblia.app.data.PlanPacing
 import com.biblia.app.data.ReadingPlan
 import com.biblia.app.ui.BibleViewModel
-import com.biblia.app.ui.LiturgicalViewModel
 import com.biblia.app.ui.ReadingPlanViewModel
-import com.biblia.app.ui.screens.CalendarScreen
 import com.biblia.app.ui.screens.ChaptersScreen
 import com.biblia.app.ui.screens.HomeScreen
 import com.biblia.app.ui.screens.OnboardingScreen
 import com.biblia.app.ui.screens.PlanDayScreen
 import com.biblia.app.ui.screens.ReaderScreen
 import com.biblia.app.ui.screens.ReadingPlansScreen
-import com.biblia.app.ui.screens.ReadingsScreen
+import com.biblia.app.ui.screens.SavedScreen
 import com.biblia.app.ui.screens.SearchScreen
 import com.biblia.app.ui.screens.SettingsSheetContent
 import com.biblia.app.ui.screens.SplashScreen
 import com.biblia.app.ui.theme.BibliaTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 
 /**
- * App shell for Biblia Takatifu.
+ * App shell for Biblia Takatifu - a Bible reader only now; the liturgical calendar/lectionary
+ * feature was removed entirely (see README).
  *
- * Bottom-nav has two root tabs (Home, Calendar) - Search and Settings are reached via icon
- * buttons instead: Search pushes a normal back-stack screen, Settings opens as a
- * ModalBottomSheet ([showSettingsSheet]) rather than navigating anywhere. "chapters",
- * "reader", "readings" and "search" are non-root, pushed routes: since routes are plain
- * strings with no argument-passing of their own, what they're showing is tracked as separate
- * Activity-level state ([selectedBook]/[selectedChapterNum]/[selectedReadingsDate]) that each
+ * Bottom-nav has three root tabs (Home, Mipango/Reading Plans, Yaliyohifadhiwa/Saved) - Search
+ * and Settings are reached via icon buttons instead: Search pushes a normal back-stack screen,
+ * Settings opens as a ModalBottomSheet ([showSettingsSheet]) rather than navigating anywhere.
+ * "chapters", "reader", "search" and "plan_day" are non-root, pushed routes: since routes are
+ * plain strings with no argument-passing of their own, what they're showing is tracked as
+ * separate Activity-level state ([selectedBook]/[selectedChapterNum]/[selectedPlan]) that each
  * navigate-to call updates just before pushing the route.
  *
  * Hardware/gesture back is intentionally NOT a plain stack-pop (that's what the in-app top-bar
@@ -79,7 +77,7 @@ import java.time.LocalDate
  * Transitions are a plain crossfade everywhere - no slide/spring/scale motion, matching the
  * flat, content-first design used throughout (see ui/theme and ui/components).
  */
-private val ROOT_ROUTES = setOf("home", "calendar")
+private val ROOT_ROUTES = setOf("home", "reading_plans", "saved")
 private const val EXIT_PRESS_WINDOW_MS = 2000L
 
 private const val PREFS_NAME = "biblia_prefs"
@@ -95,7 +93,6 @@ class MainActivity : ComponentActivity() {
     setContent {
       val viewModel: BibleViewModel = viewModel()
       val themeMode by viewModel.themeMode.collectAsState()
-      val readingState by viewModel.readingState.collectAsState()
 
       BibliaTheme(themeMode = themeMode) {
         // Real back-stack: navigate() pushes/roots; goBack() pops one level (used by in-app
@@ -111,20 +108,15 @@ class MainActivity : ComponentActivity() {
           mutableStateListOf("splash")
         }
         val currentScreen = backStack.last()
-        val liturgicalViewModel: LiturgicalViewModel = viewModel()
         val readingPlanViewModel: ReadingPlanViewModel = viewModel()
-
-        val plans by readingPlanViewModel.plans.collectAsState()
-        val pacingByPlan by readingPlanViewModel.pacingByPlan.collectAsState()
 
         var selectedBook by remember { mutableStateOf<BibleBook?>(null) }
         var selectedChapterNum by remember { mutableIntStateOf(1) }
-        var selectedReadingsDate by remember { mutableStateOf(LocalDate.now()) }
         var selectedPlan by remember { mutableStateOf<ReadingPlan?>(null) }
         var selectedPacing by remember { mutableStateOf(PlanPacing.ONE_YEAR) }
         var showSettingsSheet by remember { mutableStateOf(false) }
-        // Set by openVerse() when jumping in from Search and the target book isn't already
-        // loaded; the LaunchedEffect below resolves it and completes the navigation.
+        // Set by openVerse() when jumping in from Search/Saved and the target book isn't
+        // already loaded; the LaunchedEffect below resolves it and completes the navigation.
         var pendingVerseBookId by remember { mutableStateOf<Int?>(null) }
 
         LaunchedEffect(pendingVerseBookId) {
@@ -165,11 +157,6 @@ class MainActivity : ComponentActivity() {
             pendingVerseBookId = verse.bookId
           }
           navigate("reader")
-        }
-
-        fun openDate(date: LocalDate) {
-          selectedReadingsDate = date
-          navigate("readings")
         }
 
         /** Shared by the Verse of Day card and reading-plan chapters: jump straight to a
@@ -227,11 +214,10 @@ class MainActivity : ComponentActivity() {
               )
               "home" -> HomeScreen(
                 viewModel = viewModel,
-                liturgicalViewModel = liturgicalViewModel,
                 onNavigate = ::navigate,
                 onOpenBook = ::openBook,
                 onContinueReading = {
-                  val state = readingState
+                  val state = viewModel.readingState.value
                   scope.launch {
                     val book = viewModel.getBook(state.lastBookId)
                     if (book != null) {
@@ -248,12 +234,12 @@ class MainActivity : ComponentActivity() {
               )
               "reading_plans" -> ReadingPlansScreen(
                 viewModel = readingPlanViewModel,
-                onBack = ::goBack,
+                onNavigate = ::navigate,
                 onOpenPlan = { planId ->
-                  val plan = plans.firstOrNull { it.id == planId }
+                  val plan = readingPlanViewModel.plans.value.firstOrNull { it.id == planId }
                   if (plan != null) {
                     selectedPlan = plan
-                    selectedPacing = pacingByPlan[planId] ?: PlanPacing.ONE_YEAR
+                    selectedPacing = readingPlanViewModel.pacingByPlan.value[planId] ?: PlanPacing.ONE_YEAR
                     navigate("plan_day")
                   }
                 },
@@ -267,23 +253,15 @@ class MainActivity : ComponentActivity() {
                   onOpenChapter = { bookId, chapterNum -> openBookChapter(bookId, chapterNum) },
                 )
               }
-              "calendar" -> CalendarScreen(
-                viewModel = liturgicalViewModel,
+              "saved" -> SavedScreen(
+                viewModel = viewModel,
                 onNavigate = ::navigate,
-                onOpenDate = ::openDate,
-              )
-              "readings" -> ReadingsScreen(
-                viewModel = liturgicalViewModel,
-                date = selectedReadingsDate,
-                onBack = ::goBack,
-                onPreviousDate = { selectedReadingsDate = selectedReadingsDate.minusDays(1) },
-                onNextDate = { selectedReadingsDate = selectedReadingsDate.plusDays(1) },
-                onOpenCalendar = { navigate("calendar") },
+                onOpenVerse = ::openVerse,
               )
               "chapters" -> selectedBook?.let { book ->
                 ChaptersScreen(
                   book = book,
-                  currentChapter = if (book.id == readingState.lastBookId) readingState.lastChapterNum else null,
+                  currentChapter = if (book.id == viewModel.readingState.value.lastBookId) viewModel.readingState.value.lastChapterNum else null,
                   onBack = ::goBack,
                   onSelectChapter = ::openChapter,
                 )

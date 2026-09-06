@@ -1,107 +1,70 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/Android-7.0%2B-4CAF50?style=for-the-badge&logo=android&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Kotlin-Jetpack%20Compose-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Bible-Offline-FF6B35?style=for-the-badge"/>
-</p>
+<p align="center"><strong>Biblia Takatifu</strong></p>
+<p align="center">A Swahili/English Bible reader, built in Jetpack Compose</p>
 
-<h1 align="center">📖 Biblia Takatifu</h1>
-<p align="center"><strong>A Swahili/English Bible reader with a live Catholic liturgical calendar, built in Jetpack Compose</strong></p>
-<p align="center">
-  All 66 books, bilingual verse-by-verse text, bookmarks/highlights/notes, full-text search —
-  fully offline. Plus a Liturgical Calendar backed by a real Mass-readings API.
-</p>
+## What this is
 
----
+A fully offline Bible app for `com.biblia.app`. Everything lives in one bundled SQLite
+database (`assets/bible_swahili.sqlite`) - all 66 books, Swahili and English text side by
+side, plus pre-seeded reading plans. No network permission is declared anywhere in the
+manifest; the app never needs one.
 
-## Overview
+The liturgical calendar/lectionary feature that used to live here (a Catholic Mass-readings
+calendar, backed first by a live API and later by a bundled Swahili lectionary dataset) has
+been removed entirely, by request, so the whole app could focus on the Bible-reading
+experience instead.
 
-Biblia Takatifu is a full rewrite of an earlier Sketchware/XML-layout Bible app, now 100%
-Jetpack Compose. Its visual design system — theming, the bottom nav pill, and the Settings /
-Appearance screen — is carried over unchanged from a separate design framework, so the app
-looks and feels consistent with that framework's other apps.
+## Features
 
-## The Bible reader (fully offline)
+- **Reading** - verse-by-verse or a flowing "paragraph" reading mode (continuous text with
+  small superscript verse numbers, closer to reading an actual book); adjustable font size,
+  three font families (serif/sans/mono), justified-text option, bilingual (Swahili + English)
+  or Swahili-only.
+- **Themes** - System/Light/Dark, plus a warm Sepia "paper" theme for comfortable reading.
+- **Bookmarks, highlights (5 colors), and notes** - set from the verse action sheet in the
+  Reader, browsed from the Yaliyohifadhiwa (Saved) tab.
+- **Share a verse** - formatted text via the Android share sheet.
+- **Read aloud** - on-device text-to-speech for the current chapter (Swahili voice if the
+  device has one installed, falling back to the device default otherwise).
+- **Swipe between chapters** - drag left/right anywhere in the Reader, in addition to the
+  arrow buttons.
+- **Search** - phrase or any-word matching, scoped to All/Old Testament/New Testament, with
+  recent searches remembered.
+- **Reading plans** - 3 real plans (Chronological, Canonical, Historical-by-authorship), each
+  in 3 pacing variants (1 year / 6 months / 3 months), using the `plans`/`reading_plans`/
+  `reading_days` tables that were already seeded in the Bible database. Progress is tracked
+  per plan with a ring indicator; mark a day read, jump straight to any chapter.
+- **Verse of the Day** - a curated rotation of well-known verses, shown on Home, picked
+  deterministically by day-of-year.
+- **Daily reminder notification** - opt-in, user-chosen time, delivers that day's curated
+  verse. Inexact `AlarmManager` (no exact-alarm permission needed), survives reboot.
+- **Reading streak** - tracks consecutive days the Reader was opened, shown on Home.
 
-- `HomeScreen` — Old/New Testament book list
-- `ChaptersScreen` — chapter picker grid for a selected book
-- `ReaderScreen` — bilingual (Swahili + English) verse reading, adjustable font size/style,
-  verse numbers toggle, and a bottom sheet for bookmarking, highlighting (5 colors), and notes
-- `SearchScreen` — debounced full-text verse search across the whole Bible
-- `SavedScreen` — your bookmarks, highlights, and notes in one place
-- `SettingsScreen` — reading preferences, the framework's Appearance section (theme mode,
-  Material You / curated palettes / custom color), and data management
+## Navigation
 
-**Data:** a bundled SQLite database (`assets/bible_swahili.sqlite`) — 66 books, ~33.7k verse
-rows, with bookmark/highlight/note columns built into the schema. Copied to private storage
-on first launch; all reads/writes after that are local.
+Three bottom-nav tabs: **Biblia** (Home), **Mipango** (Reading Plans), **Yaliyohifadhiwa**
+(Saved). Search and Settings are icon buttons (top bar), not tabs - Search pushes a normal
+screen, Settings opens as a bottom sheet.
 
-**Not wired up yet:** the DB also has `plans`/`reading_days`/`reading_plans` tables for guided
-reading plans — schema's there, no UI built for it yet.
+Hardware/gesture back jumps straight to Home from anywhere else, and is double-press-to-exit
+on Home itself. In-app top-bar back arrows still do a normal one-level pop.
 
-## Liturgical Calendar (online by necessity)
+## Architecture notes
 
-`CalendarScreen` (month grid, tap any day) and `ReadingsScreen` (a day's celebration + full
-Mass readings, rendered as real verse text from `bible_swahili.sqlite`) are backed by the
-real, public [LiturgicalCalendarAPI](https://litcal.johnromanodorazio.com) (Apache-2.0, John
-R. D'Orazio) — **not** a hand-written dataset. Every feast name, rank, color, and reading
-citation comes from that live source, cached to disk per year (`LitCalRepository.kt`) so the
-calendar keeps working offline after the first successful fetch. This is the one part of the
-app that needs `INTERNET` permission, and why: the correct Table of Liturgical Days
-(precedence rules, transferred feasts, national/diocesan variants) is itself a maintained
-dataset, not something derivable from a date formula — see `LiturgicalCalendar.kt`'s doc
-comment for the parts that genuinely are pure date math (Easter's computus, season
-boundaries) versus the parts that aren't.
+- No Room, no KSP - both `BibleRepository` and `ReadingPlanRepository` use raw
+  `SQLiteDatabase` directly against the bundled asset (copied to app storage read-write on
+  first launch, since bookmarks/highlights/notes/plan-progress all need to write to it).
+- DataStore Preferences for every setting (`ReadingPrefs`, `AppearancePrefs`, `ReminderPrefs`,
+  `ReadingPlanPrefs`, `RecentSearchesPrefs`, `ReadingStreakPrefs`) - one small file each.
+- Single-Activity Compose UI with a custom string-based back stack (`MainActivity.kt`) - no
+  Jetpack Navigation library, despite `navigation-compose` still sitting in the dependency
+  list unused from the original project template.
+- `chapter_order` in `reading_plans` maps directly onto the same 1-66 canonical book ordering
+  the `chapters` table's own ids already use (`bookId = 8021 + chapter_order`) - see
+  `ReadingPlanRepository`'s doc comment for how that was confirmed against the actual data.
 
-**How a reading gets from citation to screen:** `LitCalApiClient` parses the API's JSON
-(schema confirmed against a real response sample — not guessed) into `LitCalEvent`s, each
-carrying `readings` as plain citation strings ("Isaiah 2:1-5"). `CitationParser` turns those
-into structured verse ranges (multi-range, cross-chapter, sub-verse-letter tolerant), which
-`ReadingRenderer` resolves against `BibleRepository` into actual `BibleVerse` rows —
-`ReadingsScreen` renders them with a visible "…" wherever the citation skips verses, the way
-a printed Missal would.
+## Known gaps
 
-**Known gap — deuterocanonical books:** `bible_swahili.sqlite` is a 66-book Protestant-canon
-Bible. The Catholic Lectionary regularly cites Wisdom, Sirach, Baruch, Tobit, Judith, and
-1–2 Maccabees for First Readings, none of which exist in this database. `ReadingRenderer`
-surfaces this honestly (an "unavailable in this translation" card, not a silent blank) rather
-than guessing. Fixing it for real means sourcing a Swahili Catholic Bible edition with the
-deuterocanonical books and merging it in — a data question for you, not something to fake.
-
-**Also not yet built:** the sanctoral cycle beyond what the API already gives us is fully
-there (feast/memorial names, ranks, colors, readings all come straight from the API) — what's
-*not* built yet is any UI for optional-memorial choice days, national/diocesan calendar
-selection (the API supports it; this app always requests the general calendar), or a
-"subscribe to a specific diocese" preference.
-
-## Removed on purpose
-
-The original upload also included a `NotificationListenerService`-based module (package
-`com.notificationhistory`) that read the content of every notification on the device —
-including banking/messaging apps — extracted OTP codes, and stored them behind a hidden
-PIN-lock screen. That has nothing to do with a Bible app and was not carried into this
-rewrite. If you want an actual in-app notification feature (e.g. a daily-verse reminder you
-schedule yourself), that's a normal `AlarmManager`/`WorkManager` addition — just ask.
-
-## Building
-
-```
-./gradlew assembleDebug
-```
-
-Opens fine in Android Studio (Jetpack Compose, minSdk 24, target/compileSdk 36, core library
-desugaring on for `java.time` on API 24-25).
-
-One thing to verify on a real device/emulator before shipping: `LitCalApiClient`/
-`LitCalRepository`'s endpoint and query params (`?year=&locale=en`) are built from a real
-sample response you provided plus the API's public docs, but this build environment has no
-network egress, so the live call has not actually been round-tripped end to end yet. If the
-deployed API expects `year` as a path segment instead of a query param, that's a one-line fix
-in `LitCalRepository.fetchAndCache()`.
-
-## Releasing
-
-See `.github/workflows/android-release.yml` — tag a commit `vX.Y.Z` (or run the workflow
-manually) to build a signed release APK + AAB. Works with zero setup using an auto-generated
-throwaway signing key; add `RELEASE_KEYSTORE_BASE64` / `RELEASE_STORE_PASSWORD` /
-`RELEASE_KEY_ALIAS` / `RELEASE_KEY_PASSWORD` as repo secrets for a stable upload key you can
-use to publish real updates.
+- No cross-references or footnotes - no data source for either was ever provided.
+- No Strong's numbers/word study tooling - same reason.
+- TTS quality depends entirely on whatever voices are installed on the device; there's no
+  bundled audio.

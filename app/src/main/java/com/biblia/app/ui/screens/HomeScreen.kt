@@ -46,7 +46,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.biblia.app.data.BibleBook
 import com.biblia.app.ui.BibleViewModel
-import com.biblia.app.ui.LiturgicalViewModel
 import com.biblia.app.ui.VerseOfDay
 import com.biblia.app.ui.components.AppBottomNav
 import com.biblia.app.ui.components.DividedRow
@@ -56,7 +55,6 @@ import com.biblia.app.ui.theme.ReadingFont
 @Composable
 fun HomeScreen(
     viewModel: BibleViewModel,
-    liturgicalViewModel: LiturgicalViewModel,
     onNavigate: (String) -> Unit,
     onOpenBook: (BibleBook) -> Unit,
     onContinueReading: () -> Unit,
@@ -68,10 +66,11 @@ fun HomeScreen(
     val oldTestament by viewModel.oldTestament.collectAsState()
     val newTestament by viewModel.newTestament.collectAsState()
     val readingState by viewModel.readingState.collectAsState()
+    val streak by viewModel.readingStreak.collectAsState()
     var tab by remember { mutableIntStateOf(0) }
     var verseOfDay by remember { mutableStateOf<VerseOfDay?>(null) }
 
-    LaunchedEffect(Unit) { verseOfDay = loadVerseOfDay(viewModel, liturgicalViewModel) }
+    LaunchedEffect(Unit) { verseOfDay = loadVerseOfDay(viewModel) }
 
     Scaffold(
         bottomBar = { AppBottomNav(currentRoute = "home", onNavigate = onNavigate) },
@@ -84,7 +83,15 @@ fun HomeScreen(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text("Biblia Takatifu", fontFamily = ReadingFont, style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.onBackground)
-                Row {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    if (streak.currentStreak > 0) {
+                        Text(
+                            "\uD83D\uDD25 ${streak.currentStreak}",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(end = 8.dp),
+                        )
+                    }
                     IconButton(onClick = onOpenSearch) {
                         Icon(Icons.Default.Search, contentDescription = "Tafuta", tint = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
@@ -173,11 +180,7 @@ private fun ContinueReadingCard(bookTitle: String, chapterNum: Int, onClick: () 
 
 @Composable
 private fun VerseOfDayCard(verseOfDay: VerseOfDay, onClick: () -> Unit) {
-    HomeCard(
-        icon = Icons.Default.AutoStories,
-        eyebrow = if (verseOfDay.isFromTodaysGospel) "INJILI YA LEO" else "MSTARI WA LEO",
-        onClick = onClick,
-    ) {
+    HomeCard(icon = Icons.Default.AutoStories, eyebrow = "MSTARI WA LEO", onClick = onClick) {
         Text(
             "${verseOfDay.bookTitle} ${verseOfDay.chapterNum}:${verseOfDay.verse.position}",
             fontFamily = ReadingFont,

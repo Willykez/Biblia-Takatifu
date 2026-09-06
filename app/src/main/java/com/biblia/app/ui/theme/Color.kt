@@ -4,8 +4,9 @@ import androidx.compose.ui.graphics.Color
 
 /**
  * Minimal/editorial palette: warm neutral paper tones, near-black ink for text, one accent
- * color used sparingly (a muted liturgical red). No gradients, no glass, no dynamic color -
- * flat surfaces and hairline dividers do the work instead.
+ * color used sparingly. No gradients, no glass, no dynamic color - flat surfaces and hairline
+ * dividers do the work instead. Sepia is a third, reading-focused scheme (warm paper/brown
+ * ink) alongside Light/Dark - see ThemeMode.
  */
 object AppColors {
     // Light
@@ -26,10 +27,12 @@ object AppColors {
     val DarkAccent = Color(0xFFE0A0A0)
     val DarkAccentMuted = Color(0xFF3A2626)
 
-    // Liturgical colors, used as small dots/labels only (calendar, day badges) - not theming.
-    val LiturgicalViolet = Color(0xFF6A4C93)
-    val LiturgicalWhite = Color(0xFFC9B896)
-    val LiturgicalGreen = Color(0xFF3F6B3F)
-    val LiturgicalRed = Color(0xFFA23B3B)
-    val LiturgicalRose = Color(0xFFC98B9C)
+    // Sepia - warm "old paper" reading theme: creamier background, brown ink, brown accent.
+    val SepiaBackground = Color(0xFFF2E8D5)
+    val SepiaSurface = Color(0xFFF8F0E1)
+    val SepiaInk = Color(0xFF3B2F20)
+    val SepiaInkMuted = Color(0xFF7A6A54)
+    val SepiaDivider = Color(0xFFDDCCA8)
+    val SepiaAccent = Color(0xFF8B4B2B)
+    val SepiaAccentMuted = Color(0xFFE8D3B0)
 }

@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Three overlapping rounded "screens" stacked diagonally: a simple mark for a reusable
-     UI-framework app. Kept within the adaptive-icon safe zone (inner ~66dp circle). -->
+<!-- An open book, in the app's warm paper tone, on the maroon background - the same
+     accent/paper relationship used throughout the app's UI, just inverted. Kept within the
+     adaptive-icon safe zone (inner ~66dp circle centered on the 108x108 viewport). -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+    <!-- Left page -->
     <path
-        android:fillColor="#FFFFFF"
-        android:fillAlpha="0.45"
-        android:pathData="M31,41 h24 a9,9 0 0 1 9,9 v24 a9,9 0 0 1 -9,9 h-24 a9,9 0 0 1 -9,-9 v-24 a9,9 0 0 1 9,-9 z" />
+        android:fillColor="#FBF9F5"
+        android:pathData="M53,32 L25,40 C23.5,40.5 22.5,41.9 22.5,43.5 L22.5,78 C22.5,80 24.3,81.5 26.2,81 L53,74 Z" />
+    <!-- Right page (mirrored) -->
     <path
-        android:fillColor="#FFFFFF"
-        android:fillAlpha="0.72"
-        android:pathData="M42,33 h24 a9,9 0 0 1 9,9 v24 a9,9 0 0 1 -9,9 h-24 a9,9 0 0 1 -9,-9 v-24 a9,9 0 0 1 9,-9 z" />
+        android:fillColor="#FBF9F5"
+        android:pathData="M55,32 L83,40 C84.5,40.5 85.5,41.9 85.5,43.5 L85.5,78 C85.5,80 83.7,81.5 81.8,81 L55,74 Z" />
+    <!-- Spine -->
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M53,25 h24 a9,9 0 0 1 9,9 v24 a9,9 0 0 1 -9,9 h-24 a9,9 0 0 1 -9,-9 v-24 a9,9 0 0 1 9,-9 z" />
+        android:fillColor="#E6DCC8"
+        android:pathData="M53,32 L53,74 L55,74 L55,32 Z" />
+    <!-- A few page-line accents for texture at larger sizes -->
+    <path
+        android:fillColor="#7A2E2E"
+        android:fillAlpha="0.35"
+        android:pathData="M28,49 L49,44.5 L49,46.5 L28,51 Z" />
+    <path
+        android:fillColor="#7A2E2E"
+        android:fillAlpha="0.35"
+        android:pathData="M28,58 L49,54.5 L49,56.5 L28,60 Z" />
+    <path
+        android:fillColor="#7A2E2E"
+        android:fillAlpha="0.35"
+        android:pathData="M59,44.5 L80,49 L80,51 L59,46.5 Z" />
+    <path
+        android:fillColor="#7A2E2E"
+        android:fillAlpha="0.35"
+        android:pathData="M59,54.5 L80,58 L80,60 L59,56.5 Z" />
 </vector>

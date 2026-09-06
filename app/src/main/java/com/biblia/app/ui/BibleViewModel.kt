@@ -10,6 +10,8 @@ import com.biblia.app.data.BibleRepository
 import com.biblia.app.data.BibleVerse
 import com.biblia.app.data.ReadingPrefs
 import com.biblia.app.data.ReadingState
+import com.biblia.app.data.ReadingStreak
+import com.biblia.app.data.ReadingStreakPrefs
 import com.biblia.app.data.RecentSearchesPrefs
 import com.biblia.app.ui.theme.ThemeMode
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,6 +32,12 @@ class BibleViewModel(application: Application) : AndroidViewModel(application) {
     private val readingPrefs = ReadingPrefs(application)
     private val appearancePrefs = AppearancePrefs(application)
     private val recentSearchesPrefs = RecentSearchesPrefs(application)
+    private val streakPrefs = ReadingStreakPrefs(application)
+
+    val readingStreak: StateFlow<ReadingStreak> = streakPrefs.state
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ReadingStreak())
+
+    fun recordReadToday() = viewModelScope.launch { streakPrefs.recordReadToday() }
 
     val recentSearches: StateFlow<List<String>> = recentSearchesPrefs.recentSearches
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
@@ -64,6 +72,9 @@ class BibleViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     suspend fun getBook(id: Int): BibleBook? = repository.getBookById(id)
+
+    /** Resolves a book by its exact Swahili title (as stored in `chapters.title`). */
+    suspend fun resolveBookId(title: String): Int? = repository.getBookByTitle(title)?.id
 
     suspend fun getVerses(bookId: Int, chapterNum: Int): List<BibleVerse> =
         repository.getVerses(bookId, chapterNum)
@@ -123,4 +134,6 @@ class BibleViewModel(application: Application) : AndroidViewModel(application) {
     fun setShowVerseNumbers(value: Boolean) = viewModelScope.launch { readingPrefs.setShowVerseNumbers(value) }
     fun setJustifyText(value: Boolean) = viewModelScope.launch { readingPrefs.setJustifyText(value) }
     fun setFontSize(sp: Int) = viewModelScope.launch { readingPrefs.setFontSize(sp) }
+    fun setFontStyle(style: com.biblia.app.data.ReaderFontStyle) = viewModelScope.launch { readingPrefs.setFontStyle(style) }
+    fun setParagraphMode(value: Boolean) = viewModelScope.launch { readingPrefs.setParagraphMode(value) }
 }

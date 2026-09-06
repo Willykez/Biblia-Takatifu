@@ -85,12 +85,7 @@ fun PlanDayScreen(
                 }
             }
 
-            LazyColumn(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp)
-            ) {
+            LazyColumn(modifier = Modifier.fillMaxSize().weight(1f).padding(horizontal = 20.dp)) {
                 items(chapters, key = { "${it.bookId}_${it.chapterNum}" }) { chapter ->
                     ChapterRow(chapter = chapter, onClick = { onOpenChapter(chapter.bookId, chapter.chapterNum) })
                     Spacer(modifier = Modifier.height(10.dp))

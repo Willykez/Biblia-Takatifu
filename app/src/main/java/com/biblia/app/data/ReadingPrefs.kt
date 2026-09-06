@@ -19,6 +19,7 @@ data class ReadingState(
     val bilingual: Boolean = true,
     val showVerseNumbers: Boolean = true,
     val justifyText: Boolean = false,
+    val paragraphMode: Boolean = false,
     val lastBookId: Int = 8022, // Mwanzo / Genesis
     val lastChapterNum: Int = 1,
     val lastBookTitle: String = "Mwanzo",
@@ -31,6 +32,7 @@ class ReadingPrefs(private val context: Context) {
         val BILINGUAL = booleanPreferencesKey("bilingual")
         val SHOW_VERSE_NUMBERS = booleanPreferencesKey("show_verse_numbers")
         val JUSTIFY_TEXT = booleanPreferencesKey("justify_text")
+        val PARAGRAPH_MODE = booleanPreferencesKey("paragraph_mode")
         val LAST_BOOK_ID = intPreferencesKey("last_book_id")
         val LAST_CHAPTER_NUM = intPreferencesKey("last_chapter_num")
         val LAST_BOOK_TITLE = stringPreferencesKey("last_book_title")
@@ -44,6 +46,7 @@ class ReadingPrefs(private val context: Context) {
             bilingual = p[Keys.BILINGUAL] ?: true,
             showVerseNumbers = p[Keys.SHOW_VERSE_NUMBERS] ?: true,
             justifyText = p[Keys.JUSTIFY_TEXT] ?: false,
+            paragraphMode = p[Keys.PARAGRAPH_MODE] ?: false,
             lastBookId = p[Keys.LAST_BOOK_ID] ?: 8022,
             lastChapterNum = p[Keys.LAST_CHAPTER_NUM] ?: 1,
             lastBookTitle = p[Keys.LAST_BOOK_TITLE] ?: "Mwanzo",
@@ -68,6 +71,10 @@ class ReadingPrefs(private val context: Context) {
 
     suspend fun setJustifyText(value: Boolean) {
         context.readingPrefsDataStore.edit { it[Keys.JUSTIFY_TEXT] = value }
+    }
+
+    suspend fun setParagraphMode(value: Boolean) {
+        context.readingPrefsDataStore.edit { it[Keys.PARAGRAPH_MODE] = value }
     }
 
     suspend fun setLastRead(bookId: Int, chapterNum: Int, bookTitle: String) {

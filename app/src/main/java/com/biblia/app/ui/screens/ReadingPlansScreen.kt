@@ -35,23 +35,27 @@ import com.biblia.app.data.PlanPacing
 import com.biblia.app.data.PlanProgress
 import com.biblia.app.data.ReadingPlan
 import com.biblia.app.ui.ReadingPlanViewModel
+import com.biblia.app.ui.components.AppBottomNav
 import com.biblia.app.ui.components.AppTopBar
 import com.biblia.app.ui.theme.ReadingFont
 
 @Composable
 fun ReadingPlansScreen(
     viewModel: ReadingPlanViewModel,
-    onBack: () -> Unit,
+    onNavigate: (String) -> Unit,
     onOpenPlan: (Int) -> Unit,
 ) {
     val plans by viewModel.plans.collectAsState()
     val progressByPlan by viewModel.progressByPlan.collectAsState()
     val pacingByPlan by viewModel.pacingByPlan.collectAsState()
 
-    Scaffold(containerColor = MaterialTheme.colorScheme.background) { innerPadding ->
-        Column(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
-            AppTopBar(title = "Mipango ya Kusoma", subtitle = "Soma Biblia yote kwa mpangilio wako", showBack = true, onBack = onBack)
-            LazyColumn(modifier = Modifier.fillMaxSize().padding(20.dp)) {
+    Scaffold(
+        bottomBar = { AppBottomNav(currentRoute = "reading_plans", onNavigate = onNavigate) },
+        containerColor = MaterialTheme.colorScheme.background,
+    ) { innerPadding ->
+        Column(modifier = Modifier.fillMaxSize().padding(top = innerPadding.calculateTopPadding())) {
+            AppTopBar(title = "Mipango ya Kusoma", subtitle = "Soma Biblia yote kwa mpangilio wako")
+            LazyColumn(modifier = Modifier.fillMaxSize().padding(bottom = innerPadding.calculateBottomPadding()).padding(20.dp)) {
                 items(plans, key = { it.id }) { plan ->
                     PlanCard(
                         plan = plan,

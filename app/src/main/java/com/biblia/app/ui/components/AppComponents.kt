@@ -13,12 +13,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.filled.AutoStories
+import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.MenuBook
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.outlined.CalendarMonth
+import androidx.compose.material.icons.outlined.AutoStories
+import androidx.compose.material.icons.outlined.Bookmark
 import androidx.compose.material.icons.outlined.MenuBook
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -79,8 +79,8 @@ private data class NavItem(val route: String, val label: String, val outlined: I
 
 private val navItems = listOf(
     NavItem("home", "Biblia", Icons.Outlined.MenuBook, Icons.Filled.MenuBook),
-    NavItem("search", "Tafuta", Icons.Outlined.Search, Icons.Filled.Search),
-    NavItem("calendar", "Kalenda", Icons.Outlined.CalendarMonth, Icons.Filled.CalendarMonth),
+    NavItem("reading_plans", "Mipango", Icons.Outlined.AutoStories, Icons.Filled.AutoStories),
+    NavItem("saved", "Yaliyohifadhiwa", Icons.Outlined.Bookmark, Icons.Filled.Bookmark),
 )
 
 /**

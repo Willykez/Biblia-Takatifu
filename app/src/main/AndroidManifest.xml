@@ -2,13 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
-      Biblia is a fully offline app: both the Bible text (assets/bible_swahili.sqlite) and
-      the liturgical calendar/lectionary (assets/lectionary_swahili.sqlite, your own dataset -
-      see APP_LOGIC.md) are bundled locally. No network permission is declared - the app
-      never needs one.
+      Biblia is a fully offline, Bible-only app: the Bible text (assets/bible_swahili.sqlite,
+      66 books, Swahili/English) is bundled locally - no network permission is declared, the
+      app never needs one.
 
       POST_NOTIFICATIONS/RECEIVE_BOOT_COMPLETED/WAKE_LOCK are for the optional daily reading
-      reminder (off by default, opt-in from Settings) - see ui/notifications/.
+      reminder (off by default, opt-in from Settings) - see notifications/.
     -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />

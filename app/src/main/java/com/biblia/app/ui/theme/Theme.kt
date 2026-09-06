@@ -1,6 +1,7 @@
 package com.biblia.app.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.darkColorScheme
@@ -9,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 
-enum class ThemeMode { SYSTEM, LIGHT, DARK }
+enum class ThemeMode { SYSTEM, LIGHT, DARK, SEPIA }
 
 /** Read-only access to which mode is actually in effect, for anything that needs to branch. */
 val LocalIsDarkTheme = staticCompositionLocalOf { false }
@@ -44,6 +45,22 @@ private val DarkScheme = darkColorScheme(
     outlineVariant = AppColors.DarkDivider,
 )
 
+/** Warm "old paper" reading theme - built on lightColorScheme() since it's a light-ish palette. */
+private val SepiaScheme = lightColorScheme(
+    primary = AppColors.SepiaAccent,
+    onPrimary = AppColors.SepiaSurface,
+    primaryContainer = AppColors.SepiaAccentMuted,
+    onPrimaryContainer = AppColors.SepiaAccent,
+    background = AppColors.SepiaBackground,
+    onBackground = AppColors.SepiaInk,
+    surface = AppColors.SepiaSurface,
+    onSurface = AppColors.SepiaInk,
+    surfaceVariant = AppColors.SepiaBackground,
+    onSurfaceVariant = AppColors.SepiaInkMuted,
+    outline = AppColors.SepiaDivider,
+    outlineVariant = AppColors.SepiaDivider,
+)
+
 @Composable
 fun BibliaTheme(
     themeMode: ThemeMode = ThemeMode.SYSTEM,
@@ -51,12 +68,18 @@ fun BibliaTheme(
 ) {
     val isDark = when (themeMode) {
         ThemeMode.SYSTEM -> isSystemInDarkTheme()
-        ThemeMode.LIGHT -> false
+        ThemeMode.LIGHT, ThemeMode.SEPIA -> false
         ThemeMode.DARK -> true
+    }
+    val scheme: ColorScheme = when (themeMode) {
+        ThemeMode.SEPIA -> SepiaScheme
+        ThemeMode.SYSTEM -> if (isDark) DarkScheme else LightScheme
+        ThemeMode.LIGHT -> LightScheme
+        ThemeMode.DARK -> DarkScheme
     }
     CompositionLocalProvider(LocalIsDarkTheme provides isDark) {
         MaterialTheme(
-            colorScheme = if (isDark) DarkScheme else LightScheme,
+            colorScheme = scheme,
             typography = AppTypography,
             shapes = Shapes(), // Material3 defaults - modest rounding, no custom pill/blob shapes
             content = content,
