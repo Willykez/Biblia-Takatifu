@@ -148,7 +148,7 @@ fun ReaderScreen(
             engine.language = runCatching { Locale("sw") }.getOrNull()?.takeIf {
                 engine.isLanguageAvailable(it) >= TextToSpeech.LANG_AVAILABLE
             } ?: Locale.getDefault()
-            engine.speak(fullText, TextToSpeech.QUEUE_FLUSH, null, "chapter_$bookId_$chapterNum")
+            engine.speak(fullText, TextToSpeech.QUEUE_FLUSH, null, "chapter_${bookId}_${chapterNum}")
         }
     }
 
